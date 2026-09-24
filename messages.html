@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>My Messages | New Brand Fashion</title>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --black: #0b0b0b;
+    --white: #ffffff;
+    --gold: #c7a45d;
+    --gray: #777;
+    --light-gray: #f5f5f5;
+    --border: #e5e5e5;
+    --danger: #d83b3b;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    transition: .3s;
+}
+
+body.light {
+    background: var(--white);
+    color: var(--black);
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,11,11,.96);
+    backdrop-filter: blur(10px);
+}
+
+body.light .navbar {
+    background: rgba(255,255,255,.96);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-btn {
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: transparent;
+    color: inherit;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    position: relative;
+    flex-shrink: 0;
+}
+
+body.light .nav-btn {
+    border-color: var(--border);
+}
+
+.nav-btn:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+    width: 92%;
+    max-width: 1100px;
+    margin: 45px auto;
+}
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: var(--gray);
+}
+
+
+/* =====================================================
+   CHAT WRAPPER
+===================================================== */
+
+.chat-wrapper {
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #111;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+}
+
+body.light .chat-wrapper {
+    background: #fff;
+    border-color: var(--border);
+}
+
+
+/* =====================================================
+   CHAT HEADER
+===================================================== */
+
+.chat-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+body.light .chat-header {
+    border-color: var(--border);
+}
+
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.admin-avatar {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.admin-info > div:last-child {
+    min-width: 0;
+}
+
+.admin-info h3 {
+    font-size: 16px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-info span {
+    font-size: 12px;
+    color: #43c66c;
+    white-space: nowrap;
+}
+
+.refresh-btn {
+    border: 1px solid rgba(255,255,255,.15);
+    background: transparent;
+    color: inherit;
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+body.light .refresh-btn {
+    border-color: var(--border);
+}
+
+.refresh-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+
+/* =====================================================
+   MESSAGES AREA
+===================================================== */
+
+.messages-box {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    min-height: 400px;
+    max-height: 520px;
+}
+
+.empty {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--gray);
+}
+
+.empty i {
+    font-size: 50px;
+    color: var(--gold);
+    margin-bottom: 18px;
+}
+
+.empty h3 {
+    color: inherit;
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   MESSAGE ROW
+===================================================== */
+
+.message-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.message-row.customer {
+    justify-content: flex-end;
+}
+
+.message-row.admin {
+    justify-content: flex-start;
+}
+
+
+/* =====================================================
+   WHATSAPP STYLE BUBBLE
+===================================================== */
+
+.message {
+    display: block;
+
+    /* IMPORTANT:
+       Bubble content ke size ke mutabiq rahegi */
+    width: fit-content;
+
+    /* Long message ke liye maximum */
+    max-width: 65%;
+
+    /* Compact WhatsApp padding */
+    padding: 7px 10px;
+
+    margin: 0;
+
+    border-radius: 13px;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* CUSTOMER MESSAGE */
+
+.message.customer {
+    background: var(--gold);
+    color: #111;
+
+    border-bottom-right-radius: 4px;
+}
+
+
+/* ADMIN MESSAGE */
+
+.message.admin {
+    background: #222;
+    color: #fff;
+
+    border-bottom-left-radius: 4px;
+}
+
+
+/* LIGHT MODE ADMIN */
+
+body.light .message.admin {
+    background: #f0f0f0;
+    color: #111;
+}
+
+
+/* =====================================================
+   MESSAGE TEXT
+===================================================== */
+
+.message-text {
+    display: inline;
+
+    line-height: 1.4;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   MESSAGE TIME
+===================================================== */
+
+.message-time {
+    display: inline-block;
+
+    width: auto;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    margin-left: 6px;
+
+    margin-top: 0;
+
+    opacity: .60;
+
+    white-space: nowrap;
+
+    vertical-align: bottom;
+}
+
+
+/* =====================================================
+   REPLY AREA
+===================================================== */
+
+.reply-area {
+    border-top: 1px solid rgba(255,255,255,.1);
+
+    padding: 16px;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+body.light .reply-area {
+    border-color: var(--border);
+}
+
+.reply-area textarea {
+    flex: 1;
+
+    resize: none;
+
+    height: 50px;
+
+    min-width: 0;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    background: #181818;
+
+    color: #fff;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+body.light .reply-area textarea {
+    background: #f7f7f7;
+
+    color: #111;
+
+    border-color: var(--border);
+}
+
+.reply-area textarea:focus {
+    border-color: var(--gold);
+}
+
+.send-btn {
+    width: 55px;
+
+    min-width: 55px;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: var(--gold);
+
+    color: #111;
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+.send-btn:hover {
+    opacity: .9;
+}
+
+.send-btn:disabled {
+    opacity: .5;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast {
+    position: fixed;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    background: #171717;
+
+    color: #fff;
+
+    padding: 14px 18px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    transform: translateY(100px);
+
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 9999;
+}
+
+.toast.show {
+    transform: translateY(0);
+
+    opacity: 1;
+}
+
+.toast.success {
+    border-color: #43c66c;
+}
+
+.toast.error {
+    border-color: var(--danger);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 25px;
+    }
+
+    .page {
+        width: 94%;
+        margin: 35px auto;
+    }
+
+    .page-header h1 {
+        font-size: 32px;
+    }
+
+    .messages-box {
+        padding: 20px;
+    }
+
+    .message {
+        max-width: 70%;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: 65px;
+
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .logo {
+        flex-shrink: 1;
+
+        min-width: 0;
+
+        overflow: hidden;
+
+        white-space: nowrap;
+
+        font-size: 19px;
+
+        gap: 6px;
+    }
+
+    .nav-right {
+        flex-shrink: 0;
+
+        gap: 6px;
+    }
+
+    .nav-btn {
+        width: 38px;
+
+        height: 38px;
+
+        font-size: 14px;
+    }
+
+
+    /* PAGE */
+
+    .page {
+        width: 94%;
+
+        margin: 28px auto;
+    }
+
+    .page-header {
+        margin-bottom: 18px;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .page-header p {
+        font-size: 13px;
+    }
+
+
+    /* CHAT */
+
+    .chat-wrapper {
+        min-height: 0;
+
+        height: calc(100vh - 180px);
+
+        max-height: 650px;
+
+        border-radius: 15px;
+    }
+
+
+    /* HEADER */
+
+    .chat-header {
+        padding: 13px 12px;
+
+        gap: 10px;
+    }
+
+    .admin-info {
+        min-width: 0;
+
+        flex: 1;
+
+        gap: 8px;
+    }
+
+    .admin-avatar {
+        width: 38px;
+
+        height: 38px;
+
+        min-width: 38px;
+
+        font-size: 15px;
+    }
+
+    .admin-info h3 {
+        font-size: 13px;
+    }
+
+    .admin-info span {
+        font-size: 9px;
+    }
+
+    .refresh-btn {
+        padding: 7px 9px;
+
+        font-size: 11px;
+    }
+
+
+    /* MESSAGE AREA */
+
+    .messages-box {
+        padding: 14px 9px;
+
+        min-height: 0;
+
+        max-height: none;
+    }
+
+
+    /* WHATSAPP BUBBLE */
+
+    .message-row {
+        margin-bottom: 6px;
+    }
+
+    .message {
+        width: fit-content;
+
+        max-width: 78%;
+
+        padding: 6px 9px;
+
+        border-radius: 12px;
+
+        font-size: 12px;
+
+        line-height: 1.35;
+    }
+
+    .message.customer {
+        border-bottom-right-radius: 4px;
+    }
+
+    .message.admin {
+        border-bottom-left-radius: 4px;
+    }
+
+    .message-text {
+        line-height: 1.35;
+    }
+
+    .message-time {
+        font-size: 7px;
+
+        margin-left: 5px;
+    }
+
+
+    /* REPLY */
+
+    .reply-area {
+        width: 100%;
+
+        padding: 9px;
+
+        gap: 7px;
+    }
+
+    .reply-area textarea {
+        width: 100%;
+
+        min-width: 0;
+
+        height: 44px;
+
+        padding: 11px;
+
+        font-size: 13px;
+
+        border-radius: 9px;
+    }
+
+    .send-btn {
+        width: 46px;
+
+        min-width: 46px;
+
+        height: 44px;
+
+        border-radius: 9px;
+
+        font-size: 14px;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        padding-left: 10px;
+
+        padding-right: 10px;
+    }
+
+    .logo {
+        font-size: 16px;
+
+        gap: 4px;
+    }
+
+    .nav-right {
+        gap: 4px;
+    }
+
+    .nav-btn {
+        width: 35px;
+
+        height: 35px;
+
+        font-size: 13px;
+    }
+
+
+    .page {
+        width: 96%;
+
+        margin: 22px auto;
+    }
+
+    .page-header {
+        margin-bottom: 14px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .page-header p {
+        font-size: 12px;
+    }
+
+
+    .chat-wrapper {
+        border-radius: 13px;
+
+        height: calc(100vh - 155px);
+    }
+
+
+    .chat-header {
+        padding: 10px 9px;
+
+        gap: 7px;
+    }
+
+    .admin-info {
+        gap: 7px;
+    }
+
+    .admin-avatar {
+        width: 34px;
+
+        height: 34px;
+
+        min-width: 34px;
+
+        font-size: 13px;
+    }
+
+    .admin-info h3 {
+        font-size: 11px;
+    }
+
+    .admin-info span {
+        font-size: 8px;
+    }
+
+    .refresh-btn {
+        padding: 6px 8px;
+
+        font-size: 9px;
+    }
+
+
+    /* BUBBLES */
+
+    .messages-box {
+        padding: 11px 7px;
+    }
+
+    .message-row {
+        margin-bottom: 5px;
+    }
+
+    .message {
+        width: fit-content;
+
+        max-width: 82%;
+
+        padding: 5px 8px;
+
+        font-size: 11px;
+
+        line-height: 1.3;
+
+        border-radius: 11px;
+    }
+
+    .message-text {
+        line-height: 1.3;
+    }
+
+    .message-time {
+        font-size: 6px;
+
+        margin-left: 4px;
+    }
+
+
+    /* REPLY */
+
+    .reply-area {
+        padding: 8px;
+
+        gap: 6px;
+    }
+
+    .reply-area textarea {
+        height: 42px;
+
+        padding: 10px;
+
+        font-size: 12px;
+    }
+
+    .send-btn {
+        width: 43px;
+
+        min-width: 43px;
+
+        height: 42px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* =====================================================
+   EXTRA SMALL PHONE
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .nav-right {
+        gap: 3px;
+    }
+
+    .nav-btn {
+        width: 32px;
+
+        height: 32px;
+
+        font-size: 12px;
+    }
+
+
+    .page {
+        width: 97%;
+
+        margin: 18px auto;
+    }
+
+    .page-header h1 {
+        font-size: 21px;
+    }
+
+    .page-header p {
+        font-size: 11px;
+    }
+
+
+    .chat-header {
+        padding: 8px 7px;
+
+        gap: 5px;
+    }
+
+    .admin-info {
+        gap: 5px;
+    }
+
+    .admin-avatar {
+        width: 31px;
+
+        height: 31px;
+
+        min-width: 31px;
+
+        font-size: 11px;
+    }
+
+    .admin-info h3 {
+        font-size: 9px;
+    }
+
+    .admin-info span {
+        font-size: 7px;
+    }
+
+    .refresh-btn {
+        padding: 5px 6px;
+
+        font-size: 8px;
+    }
+
+
+    /* SMALL BUBBLE */
+
+    .messages-box {
+        padding: 9px 5px;
+    }
+
+    .message {
+        width: fit-content;
+
+        max-width: 85%;
+
+        padding: 4px 7px;
+
+        font-size: 10px;
+
+        line-height: 1.3;
+
+        border-radius: 10px;
+    }
+
+    .message-time {
+        font-size: 6px;
+
+        margin-left: 3px;
+    }
+
+
+    .reply-area {
+        padding: 6px;
+
+        gap: 5px;
+    }
+
+    .reply-area textarea {
+        height: 40px;
+
+        padding: 9px;
+
+        font-size: 11px;
+    }
+
+    .send-btn {
+        width: 40px;
+
+        min-width: 40px;
+
+        height: 40px;
+
+        font-size: 12px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL PHONE
+===================================================== */
+
+@media (max-width: 320px) {
+
+    .logo {
+        font-size: 13px;
+    }
+
+    .nav-btn {
+        width: 30px;
+
+        height: 30px;
+
+        font-size: 11px;
+    }
+
+    .page-header h1 {
+        font-size: 19px;
+    }
+
+    .message {
+        max-width: 87%;
+
+        font-size: 10px;
+
+        padding: 4px 6px;
+    }
+
+    .refresh-btn {
+        padding: 4px 5px;
+
+        font-size: 7px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a
+        href="index.html"
+        class="logo"
+    >
+        New <span>Brand</span>Fashion
+    </a>
+
+    <div class="nav-right">
+
+        <a
+            href="index.html"
+            class="nav-btn"
+            title="Shop"
+        >
+            <i class="fa-solid fa-home"></i>
+        </a>
+
+        <a
+            href="profile.html"
+            class="nav-btn"
+            title="Shop"
+        >
+            <i class="fa-solid fa-user"></i>
+        </a>
+
+        <button
+            class="nav-btn"
+            id="themeBtn"
+            title="Theme"
+        >
+            <i
+                class="fa-solid fa-moon"
+                id="themeIcon"
+            ></i>
+        </button>
+    </div>
+</nav>
+
+<main class="page">
+    <div class="page-header">
+        <h1>My Messages</h1>
+        <p>
+            Chat with New Brand Fashion support.
+        </p>
+    </div>
+
+    <div class="chat-wrapper">
+        <div class="chat-header">
+            <div class="admin-info">
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div>
+                    <h3>
+                        New Brand Fashion Support
+                    </h3>
+                    <span>
+                        ● Support available
+                    </span>
+                </div>
+            </div>
+
+            <button
+                class="refresh-btn"
+                id="refreshBtn"
+            >
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
+            </button>
+        </div>
+
+        <div
+            class="messages-box"
+            id="messagesBox"
+        >
+            <div class="empty">
+                <i class="fa-regular fa-comments"></i>
+                <h3>
+                    Loading messages...
+                </h3>
+                <p>
+                    Please wait.
+                </p>
+            </div>
+        </div>
+
+        <div class="reply-area">
+            <textarea
+                id="replyInput"
+                placeholder="Write your message..."
+            ></textarea>
+            <button
+                class="send-btn"
+                id="sendBtn"
+                title="Send"
+            >
+                <i class="fa-solid fa-paper-plane"></i>
+
+            </button>
+        </div>
+    </div>
+</main>
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+<script>
+
+/* =====================================================
+   API
+===================================================== */
+
+const MESSAGES_API =
+    "http://localhost:5000/api/messages";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const messagesBox =
+    document.getElementById(
+        "messagesBox"
+    );
+
+const replyInput =
+    document.getElementById(
+        "replyInput"
+    );
+
+const sendBtn =
+    document.getElementById(
+        "sendBtn"
+    );
+
+const refreshBtn =
+    document.getElementById(
+        "refreshBtn"
+    );
+
+const toast =
+    document.getElementById(
+        "toast"
+    );
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+const themeBtn =
+    document.getElementById(
+        "themeBtn"
+    );
+
+const themeIcon =
+    document.getElementById(
+        "themeIcon"
+    );
+
+
+function applyTheme() {
+
+    const savedTheme =
+        localStorage.getItem(
+            "theme"
+        );
+
+
+    if (savedTheme === "light") {
+
+        document.body.classList.add(
+            "light"
+        );
+
+        themeIcon.classList.remove(
+            "fa-moon"
+        );
+
+        themeIcon.classList.add(
+            "fa-sun"
+        );
+
+    } else {
+
+        document.body.classList.remove(
+            "light"
+        );
+
+        themeIcon.classList.remove(
+            "fa-sun"
+        );
+
+        themeIcon.classList.add(
+            "fa-moon"
+        );
+
+    }
+
+}
+
+
+themeBtn.addEventListener(
+    "click",
+    function () {
+
+        document.body.classList.toggle(
+            "light"
+        );
+
+
+        if (
+            document.body.classList.contains(
+                "light"
+            )
+        ) {
+
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
+
+            themeIcon.classList.remove(
+                "fa-moon"
+            );
+
+            themeIcon.classList.add(
+                "fa-sun"
+            );
+
+        } else {
+
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
+
+            themeIcon.classList.remove(
+                "fa-sun"
+            );
+
+            themeIcon.classList.add(
+                "fa-moon"
+            );
+
+        }
+
+    }
+);
+
+
+applyTheme();
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let conversationId =
+    localStorage.getItem(
+        "conversationId"
+    );
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+    message,
+    type = "success"
+) {
+
+    toast.textContent = message;
+
+    toast.className =
+        "toast show " + type;
+
+
+    setTimeout(
+        function () {
+
+            toast.className =
+                "toast";
+
+        },
+        3000
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text || "";
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(
+            dateString.replace(
+                " ",
+                "T"
+            ) + "Z"
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return dateString;
+
+    }
+
+
+    return date.toLocaleString(
+        "en-PK",
+        {
+            dateStyle: "medium",
+            timeStyle: "short"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOAD CONVERSATION
+===================================================== */
+
+async function loadConversation() {
+
+    if (!conversationId) {
+
+        showEmptyState();
+
+        return;
+
+    }
+
+
+    messagesBox.innerHTML = `
+
+        <div class="empty">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <h3>
+                Loading messages...
+            </h3>
+
+            <p>
+                Please wait.
+            </p>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                MESSAGES_API +
+                "/conversation/" +
+                encodeURIComponent(
+                    conversationId
+                )
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Messages load nahi ho sake."
+            );
+
+        }
+
+
+        renderMessages(
+            data.messages || []
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Messages loading error:",
+            error
+        );
+
+
+        messagesBox.innerHTML = `
+
+            <div class="empty">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h3>
+                    Messages load nahi ho sake
+                </h3>
+
+                <p>
+                    Backend server check karein.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+function showEmptyState() {
+
+    messagesBox.innerHTML = `
+
+        <div class="empty">
+
+            <i class="fa-regular fa-comments"></i>
+
+            <h3>
+                No conversation yet
+            </h3>
+
+            <p>
+                Contact page se pehle message send karein.
+            </p>
+
+            <br>
+
+            <a
+                href="contact.html"
+                style="
+                    color:var(--gold);
+                    text-decoration:none;
+                    font-weight:600;
+                "
+            >
+                Go to Contact Us
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   RENDER MESSAGES
+===================================================== */
+
+function renderMessages(messages) {
+
+    if (!messages.length) {
+
+        showEmptyState();
+
+        return;
+
+    }
+
+
+    messagesBox.innerHTML = "";
+
+
+    messages.forEach(
+        function (item) {
+
+            const isCustomer =
+                item.sender_type ===
+                "customer";
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+            row.className =
+                "message-row " +
+                (
+                    isCustomer
+                        ? "customer"
+                        : "admin"
+                );
+
+
+            const message =
+                document.createElement(
+                    "div"
+                );
+
+            message.className =
+                "message " +
+                (
+                    isCustomer
+                        ? "customer"
+                        : "admin"
+                );
+
+
+            message.innerHTML = `
+
+                <div class="message-text">
+                    ${escapeHTML(
+                        item.message
+                    )}
+                </div>
+
+                <span class="message-time">
+
+                    ${
+                        isCustomer
+                            ? "You"
+                            : "New Brand Fashion"
+                    }
+
+                    •
+                    ${formatDate(
+                        item.created_at
+                    )}
+
+                </span>
+
+            `;
+
+
+            row.appendChild(
+                message
+            );
+
+            messagesBox.appendChild(
+                row
+            );
+
+        }
+    );
+
+
+    messagesBox.scrollTop =
+        messagesBox.scrollHeight;
+
+}
+
+
+/* =====================================================
+   SEND REPLY
+===================================================== */
+
+async function sendReply() {
+
+    const message =
+        replyInput.value.trim();
+
+
+    if (!message) {
+
+        showToast(
+            "Message likhein.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!conversationId) {
+
+        showToast(
+            "Pehle Contact Us se conversation start karein.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /* CUSTOMER INFORMATION */
+
+    let user =
+        null;
+
+
+    try {
+
+        user =
+            JSON.parse(
+                localStorage.getItem(
+                    "user"
+                ) || "null"
+            );
+
+    } catch {
+
+        user = null;
+
+    }
+
+
+    const customerName =
+        user?.name ||
+        localStorage.getItem(
+            "userName"
+        ) ||
+        "Customer";
+
+
+    const customerEmail =
+        user?.email ||
+        localStorage.getItem(
+            "userEmail"
+        ) ||
+        "";
+
+
+    const customerPhone =
+        user?.phone ||
+        localStorage.getItem(
+            "userPhone"
+        ) ||
+        "";
+
+
+    sendBtn.disabled =
+        true;
+
+
+    sendBtn.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+
+    try {
+
+        const response =
+            await fetch(
+                MESSAGES_API,
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        customer_name:
+                            customerName,
+
+                        customer_email:
+                            customerEmail,
+
+                        customer_phone:
+                            customerPhone,
+
+                        subject:
+                            "Customer Reply",
+
+                        message:
+                            message,
+
+                        sender_type:
+                            "customer",
+
+                        conversation_id:
+                            conversationId
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Reply send nahi ho saka."
+            );
+
+        }
+
+
+        replyInput.value = "";
+
+
+        showToast(
+            "Message sent successfully."
+        );
+
+
+        await loadConversation();
+
+
+    } catch (error) {
+
+        console.error(
+            "Send reply error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Message send nahi ho saka.",
+            "error"
+        );
+
+    } finally {
+
+        sendBtn.disabled =
+            false;
+
+        sendBtn.innerHTML =
+            '<i class="fa-solid fa-paper-plane"></i>';
+
+    }
+
+}
+
+
+/* =====================================================
+   EVENTS
+===================================================== */
+
+sendBtn.addEventListener(
+    "click",
+    sendReply
+);
+
+
+refreshBtn.addEventListener(
+    "click",
+    loadConversation
+);
+
+
+replyInput.addEventListener(
+    "keydown",
+    function (e) {
+
+        if (
+            e.key === "Enter" &&
+            !e.shiftKey
+        ) {
+
+            e.preventDefault();
+
+            sendReply();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadConversation();
+
+</script>
+
+</body>
+</html>

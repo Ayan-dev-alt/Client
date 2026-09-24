@@ -1,0 +1,3071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | New Brand Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+  <style>
+    :root {
+      --bg: #070707;
+      --card: #101010;
+      --card2: #151515;
+      --text: #ffffff;
+      --muted: #a5a5a5;
+      --border: #292929;
+      --gold: #d5ad55;
+      --gold-dark: #b58d35;
+      --input: #151515;
+      --green: #55b879;
+      --red: #df5555;
+      --blue: #6495ed;
+      --orange: #d99a45;
+    }
+
+    body.light {
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --card2: #f1f1f1;
+      --text: #111111;
+      --muted: #666666;
+      --border: #dddddd;
+      --gold: #b7892e;
+      --gold-dark: #966d20;
+      --input: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: 0.3s ease;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    .dashboard {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      transition: 0.3s ease;
+    }
+
+    .sidebar-logo {
+      height: 75px;
+      padding: 0 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 43px;
+      height: 43px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 15px;
+      letter-spacing: 1.5px;
+    }
+
+    .logo-text span {
+      display: block;
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 3px;
+    }
+
+    .admin-profile {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .admin-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--card2);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .admin-info strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .admin-info span {
+      display: block;
+      margin-top: 3px;
+      color: var(--gold);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 12px;
+    }
+
+    .nav-title {
+      padding: 0 10px;
+      margin: 10px 0 9px;
+      color: var(--muted);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .sidebar-link {
+      min-height: 43px;
+      padding: 0 12px;
+      margin-bottom: 4px;
+      border-radius: 7px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      transition: 0.2s;
+    }
+
+    .sidebar-link i {
+      width: 18px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .sidebar-link:hover {
+      color: var(--text);
+      background: var(--card2);
+    }
+
+    .sidebar-link.active {
+      background: var(--gold);
+      color: #080808;
+      font-weight: 700;
+    }
+
+    .sidebar-link.active i {
+      color: #080808;
+    }
+
+    .nav-count {
+      margin-left: auto;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: 10px;
+      background: var(--gold);
+      color: #080808;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-bottom {
+      padding: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .logout-link {
+      color: var(--muted);
+    }
+
+    .logout-link:hover {
+      color: var(--red);
+    }
+
+    .main-content {
+      width: calc(100% - 250px);
+      margin-left: 250px;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 75px;
+      padding: 0 28px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+    }
+
+    .menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .page-heading {
+      flex: 1;
+    }
+
+    .page-heading h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 23px;
+    }
+
+    .page-heading p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .topbar-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    .topbar-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .notification-dot {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .content {
+      max-width: 1500px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    .welcome-card {
+      min-height: 145px;
+      padding: 28px 30px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-card::after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      right: -100px;
+      top: -110px;
+    }
+
+    .welcome-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .welcome-text span {
+      color: var(--gold);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .welcome-text h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      margin: 7px 0;
+    }
+
+    .welcome-text p {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .welcome-action {
+      position: relative;
+      z-index: 2;
+    }
+
+    .primary-btn {
+      height: 42px;
+      padding: 0 18px;
+      border-radius: 7px;
+      background: var(--gold);
+      color: #080808;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .primary-btn:hover {
+      background: var(--gold-dark);
+      transform: translateY(-1px);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      padding: 21px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .stat-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 7px;
+      background: var(--card2);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .stat-change {
+      font-size: 10px;
+      color: var(--green);
+    }
+
+    .stat-card h3 {
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .stat-card p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .section-header h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 19px;
+    }
+
+    .view-all {
+      color: var(--gold);
+      font-size: 11px;
+    }
+
+    .view-all:hover {
+      text-decoration: underline;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-header h3 {
+      font-size: 13px;
+    }
+
+    .panel-body {
+      padding: 0;
+    }
+
+    .orders-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .orders-table th {
+      padding: 12px 16px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 600;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .orders-table td {
+      padding: 14px 16px;
+      font-size: 11px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .orders-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .order-id {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .customer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .customer-avatar {
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: var(--card2);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 8px;
+      border-radius: 5px;
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    .status.pending {
+      background: rgba(217, 154, 69, 0.12);
+      color: var(--orange);
+    }
+
+    .status.completed {
+      background: rgba(85, 184, 121, 0.12);
+      color: var(--green);
+    }
+
+    .status.cancelled {
+      background: rgba(223, 85, 85, 0.12);
+      color: var(--red);
+    }
+
+    .status.shipped {
+      background: rgba(100, 149, 237, 0.12);
+      color: var(--blue);
+    }
+
+    .status.processing {
+      background: rgba(100, 149, 237, 0.12);
+      color: var(--blue);
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 17px;
+    }
+
+    .quick-action {
+      min-height: 92px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      background: var(--card2);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 9px;
+      transition: 0.2s;
+    }
+
+    .quick-action:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .quick-action i {
+      color: var(--gold);
+      font-size: 16px;
+    }
+
+    .quick-action span {
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .product-list {
+      padding: 7px 17px;
+    }
+
+    .product-row {
+      min-height: 65px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .product-row:last-child {
+      border-bottom: none;
+    }
+
+    .product-image {
+      width: 45px;
+      height: 45px;
+      border-radius: 7px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 15px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .product-info strong {
+      display: block;
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-info span {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      margin-top: 3px;
+    }
+
+    .product-price {
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .loading-row {
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .error-row {
+      padding: 25px;
+      text-align: center;
+      color: var(--red);
+      font-size: 12px;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 999;
+    }
+
+/* =========================================================
+   NEW BRAND FASHION
+   ADMIN DASHBOARD — COMPLETE MOBILE RESPONSIVE OVERRIDE
+   HTML / JS / BACKEND UNCHANGED
+========================================================= */
+
+
+/* =========================================================
+   1. BASIC RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+body {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   2. DESKTOP DEFAULT
+========================================================= */
+
+.main-content {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.dashboard-content {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.dashboard-grid,
+.stats-grid {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* =========================================
+   VIEW ALL + CLEAR ALL
+========================================= */
+
+.section-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.clear-all-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    border: 1px solid #e05252;
+    background: transparent;
+    color: #e05252;
+
+    padding: 7px 12px;
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.clear-all-btn:hover {
+    background: #e05252;
+    color: #fff;
+}
+
+/* =========================================================
+   NEW BRAND FASHION
+   ADMIN DASHBOARD — RESPONSIVE ONLY
+   HTML / JS / BACKEND UNCHANGED
+========================================================= */
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+
+    /* SIDEBAR MOBILE MODE */
+
+    .sidebar {
+        width: 250px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        box-shadow: 12px 0 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+
+    /* DARK OVERLAY */
+
+    .sidebar-overlay {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: 0.3s ease;
+    }
+
+    .sidebar-overlay.show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+
+    /* MAIN CONTENT FULL WIDTH */
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+
+    /* MENU BUTTON */
+
+    .menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+
+    /* TOPBAR */
+
+    .topbar {
+        padding: 0 20px;
+    }
+
+
+    /* STATS */
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* DASHBOARD GRID */
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================
+   TABLET SMALL
+========================= */
+
+@media (max-width: 800px) {
+
+    .content {
+        padding: 22px;
+    }
+
+
+    .welcome-card {
+        padding: 23px;
+    }
+
+
+    .welcome-text h2 {
+        font-size: 25px;
+    }
+
+
+    .dashboard-grid {
+        gap: 16px;
+    }
+
+
+    .orders-table {
+        min-width: 650px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    /* =====================
+       TOPBAR
+    ===================== */
+
+    .topbar {
+        height: 65px;
+        padding: 0 13px;
+        gap: 9px;
+    }
+
+
+    .menu-btn {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        border-radius: 7px;
+        font-size: 14px;
+    }
+
+
+    .page-heading {
+        min-width: 0;
+    }
+
+
+    .page-heading h1 {
+        font-size: 19px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+    .page-heading p {
+        font-size: 9px;
+    }
+
+
+    .topbar-actions {
+        gap: 5px;
+    }
+
+
+    .topbar-btn {
+        width: 37px;
+        height: 37px;
+        min-width: 37px;
+        border-radius: 7px;
+    }
+
+
+    /* MESSAGE ICON */
+
+    .nav-icon {
+        width: 37px;
+        height: 37px;
+        min-width: 37px;
+        border: 1px solid var(--border);
+        background: var(--card2);
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text);
+        font-size: 13px;
+    }
+
+
+    /* =====================
+       CONTENT
+    ===================== */
+
+    .content {
+        padding: 14px;
+    }
+
+
+    /* =====================
+       WELCOME
+    ===================== */
+
+    .welcome-card {
+        min-height: auto;
+        padding: 20px;
+        display: block;
+        border-radius: 10px;
+    }
+
+
+    .welcome-text span {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+    }
+
+
+    .welcome-text h2 {
+        font-size: 23px;
+        margin: 6px 0;
+    }
+
+
+    .welcome-text p {
+        font-size: 10px;
+        line-height: 1.5;
+        max-width: 90%;
+    }
+
+
+    .welcome-action {
+        margin-top: 16px;
+    }
+
+
+    .primary-btn {
+        height: 39px;
+        padding: 0 14px;
+        font-size: 10px;
+    }
+
+
+    /* =====================
+       STATS
+    ===================== */
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+        margin-top: 14px;
+    }
+
+
+    .stat-card {
+        padding: 13px;
+        border-radius: 8px;
+    }
+
+
+    .stat-top {
+        margin-bottom: 10px;
+    }
+
+
+    .stat-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 11px;
+    }
+
+
+    .stat-change {
+        font-size: 8px;
+    }
+
+
+    .stat-card h3 {
+        font-size: 19px;
+    }
+
+
+    .stat-card p {
+        font-size: 9px;
+    }
+
+
+    /* =====================
+       SECTION HEADER
+    ===================== */
+
+    .section-header {
+        margin-bottom: 10px;
+    }
+
+
+    .section-header h2 {
+        font-size: 17px;
+    }
+
+
+    .view-all {
+        font-size: 9px;
+    }
+
+
+    /* =====================
+       DASHBOARD GRID
+    ===================== */
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 17px;
+    }
+
+
+    /* =====================
+       PANEL
+    ===================== */
+
+    .panel {
+        border-radius: 8px;
+    }
+
+
+    .panel-header {
+        padding: 13px;
+    }
+
+
+    .panel-header h3 {
+        font-size: 12px;
+    }
+
+
+    /* =====================
+       RECENT ORDERS
+    ===================== */
+
+    .table-scroll {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    .orders-table {
+        min-width: 620px;
+    }
+
+
+    .orders-table th {
+        padding: 10px 12px;
+        font-size: 8px;
+    }
+
+
+    .orders-table td {
+        padding: 11px 12px;
+        font-size: 9px;
+    }
+
+
+    .customer {
+        gap: 6px;
+    }
+
+
+    .customer-avatar {
+        width: 25px;
+        height: 25px;
+        font-size: 9px;
+    }
+
+
+    .status {
+        padding: 4px 7px;
+        font-size: 8px;
+    }
+
+
+    /* =====================
+       QUICK ACTIONS
+    ===================== */
+
+    .quick-actions {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 12px;
+    }
+
+
+    .quick-action {
+        min-height: 75px;
+        padding: 12px;
+        gap: 7px;
+        border-radius: 7px;
+    }
+
+
+    .quick-action i {
+        font-size: 14px;
+    }
+
+
+    .quick-action span {
+        font-size: 9px;
+    }
+
+
+    /* =====================
+       PRODUCTS
+    ===================== */
+
+    .product-list {
+        padding: 5px 12px;
+    }
+
+
+    .product-row {
+        min-height: 58px;
+        gap: 8px;
+    }
+
+
+    .product-image {
+        width: 39px;
+        height: 39px;
+        min-width: 39px;
+    }
+
+
+    .product-info strong {
+        font-size: 10px;
+    }
+
+
+    .product-info span {
+        font-size: 8px;
+    }
+
+
+    .product-price {
+        font-size: 9px;
+    }
+
+
+    /* =====================
+       CLEAR ALL / VIEW ALL
+    ===================== */
+
+    .section-actions {
+        gap: 7px;
+    }
+
+
+    .section-link,
+    .clear-all-btn {
+        font-size: 9px;
+    }
+
+
+    .clear-all-btn {
+        padding: 6px 8px;
+    }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    .topbar {
+        padding: 0 9px;
+    }
+
+
+    .menu-btn,
+    .topbar-btn,
+    .nav-icon {
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+    }
+
+
+    .page-heading h1 {
+        font-size: 17px;
+    }
+
+
+    .page-heading p {
+        font-size: 8px;
+    }
+
+
+    .content {
+        padding: 10px;
+    }
+
+
+    .welcome-card {
+        padding: 17px;
+    }
+
+
+    .welcome-text h2 {
+        font-size: 21px;
+    }
+
+
+    .welcome-text p {
+        font-size: 9px;
+    }
+
+
+    .stats-grid {
+        gap: 7px;
+    }
+
+
+    .stat-card {
+        padding: 11px;
+    }
+
+
+    .stat-icon {
+        width: 29px;
+        height: 29px;
+    }
+
+
+    .stat-card h3 {
+        font-size: 17px;
+    }
+
+
+    .stat-card p {
+        font-size: 8px;
+    }
+
+
+    .quick-actions {
+        gap: 6px;
+        padding: 9px;
+    }
+
+
+    .quick-action {
+        min-height: 68px;
+        padding: 10px;
+    }
+
+
+    .panel-header {
+        padding: 11px;
+    }
+
+
+    .section-actions {
+        gap: 5px;
+    }
+
+
+    .clear-all-btn {
+        padding: 5px 7px;
+        font-size: 8px;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media (max-width: 340px) {
+
+    .topbar-actions {
+        gap: 3px;
+    }
+
+
+    .menu-btn,
+    .topbar-btn,
+    .nav-icon {
+        width: 33px;
+        height: 33px;
+        min-width: 33px;
+    }
+
+
+    .page-heading h1 {
+        font-size: 16px;
+    }
+
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .welcome-text h2 {
+        font-size: 20px;
+    }
+
+
+    .primary-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+
+    .section-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+}
+
+  </style>
+
+</head>
+
+<body>
+
+  <div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+  ></div>
+
+  <div class="dashboard">
+
+    <aside
+      class="sidebar"
+      id="sidebar"
+    >
+      <a
+        href="admin-dashboard.html"
+        class="sidebar-logo"
+      >
+        <div class="logo-icon">
+          NB
+        </div>
+        <div class="logo-text">
+          <strong>NEW BRAND</strong>
+          <span>FASHION</span>
+        </div>
+      </a>
+      <div class="admin-profile">
+        <div class="admin-avatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="admin-info">
+          <strong>👑⃟≛ HΛFIZ MUHΛMMΛÐ JUNΛIÐ 🕊️⃟</strong>
+          <span>Admin For Website</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-title">
+          Main
+        </div>
+        <a
+          href="admin-dashboard.html"
+          class="sidebar-link active"
+        >
+          <i class="fa-solid fa-chart-line"></i>
+          Dashboard
+        </a>
+        <a
+          href="admin-orders.html"
+          class="sidebar-link"
+        >
+          <i class="fa-solid fa-bag-shopping"></i>
+          Orders
+          <span
+            class="nav-count"
+            id="orderCount"
+          >
+            0
+          </span>
+        </a>
+
+        <a
+          href="admin-product.html"
+          class="sidebar-link"
+        >
+          <i class="fa-solid fa-box"></i>
+          Products
+        </a>
+        <a
+          href="admin-customer.html"
+          class="sidebar-link"
+        >
+          <i class="fa-solid fa-users"></i>
+          Customers
+        </a>
+        <div class="nav-title">
+          Store
+        </div>
+        <a
+          href="admin-add-product.html"
+          class="sidebar-link"
+        >
+          <i class="fa-solid fa-plus"></i>
+          Add Product
+        </a>
+        <a
+          href="admin-messages.html"
+          class="sidebar-link"
+        >
+          <i class="fa-regular fa-envelope"></i>
+          Messages
+          <span class="nav-count">
+            3
+          </span>
+        </a>
+        <div class="nav-title">
+          Management
+        </div>
+        <a
+          href="admin-setting.html"
+          class="sidebar-link"
+        >
+          <i class="fa-solid fa-gear"></i>
+          Settings
+        </a>
+        <a
+          href="index.html"
+          class="sidebar-link"
+        >
+          <i class="fa-solid fa-store"></i>
+          View Store
+        </a>
+      </nav>
+      <div class="sidebar-bottom">
+        <a
+          href="#"
+          class="sidebar-link logout-link"
+          id="logoutBtn"
+        >
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </a>
+      </div>
+    </aside>
+    <div class="main-content">
+      <header class="topbar">
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          title="Open menu"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="page-heading">
+          <h1>
+            Dashboard
+          </h1>
+          <p>
+            Welcome back, Admin
+          </p>
+        </div>
+        <div class="topbar-actions">
+          <button
+            class="topbar-btn"
+            title="Notifications"
+            id="notificationBtn"
+          >
+            <i class="fa-regular fa-bell"></i>
+            <span
+              class="notification-dot"
+              id="notificationDot"
+            ></span>
+          </button>
+               <a href="admin-messages.html" class="nav-icon">
+                <i class="fa-regular fa-message"></i>
+                    </a>
+          <button
+            class="topbar-btn"
+            id="themeToggle"
+            title="Change Theme"
+          >
+            <i class="fa-solid fa-sun"></i>
+          </button>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="welcome-card">
+          <div class="welcome-text">
+            <span>
+              New Brand Fashion
+            </span>
+            <h2>
+              Store Overview
+            </h2>
+            <p>
+              Manage your products, orders and customers
+              from one place.
+            </p>
+          </div>
+          <div class="welcome-action">
+            <a
+              href="admin-add-product.html"
+              class="primary-btn"
+            >
+              <i class="fa-solid fa-plus"></i>
+              Add New Product
+            </a>
+          </div>
+        </section>
+
+        <section class="stats-grid">
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon">
+                <i class="fa-solid fa-chart-column"></i>
+              </div>
+
+              <span
+                class="stat-change"
+                id="revenueChange"
+              >
+                Live
+              </span>
+
+            </div>
+
+            <h3 id="totalRevenue">
+              Rs. 0
+            </h3>
+
+            <p>
+              Total Revenue
+            </p>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+              </div>
+
+              <span
+                class="stat-change"
+                id="orderChange"
+              >
+                Live
+              </span>
+
+            </div>
+
+            <h3 id="totalOrders">
+              0
+            </h3>
+
+            <p>
+              Total Orders
+            </p>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon">
+                <i class="fa-solid fa-box"></i>
+              </div>
+
+              <span
+                class="stat-change"
+                id="productChange"
+              >
+                Live
+              </span>
+
+            </div>
+
+            <h3 id="totalProducts">
+              0
+            </h3>
+
+            <p>
+              Total Products
+            </p>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon">
+                <i class="fa-solid fa-users"></i>
+              </div>
+
+              <span
+                class="stat-change"
+                id="customerChange"
+              >
+                Live
+              </span>
+
+            </div>
+
+            <h3 id="totalCustomers">
+              0
+            </h3>
+
+            <p>
+              Total Customers
+            </p>
+
+          </div>
+
+        </section>
+
+        <section class="stats-grid" style="margin-top: 20px;">
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon">
+                <i class="fa-solid fa-user-tag"></i>
+              </div>
+              <span class="stat-change" id="sellerChange">Live</span>
+            </div>
+            <h3 id="totalSellers">0</h3>
+            <p>Seller Accounts</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+              <span class="stat-change" id="buyerChange">Live</span>
+            </div>
+            <h3 id="totalBuyers">0</h3>
+            <p>Buyer Accounts</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <span class="stat-change" id="reviewChange">Live</span>
+            </div>
+            <h3 id="totalReviews">0</h3>
+            <p>Reviews</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon">
+                <i class="fa-solid fa-store"></i>
+              </div>
+              <span class="stat-change" id="sourceChange">Live</span>
+            </div>
+            <h3 id="productSourceCount">0</h3>
+            <p>Seller Products</p>
+          </div>
+        </section>
+
+        <div class="dashboard-grid">
+
+          <section class="panel">
+
+            <div class="panel-header">
+
+              <h3>
+                Recent Orders
+              </h3>
+
+              <div class="section-actions">
+             <a href="admin-orders.html" class="section-link">
+              View All
+              </a>
+
+             <button type="button" class="clear-all-btn" onclick="clearAllOrders()">
+             <i class="fas fa-trash"></i>
+            Clear All
+           </button>
+           </div>
+
+            </div>
+
+            <div class="panel-body table-scroll">
+
+              <table class="orders-table">
+
+                <thead>
+
+                  <tr>
+
+                    <th>
+                      Order
+                    </th>
+
+                    <th>
+                      Customer
+                    </th>
+
+                    <th>
+                      Amount
+                    </th>
+
+                    <th>
+                      Status
+                    </th>
+
+                    <th>
+                      Date
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody id="recentOrders">
+
+                  <tr>
+                    <td
+                      colspan="5"
+                      class="loading-row"
+                    >
+                      Loading orders...
+                    </td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </section>
+
+          <section class="panel">
+
+            <div class="panel-header">
+
+              <h3>
+                Quick Actions
+              </h3>
+
+            </div>
+
+            <div class="quick-actions">
+              <a
+                href="admin-add-product.html"
+                class="quick-action"
+              >
+                <i class="fa-solid fa-plus"></i>
+                <span>
+                  Add Product
+                </span>
+              </a>
+              <a
+                href="admin-orders.html"
+                class="quick-action"
+              >
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span>
+                  Manage Orders
+                </span>
+              </a>
+              <a
+                href="admin-customer.html"
+                class="quick-action"
+              >
+                <i class="fa-solid fa-users"></i>
+                <span>
+                  Customers
+                </span>
+              </a>
+              <a
+                href="admin-messages.html"
+                class="quick-action"
+              >
+                <i class="fa-regular fa-envelope"></i>
+                <span>
+                  Messages
+                </span>
+              </a>
+            </div>
+          </section>
+        </div>
+        <section
+          class="panel"
+          style="margin-top: 20px;"
+        >
+          <div class="panel-header">
+            <h3>
+              Recent Products
+            </h3>
+            <a
+              href="admin-product.html"
+              class="view-all"
+            >
+              Manage Products
+            </a>
+          </div>
+          <div
+            class="product-list"
+            id="recentProducts"
+          >
+            <div class="loading-row">
+              Loading products...
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+
+    /*
+    ========================================================
+    ADMIN AUTHENTICATION
+    ========================================================
+    */
+
+    const adminLoggedIn =
+      localStorage.getItem("adminLoggedIn");
+
+    const adminToken =
+      localStorage.getItem("adminToken");
+
+    /*
+      Dashboard sirf admin login + token
+      ke saath open hoga.
+    */
+
+    if (
+      adminLoggedIn !== "true" ||
+      !adminToken
+    ) {
+
+      localStorage.removeItem("adminLoggedIn");
+      localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminUserId");
+      localStorage.removeItem("adminUser");
+
+      window.location.replace(
+        "admin-login.html"
+      );
+
+      throw new Error(
+        "Admin authentication required."
+      );
+    }
+
+
+    /*
+    ========================================================
+    API
+    ========================================================
+    */
+
+    const ORDERS_API =
+      "http://localhost:5000/api/orders";
+
+    const PRODUCTS_API =
+      "http://localhost:5000/api/products";
+
+    const ANALYTICS_API =
+      "http://localhost:5000/api/analytics/dashboard";
+
+
+    /*
+    ========================================================
+    ADMIN API HEADERS
+    ========================================================
+    */
+
+    function getAdminHeaders() {
+
+      const token =
+        localStorage.getItem("adminToken");
+
+      return {
+        "Authorization":
+          `Bearer ${token}`,
+        "Content-Type":
+          "application/json"
+      };
+    }
+
+
+    /*
+    ========================================================
+    UNAUTHORIZED HANDLER
+    ========================================================
+    */
+
+    function handleUnauthorized(response) {
+
+      if (
+        response.status === 401 ||
+        response.status === 403
+      ) {
+
+        localStorage.removeItem(
+          "adminLoggedIn"
+        );
+
+        localStorage.removeItem(
+          "adminToken"
+        );
+
+        localStorage.removeItem(
+          "adminUserId"
+        );
+
+        localStorage.removeItem(
+          "adminUser"
+        );
+
+        window.location.replace(
+          "admin-login.html"
+        );
+
+        return true;
+      }
+
+      return false;
+    }
+
+
+    /*
+    ========================================================
+    THEME
+    ========================================================
+    */
+
+    const themeToggle =
+      document.getElementById("themeToggle");
+
+    function applyTheme() {
+
+      const savedTheme =
+        localStorage.getItem("theme") || "dark";
+
+      if (savedTheme === "light") {
+
+        document.body.classList.add("light");
+
+        themeToggle.innerHTML =
+          '<i class="fa-solid fa-moon"></i>';
+
+      } else {
+
+        document.body.classList.remove("light");
+
+        themeToggle.innerHTML =
+          '<i class="fa-solid fa-sun"></i>';
+      }
+    }
+
+    applyTheme();
+
+    themeToggle.addEventListener(
+      "click",
+      function () {
+
+        const isLight =
+          document.body.classList.toggle("light");
+
+        localStorage.setItem(
+          "theme",
+          isLight ? "light" : "dark"
+        );
+
+        themeToggle.innerHTML =
+          isLight
+            ? '<i class="fa-solid fa-moon"></i>'
+            : '<i class="fa-solid fa-sun"></i>';
+      }
+    );
+
+
+    /*
+    ========================================================
+    MOBILE SIDEBAR
+    ========================================================
+    */
+
+    const menuBtn =
+      document.getElementById("menuBtn");
+
+    const sidebar =
+      document.getElementById("sidebar");
+
+    const sidebarOverlay =
+      document.getElementById("sidebarOverlay");
+
+    function openSidebar() {
+
+      sidebar.classList.add("open");
+      sidebarOverlay.classList.add("show");
+    }
+
+    function closeSidebar() {
+
+      sidebar.classList.remove("open");
+      sidebarOverlay.classList.remove("show");
+    }
+
+    menuBtn.addEventListener(
+      "click",
+      openSidebar
+    );
+
+    sidebarOverlay.addEventListener(
+      "click",
+      closeSidebar
+    );
+
+
+    /*
+    ========================================================
+    HELPER
+    ========================================================
+    */
+
+    function escapeHTML(value) {
+
+      if (
+        value === null ||
+        value === undefined
+      ) {
+        return "";
+      }
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    function formatPrice(value) {
+
+      const number =
+        Number(value) || 0;
+
+      return "Rs. " +
+        number.toLocaleString("en-PK");
+    }
+
+
+    function formatDate(dateValue) {
+
+      if (!dateValue) {
+        return "-";
+      }
+
+      const date =
+        new Date(dateValue);
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return "-";
+      }
+
+      return date.toLocaleDateString(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric"
+        }
+      );
+    }
+
+
+    function getInitials(name) {
+
+      if (!name) {
+        return "CU";
+      }
+
+      const words =
+        String(name)
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+      if (words.length === 1) {
+
+        return words[0]
+          .substring(0, 2)
+          .toUpperCase();
+      }
+
+      return (
+        words[0][0] +
+        words[1][0]
+      ).toUpperCase();
+    }
+
+
+    function getStatusClass(status) {
+
+      const value =
+        String(status || "Pending")
+          .toLowerCase()
+          .trim();
+
+      if (
+        value === "completed" ||
+        value === "delivered"
+      ) {
+        return "completed";
+      }
+
+      if (
+        value === "cancelled" ||
+        value === "canceled"
+      ) {
+        return "cancelled";
+      }
+
+      if (
+        value === "shipped" ||
+        value === "out for delivery"
+      ) {
+        return "shipped";
+      }
+
+      if (
+        value === "processing" ||
+        value === "confirmed"
+      ) {
+        return "processing";
+      }
+
+      return "pending";
+    }
+
+
+    /*
+    ========================================================
+    LOAD DASHBOARD
+    ========================================================
+    */
+
+    async function loadDashboard() {
+
+      try {
+
+        const headers =
+          getAdminHeaders();
+
+        const [
+          ordersResponse,
+          productsResponse,
+          analyticsResponse
+        ] = await Promise.all([
+
+          fetch(
+            ORDERS_API,
+            {
+              method: "GET",
+              headers: headers
+            }
+          ),
+
+          fetch(
+            PRODUCTS_API,
+            {
+              method: "GET",
+              headers: headers
+            }
+          ),
+
+          fetch(
+            ANALYTICS_API,
+            {
+              method: "GET",
+              headers: headers
+            }
+          )
+
+        ]);
+
+
+        /*
+          Agar admin token invalid/expired
+          hai to login page par bhejo.
+        */
+
+        if (
+          handleUnauthorized(
+            ordersResponse
+          )
+        ) {
+          return;
+        }
+
+        if (
+          handleUnauthorized(
+            productsResponse
+          )
+        ) {
+          return;
+        }
+
+        if (
+          handleUnauthorized(
+            analyticsResponse
+          )
+        ) {
+          return;
+        }
+
+
+        if (!ordersResponse.ok) {
+
+          throw new Error(
+            "Orders API error"
+          );
+        }
+
+
+        if (!productsResponse.ok) {
+
+          throw new Error(
+            "Products API error"
+          );
+        }
+
+
+        if (!analyticsResponse.ok) {
+
+          throw new Error(
+            "Analytics API error"
+          );
+        }
+
+
+        const ordersData =
+          await ordersResponse.json();
+
+        const productsData =
+          await productsResponse.json();
+
+        const analyticsData =
+          await analyticsResponse.json();
+
+
+        if (!ordersData.success) {
+
+          throw new Error(
+            ordersData.message ||
+            "Could not load orders."
+          );
+        }
+
+
+        if (!productsData.success) {
+
+          throw new Error(
+            productsData.message ||
+            "Could not load products."
+          );
+        }
+
+
+        if (!analyticsData.success) {
+
+          throw new Error(
+            analyticsData.message ||
+            "Could not load analytics."
+          );
+        }
+
+
+        const orders =
+          Array.isArray(
+            ordersData.orders
+          )
+            ? ordersData.orders
+            : [];
+
+
+        const products =
+          Array.isArray(
+            productsData.products
+          )
+            ? productsData.products
+            : [];
+
+        const analyticsSummary =
+          analyticsData.summary || {};
+
+        localStorage.setItem(
+          "adminAnalyticsCache",
+          JSON.stringify(analyticsSummary)
+        );
+
+
+        renderStats(
+          orders,
+          products,
+          analyticsSummary
+        );
+
+
+        renderRecentOrders(
+          orders
+        );
+
+
+        renderRecentProducts(
+          products
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Dashboard loading error:",
+          error
+        );
+
+        const cachedAnalytics =
+          JSON.parse(
+            localStorage.getItem("adminAnalyticsCache") || "{}"
+          );
+
+        renderStats([], [], cachedAnalytics);
+
+        document.getElementById(
+          "recentOrders"
+        ).innerHTML = `
+          <tr>
+            <td
+              colspan="5"
+              class="error-row"
+            >
+              Could not load dashboard data.
+            </td>
+          </tr>
+        `;
+
+
+        document.getElementById(
+          "recentProducts"
+        ).innerHTML = `
+          <div class="error-row">
+            Could not load products.
+          </div>
+        `;
+      }
+    }
+
+
+    /*
+    ========================================================
+    STATS
+    ========================================================
+    */
+
+    function renderStats(
+      orders,
+      products,
+      analyticsSummary = {}
+    ) {
+
+      const totalOrders =
+        orders.length;
+
+
+      const totalProducts =
+        products.length;
+
+
+      const customers =
+        new Set();
+
+
+      let totalRevenue = 0;
+
+
+      orders.forEach(order => {
+
+        const customer =
+          order.customer || {};
+
+
+        const customerKey =
+          customer.email ||
+          customer.phone ||
+          customer.name;
+
+
+        if (customerKey) {
+
+          customers.add(
+            String(customerKey)
+              .toLowerCase()
+              .trim()
+          );
+        }
+
+
+        const status =
+          String(
+            order.status || ""
+          ).toLowerCase();
+
+
+        /*
+          Cancelled orders ko
+          revenue mein include nahi kar rahe.
+        */
+
+        if (
+          status !== "cancelled" &&
+          status !== "canceled"
+        ) {
+
+          totalRevenue +=
+            Number(order.total) || 0;
+        }
+
+      });
+
+      const usersSummary =
+        analyticsSummary.users || {};
+
+      const productsSummary =
+        analyticsSummary.products || {};
+
+      const reviewsSummary =
+        analyticsSummary.reviews || {};
+
+      const totalSellers =
+        Number(usersSummary.totalSellers || 0);
+
+      const totalBuyers =
+        Number(usersSummary.totalBuyers || 0);
+
+      const totalReviews =
+        Number(reviewsSummary.totalReviews || 0);
+
+      const sellerProducts =
+        Number(productsSummary.sellerProducts || 0);
+
+      document.getElementById(
+        "totalRevenue"
+      ).textContent =
+        formatPrice(
+          Number(analyticsSummary.revenue?.totalRevenue || totalRevenue)
+        );
+
+
+      document.getElementById(
+        "totalOrders"
+      ).textContent =
+        totalOrders.toLocaleString();
+
+
+      document.getElementById(
+        "totalProducts"
+      ).textContent =
+        totalProducts.toLocaleString();
+
+
+      document.getElementById(
+        "totalCustomers"
+      ).textContent =
+        customers.size.toLocaleString();
+
+      document.getElementById("totalSellers").textContent = totalSellers.toLocaleString();
+      document.getElementById("totalBuyers").textContent = totalBuyers.toLocaleString();
+      document.getElementById("totalReviews").textContent = totalReviews.toLocaleString();
+      document.getElementById("productSourceCount").textContent = sellerProducts.toLocaleString();
+
+
+      document.getElementById(
+        "orderCount"
+      ).textContent =
+        totalOrders;
+
+
+      document.getElementById(
+        "orderChange"
+      ).textContent =
+        "Live";
+
+
+      document.getElementById(
+        "productChange"
+      ).textContent =
+        "Live";
+
+
+      document.getElementById(
+        "customerChange"
+      ).textContent =
+        "Live";
+
+
+      document.getElementById(
+        "revenueChange"
+      ).textContent =
+        "Live";
+
+      document.getElementById("sellerChange").textContent = "Live";
+      document.getElementById("buyerChange").textContent = "Live";
+      document.getElementById("reviewChange").textContent = "Live";
+      document.getElementById("sourceChange").textContent = "Live";
+    }
+
+
+    /*
+    ========================================================
+    RECENT ORDERS
+    ========================================================
+    */
+
+    function renderRecentOrders(
+      orders
+    ) {
+
+      const container =
+        document.getElementById(
+          "recentOrders"
+        );
+
+
+      if (!orders.length) {
+
+        container.innerHTML = `
+          <tr>
+            <td
+              colspan="5"
+              class="loading-row"
+            >
+              No orders found.
+            </td>
+          </tr>
+        `;
+
+        return;
+      }
+
+
+      const recentOrders =
+        [...orders]
+          .sort(
+            (a, b) => {
+
+              const dateA =
+                new Date(
+                  a.created_at ||
+                  a.createdAt ||
+                  0
+                ).getTime();
+
+
+              const dateB =
+                new Date(
+                  b.created_at ||
+                  b.createdAt ||
+                  0
+                ).getTime();
+
+
+              return dateB - dateA;
+            }
+          )
+          .slice(0, 5);
+
+
+      container.innerHTML =
+        recentOrders
+          .map(order => {
+
+            const customer =
+              order.customer || {};
+
+
+            const customerName =
+              customer.name ||
+              "Customer";
+
+
+            const orderNumber =
+              order.order_number ||
+              order.orderNumber ||
+              ("#" + order.id);
+
+
+            const status =
+              order.status ||
+              "Pending";
+
+
+            const statusClass =
+              getStatusClass(status);
+
+
+            const createdDate =
+              order.created_at ||
+              order.createdAt;
+
+
+            return `
+              <tr
+                style="cursor:pointer"
+                onclick="openOrder(${Number(order.id) || 0})"
+              >
+
+                <td class="order-id">
+                  #${escapeHTML(orderNumber)}
+                </td>
+
+                <td>
+
+                  <div class="customer">
+
+                    <div class="customer-avatar">
+                      ${escapeHTML(
+                        getInitials(
+                          customerName
+                        )
+                      )}
+                    </div>
+
+                    ${escapeHTML(
+                      customerName
+                    )}
+
+                  </div>
+
+                </td>
+
+                <td>
+                  ${formatPrice(
+                    order.total
+                  )}
+                </td>
+
+                <td>
+
+                  <span
+                    class="status ${statusClass}"
+                  >
+                    ${escapeHTML(
+                      status
+                    )}
+                  </span>
+
+                </td>
+
+                <td>
+                  ${formatDate(
+                    createdDate
+                  )}
+                </td>
+
+              </tr>
+            `;
+          })
+          .join("");
+    }
+
+
+    /*
+    ========================================================
+    OPEN ORDER
+    ========================================================
+    */
+
+    function openOrder(id) {
+
+      if (!id) {
+        return;
+      }
+
+      window.location.href =
+        "admin-order-details.html?id=" +
+        encodeURIComponent(id);
+    }
+
+
+    /*
+    ========================================================
+    RECENT PRODUCTS
+    ========================================================
+    */
+
+    function renderRecentProducts(
+      products
+    ) {
+
+      const container =
+        document.getElementById(
+          "recentProducts"
+        );
+
+
+      if (!products.length) {
+
+        container.innerHTML = `
+          <div class="loading-row">
+            No products found.
+          </div>
+        `;
+
+        return;
+      }
+
+
+      const recentProducts =
+        [...products]
+          .sort(
+            (a, b) => {
+
+              const dateA =
+                new Date(
+                  a.created_at ||
+                  a.createdAt ||
+                  0
+                ).getTime();
+
+
+              const dateB =
+                new Date(
+                  b.created_at ||
+                  b.createdAt ||
+                  0
+                ).getTime();
+
+
+              return dateB - dateA;
+            }
+          )
+          .slice(0, 4);
+
+
+      container.innerHTML =
+        recentProducts
+          .map(product => {
+
+            const image =
+              product.image || "";
+
+
+            const imageHTML =
+              image
+                ? `
+                  <img
+                    src="${escapeHTML(image)}"
+                    alt="${escapeHTML(
+                      product.name ||
+                      "Product"
+                    )}"
+                    onerror="this.style.display='none';this.parentElement.innerHTML='<i class=&quot;fa-solid fa-shirt&quot;></i>';"
+                  >
+                `
+                : `
+                  <i class="fa-solid fa-shirt"></i>
+                `;
+
+
+            return `
+              <div class="product-row">
+
+                <div class="product-image">
+                  ${imageHTML}
+                </div>
+
+                <div class="product-info">
+
+                  <strong>
+                    ${escapeHTML(
+                      product.name ||
+                      "Unnamed Product"
+                    )}
+                  </strong>
+
+                  <span>
+                    ${escapeHTML(
+                      product.category ||
+                      "Product"
+                    )}
+                    · Stock:
+                    ${Number(
+                      product.stock
+                    ) || 0}
+                  </span>
+
+                </div>
+
+                <div class="product-price">
+                  ${formatPrice(
+                    product.price
+                  )}
+                </div>
+
+              </div>
+            `;
+          })
+          .join("");
+    }
+
+
+    /*
+    ========================================================
+    NOTIFICATIONS
+    ========================================================
+    */
+
+    document
+      .getElementById(
+        "notificationBtn"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          window.location.href =
+            "admin-orders.html";
+        }
+      );
+
+
+    /*
+    ========================================================
+    LOGOUT
+    ========================================================
+    */
+
+    document
+      .getElementById(
+        "logoutBtn"
+      )
+      .addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+
+
+          const confirmLogout =
+            confirm(
+              "Are you sure you want to logout?"
+            );
+
+
+          if (confirmLogout) {
+
+            localStorage.removeItem(
+              "adminLoggedIn"
+            );
+
+
+            localStorage.removeItem(
+              "adminToken"
+            );
+
+
+            localStorage.removeItem(
+              "adminUserId"
+            );
+
+
+            localStorage.removeItem(
+              "adminUser"
+            );
+
+
+            localStorage.removeItem(
+              "adminRemember"
+            );
+
+
+            window.location.href =
+              "admin-login.html";
+          }
+
+        }
+      );
+
+
+    /*
+    ========================================================
+    START DASHBOARD
+    ========================================================
+    */
+
+    loadDashboard();
+
+async function clearAllOrders() {
+
+    const confirmClear = confirm(
+        "⚠️ Kya aap waqai tamam orders permanently delete karna chahte hain?\n\nYe action undo nahi kiya ja sakta."
+    );
+
+    if (!confirmClear) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(ORDERS_API, {
+            method: "DELETE",
+            headers: getAdminHeaders()
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            if (response.status === 401 || response.status === 403) {
+                handleUnauthorized(response);
+                return;
+            }
+
+            throw new Error(
+                data.message || "Orders clear nahi ho sake."
+            );
+        }
+
+        alert("✅ Tamam orders successfully clear ho gaye.");
+
+        // Dashboard dobara load
+        loadDashboard();
+
+    } catch (error) {
+
+        console.error("Clear orders error:", error);
+
+        alert(
+            "❌ Orders clear nahi ho sake.\n\n" +
+            error.message
+        );
+    }
+}
+
+
+  </script>
+
+</body>
+</html>

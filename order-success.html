@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Successful — New Brand Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #070707;
+      --card: #101010;
+      --card2: #151515;
+      --text: #ffffff;
+      --muted: #a5a5a5;
+      --border: #292929;
+      --gold: #d5ad55;
+      --gold-dark: #b58d35;
+      --input: #151515;
+    }
+
+    body.light {
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --card2: #f1f1f1;
+      --text: #111111;
+      --muted: #666666;
+      --border: #dddddd;
+      --gold: #b7892e;
+      --gold-dark: #966d20;
+      --input: #ffffff;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      max-width: 1450px;
+      min-height: 75px;
+      margin: auto;
+      padding: 0 25px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 230px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .logo-text {
+      line-height: 1.05;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+    }
+
+    .nav-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      white-space: nowrap;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .separator {
+      width: 1px;
+      height: 25px;
+      background: var(--border);
+    }
+
+    .nav-icon {
+      position: relative;
+      font-size: 18px;
+      color: var(--text);
+      transition: 0.2s;
+    }
+
+    .nav-icon:hover {
+      color: var(--gold);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -9px;
+      right: -11px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #111;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .theme-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    main {
+      min-height: calc(100vh - 75px);
+    }
+
+    .breadcrumb {
+      max-width: 1450px;
+      margin: auto;
+      padding: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+
+    .success-section {
+      max-width: 900px;
+      margin: 30px auto 100px;
+      padding: 0 25px;
+      text-align: center;
+    }
+
+    .success-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 55px 40px;
+    }
+
+    .success-icon {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      background: rgba(213, 173, 85, 0.12);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 40px;
+    }
+
+    .success-card h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .success-card > p {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .order-number {
+      display: inline-block;
+      margin: 25px 0;
+      padding: 13px 22px;
+      border-radius: 8px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      font-size: 15px;
+    }
+
+    .order-number span {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .order-info {
+      margin-top: 30px;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .info-box {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .info-box h3 {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .info-box p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .info-box strong {
+      color: var(--text);
+    }
+
+    .success-actions {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 7px;
+      padding: 13px 22px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .copyright {
+      margin-top: 45px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+  /* =========================================
+   RESPONSIVE DESIGN
+   ORDER SUCCESSFUL PAGE
+   ORIGINAL DESIGN PRESERVED
+========================================= */
+
+
+/* =========================================
+   LARGE LAPTOP
+========================================= */
+
+@media (max-width: 1200px) {
+
+  .navbar {
+    padding: 0 20px;
+    gap: 18px;
+  }
+
+  .logo {
+    min-width: 200px;
+  }
+
+  .breadcrumb {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .success-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    min-height: 70px;
+    padding: 12px 18px;
+    gap: 15px;
+  }
+
+  .logo {
+    min-width: auto;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .logo-text strong {
+    font-size: 16px;
+  }
+
+  .logo-text span {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+  .nav-right {
+    gap: 13px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+  }
+
+  .nav-icon {
+    font-size: 17px;
+  }
+
+  .theme-btn {
+    width: 37px;
+    height: 37px;
+  }
+
+
+  main {
+    min-height: calc(100vh - 70px);
+  }
+
+
+  .breadcrumb {
+    padding: 20px 18px;
+    font-size: 12px;
+  }
+
+
+  .success-section {
+    max-width: 800px;
+    margin: 20px auto 70px;
+    padding: 0 18px;
+  }
+
+
+  .success-card {
+    padding: 45px 30px;
+    border-radius: 14px;
+  }
+
+
+  .success-icon {
+    width: 82px;
+    height: 82px;
+    font-size: 36px;
+    margin-bottom: 22px;
+  }
+
+
+  .success-card h1 {
+    font-size: 34px;
+  }
+
+
+  .success-card > p {
+    font-size: 14px;
+  }
+
+
+  .order-number {
+    margin: 22px 0;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+
+  .order-info {
+    gap: 15px;
+  }
+
+
+  .info-box {
+    padding: 18px;
+  }
+
+
+  .info-box h3 {
+    font-size: 14px;
+  }
+
+
+  .info-box p {
+    font-size: 13px;
+  }
+
+
+  .success-actions {
+    margin-top: 30px;
+  }
+
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+
+  .copyright {
+    margin-top: 35px;
+    padding: 18px 15px;
+    font-size: 11px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  header {
+    position: sticky;
+    top: 0;
+  }
+
+
+  .navbar {
+    min-height: auto;
+    padding: 11px 14px;
+    gap: 10px;
+  }
+
+
+  .logo {
+    gap: 7px;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .logo-text strong {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .logo-text span {
+    font-size: 9px;
+    letter-spacing: 1.8px;
+  }
+
+
+  .nav-right {
+    gap: 10px;
+  }
+
+
+  .nav-link {
+    display: none;
+  }
+
+
+  .nav-icon {
+    font-size: 15px;
+  }
+
+
+  .theme-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+
+
+  main {
+    min-height: calc(100vh - 60px);
+  }
+
+
+  /* Breadcrumb */
+
+  .breadcrumb {
+    padding: 15px 14px 5px;
+    font-size: 10px;
+  }
+
+
+  .breadcrumb span {
+    white-space: nowrap;
+  }
+
+
+  /* Success Section */
+
+  .success-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 15px auto 45px;
+    padding: 0 14px;
+  }
+
+
+  .success-card {
+    padding: 35px 18px;
+    border-radius: 12px;
+  }
+
+
+  /* Success Icon */
+
+  .success-icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+    border-width: 2px;
+    font-size: 31px;
+  }
+
+
+  /* Heading */
+
+  .success-card h1 {
+    font-size: 28px;
+    line-height: 1.25;
+    margin-bottom: 11px;
+  }
+
+
+  .success-card > p {
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+
+  /* Order ID */
+
+  .order-number {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    padding: 12px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+
+  .order-number span {
+    word-break: break-word;
+  }
+
+
+  /* Information Boxes */
+
+  .order-info {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+
+  .info-box {
+    padding: 16px;
+    border-radius: 9px;
+  }
+
+
+  .info-box h3 {
+    font-size: 13px;
+    margin-bottom: 9px;
+  }
+
+
+  .info-box h3 i {
+    width: 17px;
+  }
+
+
+  .info-box p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+
+  /* Buttons */
+
+  .success-actions {
+    width: 100%;
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+
+  .btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 15px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+
+  /* Footer */
+
+  .copyright {
+    margin-top: 25px;
+    padding: 17px 12px;
+    font-size: 9px;
+    line-height: 1.6;
+  }
+
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 9px 11px;
+  }
+
+
+  .logo {
+    gap: 6px;
+  }
+
+
+  .logo-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+
+
+  .logo-text strong {
+    font-size: 12px;
+    letter-spacing: 0.4px;
+  }
+
+
+  .logo-text span {
+    font-size: 8px;
+    letter-spacing: 1.4px;
+  }
+
+
+  .nav-right {
+    gap: 8px;
+  }
+
+
+  .nav-icon {
+    font-size: 14px;
+  }
+
+
+  .theme-btn {
+    width: 31px;
+    height: 31px;
+    font-size: 11px;
+  }
+
+
+  /* Breadcrumb */
+
+  .breadcrumb {
+    padding: 12px 11px 4px;
+    font-size: 9px;
+  }
+
+
+  .success-section {
+    margin: 12px auto 38px;
+    padding: 0 11px;
+  }
+
+
+  .success-card {
+    padding: 28px 14px;
+    border-radius: 10px;
+  }
+
+
+  /* Icon */
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 27px;
+    margin-bottom: 17px;
+  }
+
+
+  /* Heading */
+
+  .success-card h1 {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+
+
+  .success-card > p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+
+  /* Order ID */
+
+  .order-number {
+    margin: 17px 0;
+    padding: 11px 10px;
+    font-size: 10px;
+  }
+
+
+  /* Info */
+
+  .order-info {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+
+  .info-box {
+    padding: 13px;
+  }
+
+
+  .info-box h3 {
+    font-size: 11px;
+    margin-bottom: 7px;
+  }
+
+
+  .info-box p {
+    font-size: 9px;
+    line-height: 1.7;
+  }
+
+
+  /* Buttons */
+
+  .success-actions {
+    margin-top: 20px;
+    gap: 8px;
+  }
+
+
+  .btn {
+    min-height: 41px;
+    padding: 10px 12px;
+    font-size: 9px;
+    border-radius: 6px;
+  }
+
+
+  .btn i {
+    font-size: 10px;
+  }
+
+
+  /* Footer */
+
+  .copyright {
+    margin-top: 20px;
+    padding: 15px 10px;
+    font-size: 8px;
+  }
+
+}
+
+
+/* =========================================
+   EXTRA SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+
+  .navbar {
+    padding: 8px 9px;
+  }
+
+
+  .logo {
+    gap: 5px;
+  }
+
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+
+  .logo-text strong {
+    font-size: 11px;
+  }
+
+
+  .logo-text span {
+    font-size: 7px;
+    letter-spacing: 1.1px;
+  }
+
+
+  .nav-right {
+    gap: 6px;
+  }
+
+
+  .nav-icon {
+    font-size: 13px;
+  }
+
+
+  .theme-btn {
+    width: 29px;
+    height: 29px;
+    font-size: 10px;
+  }
+
+
+  /* Breadcrumb */
+
+  .breadcrumb {
+    padding: 10px 9px 3px;
+    font-size: 8px;
+  }
+
+
+  .success-section {
+    margin: 10px auto 32px;
+    padding: 0 9px;
+  }
+
+
+  .success-card {
+    padding: 24px 11px;
+    border-radius: 9px;
+  }
+
+
+  /* Icon */
+
+  .success-icon {
+    width: 58px;
+    height: 58px;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+
+  /* Heading */
+
+  .success-card h1 {
+    font-size: 21px;
+  }
+
+
+  .success-card > p {
+    font-size: 10px;
+    line-height: 1.65;
+  }
+
+
+  /* Order */
+
+  .order-number {
+    margin: 15px 0;
+    padding: 9px 8px;
+    font-size: 9px;
+  }
+
+
+  /* Info Boxes */
+
+  .order-info {
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+
+  .info-box {
+    padding: 11px;
+  }
+
+
+  .info-box h3 {
+    font-size: 10px;
+  }
+
+
+  .info-box p {
+    font-size: 8px;
+    line-height: 1.65;
+  }
+
+
+  /* Buttons */
+
+  .success-actions {
+    margin-top: 17px;
+    gap: 7px;
+  }
+
+
+  .btn {
+    min-height: 39px;
+    padding: 9px 10px;
+    font-size: 8px;
+  }
+
+
+  .btn i {
+    font-size: 9px;
+  }
+
+
+  /* Footer */
+
+  .copyright {
+    margin-top: 16px;
+    padding: 13px 8px;
+    font-size: 7px;
+  }
+
+}
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NB</div>
+        <div class="logo-text">
+          <strong>NEW BRAND</strong>
+          <span>FASHION</span>
+        </div>
+      </a>
+      
+      <div class="nav-right">
+
+        <a href="profile.html" class="nav-icon">
+          <i class="fa-solid fa-user"></i>
+        </a>
+        <a href="index.html" class="nav-icon">
+          <i class="fa-solid fa-home"></i>
+        </a>
+        <button
+          class="theme-btn"
+          id="themeBtn"
+          title="Toggle Theme"
+        >
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span> / </span>
+      <span>Order Successful</span>
+    </div>
+    <section class="success-section">
+      <div class="success-card">
+        <div class="success-icon">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h1>Order Placed Successfully!</h1>
+
+        <p>
+          Thank you for shopping with New Brand Fashion.
+          Your order has been received successfully. Our team will
+          contact you shortly for order confirmation.
+        </p>
+        <div class="order-number">
+
+          Order ID:
+          <span id="orderId">
+            Loading...
+          </span>
+        </div>
+        <div class="order-info">
+          <div class="info-box">
+            <h3>
+              <i class="fa-solid fa-user"></i>
+              Customer
+            </h3>
+            <p id="customerInfo">
+              Loading customer information...
+            </p>
+          </div>
+          <div class="info-box">
+            <h3>
+              <i class="fa-solid fa-location-dot"></i>
+              Delivery Address
+            </h3>
+
+            <p id="addressInfo">
+              Loading address...
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3>
+              <i class="fa-solid fa-money-bill"></i>
+              Payment
+            </h3>
+            <p id="paymentInfo">
+              Cash on Delivery
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3>
+              <i class="fa-solid fa-clock"></i>
+              Order Status
+            </h3>
+
+            <p id="statusInfo">
+              <strong>Pending Confirmation</strong><br>
+              Our team will contact you shortly.
+            </p>
+
+          </div>
+        </div>
+        <div class="success-actions">
+          <a href="shop.html" class="btn btn-primary">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+            Continue Shopping
+          </a>
+          <a href="track-order.html" class="btn btn-outline">
+
+            <i class="fa-solid fa-truck"></i>
+            Track Order
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<footer class="copyright">
+  © 2026 New Brand Fashion. All Rights Reserved.
+</footer>
+
+<script>
+
+  /* ==========================================
+     THEME
+  ========================================== */
+
+  const themeBtn =
+    document.getElementById("themeBtn");
+
+  const themeIcon =
+    document.getElementById("themeIcon");
+
+
+  function applyTheme() {
+
+    const savedTheme =
+      localStorage.getItem("theme");
+
+
+    if (savedTheme === "light") {
+
+      document.body.classList.add("light");
+
+      if (themeIcon) {
+        themeIcon.classList.remove("fa-moon");
+        themeIcon.classList.add("fa-sun");
+      }
+
+    } else {
+
+      document.body.classList.remove("light");
+
+      if (themeIcon) {
+        themeIcon.classList.remove("fa-sun");
+        themeIcon.classList.add("fa-moon");
+      }
+
+    }
+
+  }
+
+
+  if (themeBtn) {
+
+    themeBtn.addEventListener(
+      "click",
+      function () {
+
+        document.body.classList.toggle("light");
+
+
+        if (
+          document.body.classList.contains("light")
+        ) {
+
+          localStorage.setItem(
+            "theme",
+            "light"
+          );
+
+          if (themeIcon) {
+            themeIcon.classList.remove("fa-moon");
+            themeIcon.classList.add("fa-sun");
+          }
+
+        } else {
+
+          localStorage.setItem(
+            "theme",
+            "dark"
+          );
+
+          if (themeIcon) {
+            themeIcon.classList.remove("fa-sun");
+            themeIcon.classList.add("fa-moon");
+          }
+
+        }
+
+      }
+    );
+
+  }
+
+
+  applyTheme();
+
+
+  /* ==========================================
+     GET ORDER ID FROM URL
+  ========================================== */
+
+  function getURLOrderId() {
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    return (
+      params.get("order") ||
+      ""
+    ).trim();
+
+  }
+
+
+  /* ==========================================
+     GET LAST ORDER
+  ========================================== */
+
+  function getOrder() {
+
+    let orders = [];
+
+    try {
+
+      orders =
+        JSON.parse(
+          localStorage.getItem("orders") ||
+          "[]"
+        );
+
+    } catch (error) {
+
+      orders = [];
+
+    }
+
+
+    if (!Array.isArray(orders)) {
+      orders = [];
+    }
+
+
+    const lastOrderId =
+      String(
+        localStorage.getItem("lastOrderId") ||
+        ""
+      ).trim();
+
+
+    const urlOrderId =
+      getURLOrderId();
+
+
+    let order = null;
+
+
+    /* ------------------------------------------
+       FIRST: lastOrderId
+    ------------------------------------------ */
+
+    if (lastOrderId) {
+
+      order =
+        orders.find(item =>
+
+          String(item.orderNumber || "") ===
+            lastOrderId
+
+          ||
+
+          String(item.id || "") ===
+            lastOrderId
+
+        );
+
+    }
+
+
+    /* ------------------------------------------
+       SECOND: URL ORDER ID
+    ------------------------------------------ */
+
+    if (!order && urlOrderId) {
+
+      order =
+        orders.find(item =>
+
+          String(item.orderNumber || "") ===
+            urlOrderId
+
+          ||
+
+          String(item.id || "") ===
+            urlOrderId
+
+        );
+
+    }
+
+
+    /* ------------------------------------------
+       THIRD: lastOrder
+    ------------------------------------------ */
+
+    if (!order) {
+
+      try {
+
+        const lastOrder =
+          JSON.parse(
+            localStorage.getItem("lastOrder") ||
+            "null"
+          );
+
+
+        if (
+          lastOrder &&
+          typeof lastOrder === "object"
+        ) {
+
+          order = lastOrder;
+
+        }
+
+      } catch (error) {
+
+        order = null;
+
+      }
+
+    }
+
+
+    return order;
+
+  }
+
+
+  /* ==========================================
+     DISPLAY ORDER
+  ========================================== */
+
+  function displayOrder() {
+
+    const order =
+      getOrder();
+
+
+    /* ------------------------------------------
+       NO ORDER
+    ------------------------------------------ */
+
+    if (!order) {
+
+      const urlOrderId =
+        getURLOrderId();
+
+
+      document.getElementById(
+        "orderId"
+      ).textContent =
+        urlOrderId ||
+        "Not Available";
+
+
+      document.getElementById(
+        "customerInfo"
+      ).textContent =
+        "Order information is not available.";
+
+
+      document.getElementById(
+        "addressInfo"
+      ).textContent =
+        "Please check your order from Track Order.";
+
+
+      document.getElementById(
+        "paymentInfo"
+      ).textContent =
+        "Payment information is not available.";
+
+
+      return;
+
+    }
+
+
+    /* ------------------------------------------
+       ORDER ID
+    ------------------------------------------ */
+
+    const orderID =
+      order.orderNumber ||
+      order.order_number ||
+      order.id ||
+      getURLOrderId() ||
+      "N/A";
+
+
+    document.getElementById(
+      "orderId"
+    ).textContent =
+      orderID;
+
+
+    /* ------------------------------------------
+       CUSTOMER
+    ------------------------------------------ */
+
+    const customer =
+      order.customer ||
+      {};
+
+
+    const customerName =
+      customer.name ||
+      order.name ||
+      "Customer";
+
+
+    const phone =
+      customer.phone ||
+      order.phone ||
+      "Not provided";
+
+
+    const city =
+      customer.city ||
+      order.city ||
+      "";
+
+
+    const email =
+      customer.email ||
+      order.email ||
+      "";
+
+
+    document.getElementById(
+      "customerInfo"
+    ).innerHTML = `
+
+      <strong>
+        ${escapeHTML(customerName)}
+      </strong>
+
+      <br>
+
+      Phone:
+      ${escapeHTML(phone)}
+
+      ${
+        city
+          ? `<br>City: ${escapeHTML(city)}`
+          : ""
+      }
+
+      ${
+        email
+          ? `<br>Email: ${escapeHTML(email)}`
+          : ""
+      }
+
+    `;
+
+
+    /* ------------------------------------------
+       ADDRESS
+    ------------------------------------------ */
+
+    const address =
+      customer.address ||
+      order.address ||
+      "Not provided";
+
+
+    document.getElementById(
+      "addressInfo"
+    ).innerHTML = `
+
+      ${escapeHTML(address)}
+
+      ${
+        city
+          ? `<br>${escapeHTML(city)}`
+          : ""
+      }
+
+    `;
+
+
+    /* ------------------------------------------
+       PAYMENT
+    ------------------------------------------ */
+
+    const paymentMethod =
+      order.paymentMethod ||
+      order.payment_method ||
+      order.payment ||
+      "Cash on Delivery";
+
+
+    const advance =
+      Number(
+        order.advancePayment ||
+        order.advance_payment ||
+        0
+      );
+
+
+    const total =
+      Number(
+        order.total ||
+        0
+      );
+
+
+    document.getElementById(
+      "paymentInfo"
+    ).innerHTML = `
+
+      <strong>
+        ${escapeHTML(paymentMethod)}
+      </strong>
+
+      <br>
+
+      Advance Payment:
+      Rs. ${advance.toLocaleString()}
+
+      ${
+        total
+          ? `<br>Total:
+             Rs. ${total.toLocaleString()}`
+          : ""
+      }
+
+    `;
+
+
+    /* ------------------------------------------
+       STATUS
+    ------------------------------------------ */
+
+    const status =
+      order.status ||
+      "Pending";
+
+
+    let statusText =
+      "Pending Confirmation";
+
+
+    const statusLower =
+      String(status)
+        .toLowerCase()
+        .trim();
+
+
+    if (statusLower === "confirmed") {
+
+      statusText =
+        "Order Confirmed";
+
+    } else if (
+      statusLower === "processing"
+    ) {
+
+      statusText =
+        "Order Processing";
+
+    } else if (
+      statusLower === "shipped"
+    ) {
+
+      statusText =
+        "Order Shipped";
+
+    } else if (
+      statusLower === "delivered"
+    ) {
+
+      statusText =
+        "Order Delivered";
+
+    } else if (
+      statusLower === "cancelled"
+    ) {
+
+      statusText =
+        "Order Cancelled";
+
+    }
+
+
+    document.getElementById(
+      "statusInfo"
+    ).innerHTML = `
+
+      <strong>
+        ${escapeHTML(statusText)}
+      </strong>
+
+      <br>
+
+      ${
+        statusText === "Order Cancelled"
+          ? "This order has been cancelled."
+          : "Our team will contact you shortly."
+      }
+
+    `;
+
+  }
+
+
+  /* ==========================================
+     HTML ESCAPE
+  ========================================== */
+
+  function escapeHTML(value) {
+
+    const div =
+      document.createElement("div");
+
+    div.textContent =
+      value ?? "";
+
+    return div.innerHTML;
+
+  }
+
+
+  /* ==========================================
+     SEARCH
+     
+     This page does not have a search box,
+     so we safely check before using it.
+  ========================================== */
+
+  const searchForm =
+    document.getElementById(
+      "searchForm"
+    );
+
+
+  if (searchForm) {
+
+    searchForm.addEventListener(
+      "submit",
+      function (e) {
+
+        e.preventDefault();
+
+
+        const searchInput =
+          document.getElementById(
+            "searchInput"
+          );
+
+
+        const search =
+          searchInput
+            ? searchInput.value.trim()
+            : "";
+
+
+        if (search) {
+
+          window.location.href =
+            "shop.html?search=" +
+            encodeURIComponent(search);
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================
+     SHOW ORDER
+  ========================================== */
+
+  displayOrder();
+
+</script>
+</body>
+</html>
