@@ -1,0 +1,2460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product | New Brand Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* =========================================================
+           NEW BRAND FASHION
+           ADMIN PRODUCT EDIT
+           PREMIUM RESPONSIVE DESIGN
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #070707;
+            --card: #101010;
+            --card2: #151515;
+            --text: #ffffff;
+            --muted: #a5a5a5;
+            --border: #292929;
+
+            --gold: #d5ad55;
+            --gold-dark: #b58d35;
+
+            --input: #151515;
+            --danger: #e05252;
+            --success: #4caf50;
+
+            --sidebar-width: 260px;
+            --topbar-height: 76px;
+
+            --shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+        }
+
+        body:not(.dark) {
+            --bg: #f7f7f7;
+            --card: #ffffff;
+            --card2: #f1f1f1;
+            --text: #111111;
+            --muted: #666666;
+            --border: #dddddd;
+
+            --gold: #b7892e;
+            --gold-dark: #966d20;
+
+            --input: #f7f7f7;
+            --danger: #d64545;
+            --success: #2e8b57;
+
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "DM Sans", sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark {
+            color-scheme: dark;
+        }
+
+        body:not(.dark) {
+            color-scheme: light;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+
+            background: var(--card);
+            border-right: 1px solid var(--border);
+
+            display: flex;
+            flex-direction: column;
+
+            z-index: 1000;
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease,
+                border-color 0.3s ease;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+
+        /* =========================================================
+           LOGO
+        ========================================================= */
+
+        .logo-area {
+            min-height: 92px;
+            padding: 20px 20px;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+
+            color: var(--gold);
+            background: linear-gradient(
+                145deg,
+                rgba(213, 173, 85, 0.12),
+                rgba(213, 173, 85, 0.03)
+            );
+
+            font-family: "Playfair Display", serif;
+            font-size: 21px;
+            font-weight: 700;
+
+            box-shadow:
+                inset 0 0 20px rgba(213, 173, 85, 0.04),
+                0 0 20px rgba(213, 173, 85, 0.04);
+        }
+
+        .logo-text {
+            min-width: 0;
+        }
+
+        .logo-title {
+            font-family: "Playfair Display", serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            margin-top: 4px;
+            color: var(--gold);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+        }
+
+        /* =========================================================
+           ADMIN PROFILE
+        ========================================================= */
+
+        .admin-profile {
+            margin: 18px 15px 8px;
+            padding: 13px;
+
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .admin-avatar {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--gold);
+            color: #080808;
+
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .admin-info {
+            min-width: 0;
+        }
+
+        .admin-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text);
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .admin-role {
+            margin-top: 3px;
+
+            font-size: 10px;
+            color: var(--muted);
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* =========================================================
+           MENU
+        ========================================================= */
+
+        .menu-title {
+            padding: 20px 22px 9px;
+
+            color: var(--muted);
+            font-size: 9px;
+            font-weight: 700;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .menu {
+            padding: 0 12px;
+        }
+
+        .menu a {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            min-height: 44px;
+            padding: 10px 13px;
+            margin-bottom: 4px;
+
+            color: var(--muted);
+
+            border: 1px solid transparent;
+            border-radius: 10px;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            transition:
+                color 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .menu a i {
+            width: 19px;
+            text-align: center;
+
+            font-size: 13px;
+            color: var(--muted);
+
+            transition: color 0.2s ease;
+        }
+
+        .menu a:hover {
+            color: var(--text);
+            background: var(--card2);
+            border-color: var(--border);
+        }
+
+        .menu a:hover i {
+            color: var(--gold);
+        }
+
+        .menu a.active {
+            color: var(--gold);
+            background: rgba(213, 173, 85, 0.09);
+            border-color: rgba(213, 173, 85, 0.22);
+        }
+
+        .menu a.active i {
+            color: var(--gold);
+        }
+
+        .menu a.active::before {
+            content: "";
+
+            position: absolute;
+            left: -1px;
+            top: 8px;
+            bottom: 8px;
+
+            width: 3px;
+
+            background: var(--gold);
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* =========================================================
+           SIDEBAR BOTTOM
+        ========================================================= */
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 15px 12px 18px;
+        }
+
+        .logout-btn {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+
+            min-height: 44px;
+            padding: 10px 13px;
+
+            border: 1px solid transparent;
+            border-radius: 10px;
+
+            background: transparent;
+            color: var(--muted);
+
+            font-size: 12px;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .logout-btn i {
+            width: 19px;
+            text-align: center;
+        }
+
+        .logout-btn:hover {
+            color: var(--danger);
+            background: rgba(224, 82, 82, 0.08);
+            border-color: rgba(224, 82, 82, 0.18);
+        }
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        .main {
+            min-height: 100vh;
+            margin-left: var(--sidebar-width);
+
+            background: var(--bg);
+
+            transition:
+                margin-left 0.3s ease,
+                background 0.3s ease;
+        }
+
+        /* =========================================================
+           TOPBAR
+        ========================================================= */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+
+            height: var(--topbar-height);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+            background: rgba(7, 7, 7, 0.88);
+            border-bottom: 1px solid var(--border);
+
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+
+            z-index: 500;
+        }
+
+        body:not(.dark) .topbar {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .topbar-title {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .mobile-menu {
+            width: 40px;
+            height: 40px;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--card);
+            color: var(--text);
+
+            transition: 0.2s ease;
+        }
+
+        .mobile-menu:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--card);
+            color: var(--muted);
+
+            transition: 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: var(--card2);
+        }
+
+        /* =========================================================
+           PAGE
+        ========================================================= */
+
+        .page {
+            width: 100%;
+            max-width: 1250px;
+
+            margin: 0 auto;
+            padding: 32px 30px 60px;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .page-heading h1 {
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(25px, 3vw, 34px);
+            line-height: 1.15;
+
+            color: var(--text);
+        }
+
+        .page-heading p {
+            margin-top: 7px;
+
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            min-height: 42px;
+            padding: 0 16px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--card);
+            color: var(--text);
+
+            font-size: 12px;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            transform: translateY(-1px);
+        }
+
+        /* =========================================================
+           FORM CARD
+        ========================================================= */
+
+        .form-card {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 16px;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 21px 24px;
+
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-header-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 9px;
+
+            background: rgba(213, 173, 85, 0.1);
+            color: var(--gold);
+
+            border: 1px solid rgba(213, 173, 85, 0.18);
+        }
+
+        .card-header-text h2 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .card-header-text p {
+            margin-top: 3px;
+
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .form-body {
+            padding: 26px;
+        }
+
+        /* =========================================================
+           FORM GRID
+        ========================================================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            min-width: 0;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: var(--text);
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .required {
+            color: var(--gold);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--input);
+            color: var(--text);
+
+            outline: none;
+
+            font-size: 12px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .form-input,
+        .form-select {
+            height: 46px;
+            padding: 0 13px;
+        }
+
+        .form-textarea {
+            min-height: 125px;
+            padding: 13px;
+
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--muted);
+            opacity: 0.7;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: var(--gold);
+
+            box-shadow:
+                0 0 0 3px rgba(213, 173, 85, 0.08);
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        body.dark .form-select option {
+            background: #151515;
+            color: #fff;
+        }
+
+        body:not(.dark) .form-select option {
+            background: #fff;
+            color: #111;
+        }
+
+        .field-help {
+            margin-top: 6px;
+
+            color: var(--muted);
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           PRICE / STOCK
+        ========================================================= */
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon .input-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--gold);
+            font-size: 12px;
+
+            pointer-events: none;
+        }
+
+        .input-with-icon .form-input {
+            padding-left: 34px;
+        }
+
+        /* =========================================================
+           IMAGE SECTION
+        ========================================================= */
+
+        .image-section {
+            margin-top: 25px;
+            padding-top: 25px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            margin-bottom: 13px;
+        }
+
+        .section-title i {
+            color: var(--gold);
+            font-size: 13px;
+        }
+
+        .section-title h3 {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .section-description {
+            margin-bottom: 16px;
+
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .image-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+
+            margin-bottom: 16px;
+        }
+
+        .image-preview-item {
+            position: relative;
+
+            aspect-ratio: 1 / 1;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            background: var(--card2);
+        }
+
+        .image-preview-item img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+
+            background: rgba(0, 0, 0, 0.72);
+            color: #fff;
+
+            font-size: 11px;
+
+            transition: 0.2s ease;
+        }
+
+        .remove-image:hover {
+            background: var(--danger);
+            border-color: var(--danger);
+            transform: scale(1.05);
+        }
+
+        .image-upload-box {
+            min-height: 125px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+
+            background: var(--card2);
+
+            cursor: pointer;
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .image-upload-box:hover {
+            border-color: var(--gold);
+            background: rgba(213, 173, 85, 0.04);
+        }
+
+        .upload-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 9px;
+
+            border-radius: 10px;
+
+            background: rgba(213, 173, 85, 0.1);
+            color: var(--gold);
+
+            font-size: 17px;
+        }
+
+        .upload-title {
+            color: var(--text);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .upload-subtitle {
+            margin-top: 4px;
+
+            color: var(--muted);
+            font-size: 10px;
+            text-align: center;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .form-actions {
+            margin-top: 27px;
+            padding-top: 22px;
+
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            min-height: 44px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            padding: 0 20px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--card2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-primary {
+            border: 1px solid var(--gold);
+
+            background: var(--gold);
+            color: #080808;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+        }
+
+        .btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
+
+        #message {
+            display: none;
+
+            margin-bottom: 18px;
+            padding: 13px 15px;
+
+            border-radius: 9px;
+
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .message-success {
+            display: block !important;
+
+            color: var(--success);
+            background: rgba(76, 175, 80, 0.08);
+            border: 1px solid rgba(76, 175, 80, 0.22);
+        }
+
+        .message-error {
+            display: block !important;
+
+            color: var(--danger);
+            background: rgba(224, 82, 82, 0.08);
+            border: 1px solid rgba(224, 82, 82, 0.22);
+        }
+
+        /* =========================================================
+           LOADING
+        ========================================================= */
+
+        #loading {
+            padding: 55px 20px;
+
+            text-align: center;
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .loading-spinner {
+            width: 32px;
+            height: 32px;
+
+            margin: 0 auto 12px;
+
+            border: 2px solid var(--border);
+            border-top-color: var(--gold);
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================================================
+           HIDDEN
+        ========================================================= */
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            :root {
+                --sidebar-width: 235px;
+            }
+
+            .page {
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+
+            .topbar {
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+
+            .image-preview-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        /* =========================================================
+           MOBILE SIDEBAR
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                width: 270px;
+
+                transform: translateX(-105%);
+
+                box-shadow: 15px 0 45px rgba(0, 0, 0, 0.25);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .topbar {
+                height: 68px;
+                padding: 0 16px;
+            }
+
+            .topbar-title {
+                font-size: 18px;
+            }
+
+            .page {
+                padding: 25px 16px 50px;
+            }
+        }
+
+        /* =========================================================
+           SMALL TABLET / MOBILE
+        ========================================================= */
+
+        @media (max-width: 720px) {
+
+            .page-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .back-btn {
+                width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 17px;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .form-body {
+                padding: 20px 17px;
+            }
+
+            .card-header {
+                padding: 17px;
+            }
+
+            .image-preview-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+        }
+
+        /* =========================================================
+           PHONE
+        ========================================================= */
+
+        @media (max-width: 480px) {
+
+            .topbar {
+                padding: 0 12px;
+            }
+
+            .topbar-left {
+                gap: 10px;
+            }
+
+            .topbar-title {
+                font-size: 16px;
+            }
+
+            .topbar-actions {
+                gap: 6px;
+            }
+
+            .icon-btn,
+            .mobile-menu {
+                width: 38px;
+                height: 38px;
+            }
+
+            .page {
+                padding: 20px 12px 40px;
+            }
+
+            .page-heading h1 {
+                font-size: 26px;
+            }
+
+            .page-heading p {
+                font-size: 10px;
+            }
+
+            .form-card {
+                border-radius: 12px;
+            }
+
+            .card-header {
+                align-items: flex-start;
+            }
+
+            .card-header-icon {
+                width: 34px;
+                height: 34px;
+            }
+
+            .card-header-text h2 {
+                font-size: 13px;
+            }
+
+            .form-body {
+                padding: 17px 13px;
+            }
+
+            .image-preview-grid {
+                gap: 9px;
+            }
+
+            .image-upload-box {
+                min-height: 115px;
+            }
+
+            .btn {
+                min-height: 45px;
+            }
+        }
+
+        /* =========================================================
+           VERY SMALL PHONE
+        ========================================================= */
+
+        @media (max-width: 360px) {
+
+            .topbar-title {
+                font-size: 14px;
+            }
+
+            .page-heading h1 {
+                font-size: 23px;
+            }
+
+            .image-preview-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Logo -->
+        <div class="logo-area">
+            <div class="logo-mark">
+                NB
+            </div>
+
+            <div class="logo-text">
+                <div class="logo-title">
+                    NEW BRAND
+                </div>
+
+                <div class="logo-subtitle">
+                    FASHION
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Admin Profile -->
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+                A
+            </div>
+
+            <div class="admin-info">
+                <div class="admin-name">
+                    👑⃟≛ HΛFIZ MUHΛMMΛÐ JUNΛIÐ 🕊️⃟
+                </div>
+
+                <div class="admin-role">
+                    Admin For website
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+        <nav class="menu">
+
+            <a href="admin-dashboard.html">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="admin-product.html" class="active">
+                <i class="fa-solid fa-box-open"></i>
+                <span>Products</span>
+            </a>
+
+            <a href="admin-orders.html">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span>Orders</span>
+            </a>
+
+            <a href="admin-customer.html">
+                <i class="fa-solid fa-users"></i>
+                <span>Customers</span>
+            </a>
+
+            <a href="admin-messages.html">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Messages</span>
+            </a>
+
+            <a href="admin-settings.html">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+
+        <!-- Bottom -->
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="logout-btn"
+                onclick="logout()"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="mobile-menu"
+                    onclick="toggleSidebar()"
+                    aria-label="Open menu"
+                >
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="topbar-title">
+                    Edit Product
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    type="button"
+                    class="icon-btn"
+                    id="themeBtn"
+                    onclick="toggleTheme()"
+                    aria-label="Toggle theme"
+                >
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE -->
+        <section class="page">
+
+            <!-- Page Header -->
+            <div class="page-header">
+
+                <div class="page-heading">
+                    <h1>Edit Product</h1>
+
+                    <p>
+                        Update your product information, pricing and images.
+                    </p>
+                </div>
+
+                <a
+                    href="admin-product.html"
+                    class="back-btn"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Products
+                </a>
+
+            </div>
+
+
+            <!-- Message -->
+            <div id="message"></div>
+
+
+            <!-- Loading -->
+            <div id="loading" class="hidden">
+
+                <div class="loading-spinner"></div>
+
+                Loading product...
+
+            </div>
+
+
+            <!-- FORM CARD -->
+            <div class="form-card" id="formCard">
+
+                <!-- Card Header -->
+                <div class="card-header">
+
+                    <div class="card-header-icon">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+
+                    <div class="card-header-text">
+
+                        <h2>
+                            Product Information
+                        </h2>
+
+                        <p>
+                            Edit the details of your selected product.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Form Body -->
+                <div class="form-body">
+
+                    <form id="editProductForm">
+
+                        <div class="form-grid">
+
+                            <!-- Product Name -->
+                            <div class="form-group full">
+
+                                <label
+                                    class="form-label"
+                                    for="productName"
+                                >
+                                    Product Name
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="productName"
+                                    class="form-input"
+                                    placeholder="Enter product name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- Category -->
+                            <div class="form-group">
+
+                                <label
+                                    class="form-label"
+                                    for="category"
+                                >
+                                    Category
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="category"
+                                    class="form-select"
+                                    required
+                                >
+                                    <option value="">
+                                        Select Category
+                                    </option>
+
+                                    <option value="T-Shirt">
+                                        T-Shirt
+                                    </option>
+
+                                    <option value="Pants">
+                                        Pants
+                                    </option>
+
+                                    <option value="Pajama">
+                                        Pajama
+                                    </option>
+
+                                    <option value="Jacket">
+                                        Jacket
+                                    </option>
+
+                                    <option value="Hoodie">
+                                        Hoodie
+                                    </option>
+
+                                    <option value="Shirt">
+                                        Shirt
+                                    </option>
+
+                                    <option value="Banyan">
+                                        Banyan
+                                    </option>
+
+                                    <option value="Tracksuit">
+                                        Tracksuit
+                                    </option>
+
+                                    <option value="Shorts">
+                                        Shorts
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- Price -->
+                            <div class="form-group">
+
+                                <label
+                                    class="form-label"
+                                    for="price"
+                                >
+                                    Price
+                                    <span class="required">*</span>
+                                </label>
+
+                                <div class="input-with-icon">
+
+                                    <i class="fa-solid fa-money-bill input-icon"></i>
+
+                                    <input
+                                        type="number"
+                                        id="price"
+                                        class="form-input"
+                                        placeholder="Enter price"
+                                        min="0"
+                                        step="0.01"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Stock -->
+                            <div class="form-group">
+
+                                <label
+                                    class="form-label"
+                                    for="stock"
+                                >
+                                    Stock
+                                    <span class="required">*</span>
+                                </label>
+
+                                <div class="input-with-icon">
+
+                                    <i class="fa-solid fa-boxes-stacked input-icon"></i>
+
+                                    <input
+                                        type="number"
+                                        id="stock"
+                                        class="form-input"
+                                        placeholder="Enter stock quantity"
+                                        min="0"
+                                        step="1"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Description -->
+                            <div class="form-group full">
+
+                                <label
+                                    class="form-label"
+                                    for="description"
+                                >
+                                    Description
+                                </label>
+
+                                <textarea
+                                    id="description"
+                                    class="form-textarea"
+                                    placeholder="Write product description..."
+                                ></textarea>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- IMAGE SECTION -->
+                        <div class="image-section">
+
+                            <div class="section-title">
+
+                                <i class="fa-solid fa-images"></i>
+
+                                <h3>
+                                    Product Images
+                                </h3>
+
+                            </div>
+
+                            <p class="section-description">
+                                Add up to 4 product images. The first image will be used as the main product image.
+                            </p>
+
+
+                            <!-- Preview -->
+                            <div
+                                id="imagePreviewGrid"
+                                class="image-preview-grid"
+                            ></div>
+
+
+                            <!-- Upload -->
+                            <label
+                                for="imageInput"
+                                class="image-upload-box"
+                                id="imageUploadBox"
+                            >
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                </div>
+
+                                <div class="upload-title">
+                                    Choose Product Images
+                                </div>
+
+                                <div class="upload-subtitle">
+                                    JPG, JPEG, PNG or WEBP • Maximum 4 images
+                                </div>
+
+                            </label>
+
+                            <input
+                                type="file"
+                                id="imageInput"
+                                accept="image/jpeg,image/jpg,image/png,image/webp"
+                                multiple
+                            >
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
+                        <div class="form-actions">
+
+                            <a
+                                href="admin-product.html"
+                                class="btn btn-secondary"
+                            >
+                                <i class="fa-solid fa-xmark"></i>
+                                Cancel
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                id="saveBtn"
+                            >
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save Changes
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* =========================================================
+           API
+        ========================================================= */
+
+        const API_URL = "http://localhost:5000/api/products";
+
+
+        /* =========================================================
+           AUTH
+        ========================================================= */
+
+        const adminLoggedIn = localStorage.getItem("adminLoggedIn");
+        const adminToken = localStorage.getItem("adminToken");
+
+        if (!adminLoggedIn || !adminToken) {
+
+            window.location.href = "admin-login.html";
+
+        }
+
+
+        /* =========================================================
+           PRODUCT ID
+        ========================================================= */
+
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get("id");
+
+
+        if (!productId) {
+
+            window.location.href = "admin-product.html";
+
+        }
+
+
+        /* =========================================================
+           ELEMENTS
+        ========================================================= */
+
+        const form = document.getElementById("editProductForm");
+        const productName = document.getElementById("productName");
+        const category = document.getElementById("category");
+        const price = document.getElementById("price");
+        const stock = document.getElementById("stock");
+        const description = document.getElementById("description");
+
+        const imageInput = document.getElementById("imageInput");
+        const imagePreviewGrid = document.getElementById("imagePreviewGrid");
+        const imageUploadBox = document.getElementById("imageUploadBox");
+
+        const saveBtn = document.getElementById("saveBtn");
+        const message = document.getElementById("message");
+        const loading = document.getElementById("loading");
+        const formCard = document.getElementById("formCard");
+
+
+        /* =========================================================
+           SELECTED IMAGES
+        ========================================================= */
+
+        let selectedImages = [];
+
+
+        /* =========================================================
+           ADMIN HEADERS
+        ========================================================= */
+
+        function getAdminHeaders() {
+
+            return {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${adminToken}`
+            };
+
+        }
+
+
+        /* =========================================================
+           UNAUTHORIZED
+        ========================================================= */
+
+        function handleUnauthorized() {
+
+            localStorage.removeItem("adminLoggedIn");
+            localStorage.removeItem("adminToken");
+
+            window.location.href = "admin-login.html";
+
+        }
+
+
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
+
+        function showMessage(text, type = "error") {
+
+            message.textContent = text;
+
+            message.className =
+                type === "success"
+                    ? "message-success"
+                    : "message-error";
+
+            message.style.display = "block";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================================================
+           ESCAPE HTML
+        ========================================================= */
+
+        function escapeHTML(value) {
+
+            if (value === null || value === undefined) {
+                return "";
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* =========================================================
+           BASE64 IMAGE
+        ========================================================= */
+
+        function readFileAsBase64(file) {
+
+            return new Promise((resolve, reject) => {
+
+                const reader = new FileReader();
+
+                reader.onload = () => {
+                    resolve(reader.result);
+                };
+
+                reader.onerror = () => {
+                    reject(new Error("Unable to read image"));
+                };
+
+                reader.readAsDataURL(file);
+
+            });
+
+        }
+
+
+        /* =========================================================
+           RENDER IMAGE PREVIEWS
+        ========================================================= */
+
+        function renderImagePreviews() {
+
+            imagePreviewGrid.innerHTML = "";
+
+            selectedImages.forEach((image, index) => {
+
+                const item = document.createElement("div");
+
+                item.className = "image-preview-item";
+
+                item.innerHTML = `
+                    <img
+                        src="${escapeHTML(image)}"
+                        alt="Product Image ${index + 1}"
+                    >
+
+                    <button
+                        type="button"
+                        class="remove-image"
+                        onclick="removeImage(${index})"
+                        aria-label="Remove image"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+
+                imagePreviewGrid.appendChild(item);
+
+            });
+
+
+            /* Hide upload when 4 images selected */
+
+            if (selectedImages.length >= 4) {
+
+                imageUploadBox.style.display = "none";
+
+            } else {
+
+                imageUploadBox.style.display = "flex";
+
+            }
+
+        }
+
+
+        /* =========================================================
+           REMOVE IMAGE
+        ========================================================= */
+
+        function removeImage(index) {
+
+            selectedImages.splice(index, 1);
+
+            renderImagePreviews();
+
+        }
+
+
+        /* =========================================================
+           IMAGE INPUT
+        ========================================================= */
+
+        imageInput.addEventListener("change", async function () {
+
+            const files = Array.from(this.files || []);
+
+            if (!files.length) {
+                return;
+            }
+
+
+            if (selectedImages.length + files.length > 4) {
+
+                showMessage(
+                    "You can upload maximum 4 images.",
+                    "error"
+                );
+
+                this.value = "";
+
+                return;
+
+            }
+
+
+            try {
+
+                imageUploadBox.style.pointerEvents = "none";
+                imageUploadBox.style.opacity = "0.6";
+
+                for (const file of files) {
+
+                    if (!file.type.startsWith("image/")) {
+                        continue;
+                    }
+
+                    const base64 = await readFileAsBase64(file);
+
+                    selectedImages.push(base64);
+
+                }
+
+                renderImagePreviews();
+
+            } catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    "Unable to load selected image.",
+                    "error"
+                );
+
+            } finally {
+
+                imageUploadBox.style.pointerEvents = "";
+                imageUploadBox.style.opacity = "";
+
+                this.value = "";
+
+            }
+
+        });
+
+
+        /* =========================================================
+           FILL PRODUCT FORM
+        ========================================================= */
+
+        function fillProductForm(product) {
+
+            productName.value = product.name || "";
+            category.value = product.category || "";
+            price.value = product.price ?? "";
+            stock.value = product.stock ?? "";
+            description.value = product.description || "";
+
+
+            selectedImages = [];
+
+
+            /* New multiple image structure */
+
+            if (
+                Array.isArray(product.images) &&
+                product.images.length
+            ) {
+
+                selectedImages = product.images
+                    .filter(Boolean)
+                    .slice(0, 4);
+
+            }
+
+
+            /* Old single image structure */
+
+            else if (product.image) {
+
+                selectedImages = [product.image];
+
+            }
+
+
+            renderImagePreviews();
+
+        }
+
+
+        /* =========================================================
+           LOAD PRODUCT
+        ========================================================= */
+
+        async function loadProduct() {
+
+            try {
+
+                loading.classList.remove("hidden");
+                formCard.style.display = "none";
+
+                const response = await fetch(
+                    `${API_URL}/${encodeURIComponent(productId)}`,
+                    {
+                        method: "GET",
+                        headers: getAdminHeaders()
+                    }
+                );
+
+
+                if (response.status === 401 || response.status === 403) {
+
+                    handleUnauthorized();
+                    return;
+
+                }
+
+
+                const data = await response.json();
+
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message || "Unable to load product."
+                    );
+
+                }
+
+
+                let product = data.product;
+
+
+                if (!product) {
+
+                    if (
+                        Array.isArray(data.products) &&
+                        data.products.length
+                    ) {
+
+                        product = data.products.find(
+                            item => String(item.id) === String(productId)
+                        );
+
+                    }
+
+                }
+
+
+                if (!product) {
+
+                    throw new Error("Product not found.");
+
+                }
+
+
+                fillProductForm(product);
+
+                formCard.style.display = "block";
+
+            } catch (error) {
+
+                console.error("Load product error:", error);
+
+                showMessage(
+                    error.message || "Unable to load product.",
+                    "error"
+                );
+
+            } finally {
+
+                loading.classList.add("hidden");
+
+            }
+
+        }
+
+
+        /* =========================================================
+           UPDATE PRODUCT
+        ========================================================= */
+
+        form.addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+
+            const name = productName.value.trim();
+            const selectedCategory = category.value.trim();
+            const selectedPrice = price.value;
+            const selectedStock = stock.value;
+            const selectedDescription = description.value.trim();
+
+
+            if (!name) {
+
+                showMessage(
+                    "Please enter product name.",
+                    "error"
+                );
+
+                productName.focus();
+
+                return;
+
+            }
+
+
+            if (!selectedCategory) {
+
+                showMessage(
+                    "Please select product category.",
+                    "error"
+                );
+
+                category.focus();
+
+                return;
+
+            }
+
+
+            if (
+                selectedPrice === "" ||
+                Number(selectedPrice) < 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid price.",
+                    "error"
+                );
+
+                price.focus();
+
+                return;
+
+            }
+
+
+            if (
+                selectedStock === "" ||
+                Number(selectedStock) < 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid stock quantity.",
+                    "error"
+                );
+
+                stock.focus();
+
+                return;
+
+            }
+
+
+            try {
+
+                saveBtn.disabled = true;
+
+                saveBtn.innerHTML = `
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    Saving...
+                `;
+
+
+                const payload = {
+
+                    name: name,
+
+                    category: selectedCategory,
+
+                    price: Number(selectedPrice),
+
+                    stock: Number(selectedStock),
+
+                    description: selectedDescription,
+
+                    image: selectedImages[0] || "",
+
+                    images: selectedImages
+
+                };
+
+
+                const response = await fetch(
+                    `${API_URL}/${encodeURIComponent(productId)}`,
+                    {
+                        method: "PUT",
+
+                        headers: getAdminHeaders(),
+
+                        body: JSON.stringify(payload)
+                    }
+                );
+
+
+                if (
+                    response.status === 401 ||
+                    response.status === 403
+                ) {
+
+                    handleUnauthorized();
+                    return;
+
+                }
+
+
+                const data = await response.json();
+
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message || "Unable to update product."
+                    );
+
+                }
+
+
+                showMessage(
+                    "Product updated successfully.",
+                    "success"
+                );
+
+
+                setTimeout(() => {
+
+                    window.location.href = "admin-product.html";
+
+                }, 900);
+
+
+            } catch (error) {
+
+                console.error("Update product error:", error);
+
+                showMessage(
+                    error.message || "Unable to update product.",
+                    "error"
+                );
+
+
+                saveBtn.disabled = false;
+
+                saveBtn.innerHTML = `
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save Changes
+                `;
+
+            }
+
+        });
+
+
+        /* =========================================================
+           THEME
+        ========================================================= */
+
+        function applyTheme() {
+
+            const theme =
+                localStorage.getItem("adminTheme") || "dark";
+
+
+            const themeIcon =
+                document.querySelector("#themeBtn i");
+
+
+            if (theme === "light") {
+
+                document.body.classList.remove("dark");
+
+                if (themeIcon) {
+
+                    themeIcon.className =
+                        "fa-solid fa-sun";
+
+                }
+
+            } else {
+
+                document.body.classList.add("dark");
+
+                if (themeIcon) {
+
+                    themeIcon.className =
+                        "fa-solid fa-moon";
+
+                }
+
+            }
+
+        }
+
+
+        function toggleTheme() {
+
+            const isDark =
+                document.body.classList.contains("dark");
+
+
+            if (isDark) {
+
+                localStorage.setItem(
+                    "adminTheme",
+                    "light"
+                );
+
+            } else {
+
+                localStorage.setItem(
+                    "adminTheme",
+                    "dark"
+                );
+
+            }
+
+
+            applyTheme();
+
+        }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        function toggleSidebar() {
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            sidebar.classList.toggle("open");
+
+        }
+
+
+        /* =========================================================
+           LOGOUT
+        ========================================================= */
+
+        function logout() {
+
+            localStorage.removeItem("adminLoggedIn");
+            localStorage.removeItem("adminToken");
+
+            window.location.href = "admin-login.html";
+
+        }
+
+
+        /* =========================================================
+           CLOSE SIDEBAR ON LINK CLICK - MOBILE
+        ========================================================= */
+
+        document.querySelectorAll(".menu a").forEach(link => {
+
+            link.addEventListener("click", function () {
+
+                if (window.innerWidth <= 850) {
+
+                    document
+                        .getElementById("sidebar")
+                        .classList.remove("open");
+
+                }
+
+            });
+
+        });
+
+
+        /* =========================================================
+           INITIALIZE
+        ========================================================= */
+
+        applyTheme();
+
+        loadProduct();
+
+    </script>
+
+</body>
+</html>

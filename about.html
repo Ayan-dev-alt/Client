@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — New Brand Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #070707;
+      --card: #101010;
+      --card2: #151515;
+      --text: #ffffff;
+      --muted: #a5a5a5;
+      --border: #292929;
+      --gold: #d5ad55;
+      --gold-dark: #b58d35;
+      --input: #151515;
+    }
+
+    body.light {
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --card2: #f1f1f1;
+      --text: #111111;
+      --muted: #666666;
+      --border: #dddddd;
+      --gold: #b7892e;
+      --gold-dark: #966d20;
+      --input: #ffffff;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      max-width: 1450px;
+      min-height: 75px;
+      margin: auto;
+      padding: 0 25px;
+
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 230px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+
+      background: var(--gold);
+      color: #111;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .logo-text {
+      line-height: 1.05;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+    }
+
+    .search-box {
+      flex: 1;
+      max-width: 600px;
+      height: 43px;
+
+      background: var(--input);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 14px;
+    }
+
+    .search-box i {
+      color: var(--muted);
+      margin-right: 10px;
+    }
+
+    .search-box input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .search-box input::placeholder {
+      color: var(--muted);
+    }
+
+    .nav-right {
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      white-space: nowrap;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .separator {
+      width: 1px;
+      height: 25px;
+      background: var(--border);
+    }
+
+    .nav-icon {
+      position: relative;
+      font-size: 18px;
+      color: var(--text);
+      transition: 0.2s;
+    }
+
+    .nav-icon:hover {
+      color: var(--gold);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -9px;
+      right: -11px;
+
+      width: 18px;
+      height: 18px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+      color: #111;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+
+      border-radius: 50%;
+
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .theme-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+
+    /* ================= MAIN ================= */
+
+    main {
+      min-height: calc(100vh - 75px);
+    }
+
+    .breadcrumb {
+      max-width: 1450px;
+      margin: auto;
+
+      padding: 25px;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+
+
+    /* ================= HERO ================= */
+
+    .about-section {
+      max-width: 1450px;
+      margin: 10px auto 100px;
+
+      padding: 0 25px;
+    }
+
+    .about-hero {
+      min-height: 430px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--card),
+          var(--card2)
+        );
+
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      padding: 65px;
+
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+
+      gap: 50px;
+
+      align-items: center;
+    }
+
+    .hero-content .small-title {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      margin-bottom: 15px;
+    }
+
+    .hero-content h1 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 48px;
+      line-height: 1.15;
+
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 span {
+      color: var(--gold);
+    }
+
+    .hero-content p {
+      max-width: 650px;
+
+      color: var(--muted);
+
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+
+      margin-top: 28px;
+
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 8px;
+
+      padding: 13px 22px;
+
+      border-radius: 7px;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-dark);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+
+    /* ================= HERO ICON ================= */
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .brand-circle {
+      width: 270px;
+      height: 270px;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--gold);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(213, 173, 85, 0.18),
+          transparent 65%
+        );
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      box-shadow:
+        0 0 60px rgba(213, 173, 85, 0.08);
+    }
+
+    .brand-circle .nb {
+      font-family: "Playfair Display", serif;
+
+      font-size: 65px;
+      font-weight: 700;
+
+      color: var(--gold);
+    }
+
+    .brand-circle span {
+      font-size: 12px;
+      letter-spacing: 5px;
+      color: var(--muted);
+    }
+
+
+    /* ================= STORY ================= */
+
+    .section-title {
+      text-align: center;
+      margin: 75px 0 35px;
+    }
+
+    .section-title h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .story-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 22px;
+    }
+
+    .story-card {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      padding: 32px;
+    }
+
+    .story-card i {
+      width: 48px;
+      height: 48px;
+
+      border-radius: 50%;
+
+      background: var(--card2);
+      color: var(--gold);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-bottom: 18px;
+
+      font-size: 19px;
+    }
+
+    .story-card h3 {
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .story-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+
+    /* ================= VALUES ================= */
+
+    .values-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 18px;
+    }
+
+    .value-card {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      padding: 28px 22px;
+
+      text-align: center;
+
+      transition: 0.25s;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+    }
+
+    .value-icon {
+      width: 55px;
+      height: 55px;
+
+      margin: 0 auto 17px;
+
+      border-radius: 50%;
+
+      background: var(--card2);
+      color: var(--gold);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 20px;
+    }
+
+    .value-card h3 {
+      font-size: 16px;
+      margin-bottom: 9px;
+    }
+
+    .value-card p {
+      color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+
+    /* ================= CATEGORIES ================= */
+
+    .category-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
+      gap: 15px;
+    }
+
+    .category-card {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 10px;
+
+      padding: 25px 15px;
+
+      text-align: center;
+
+      transition: 0.2s;
+    }
+
+    .category-card:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .category-card i {
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    .category-card h3 {
+      font-size: 14px;
+    }
+
+
+    /* ================= CTA ================= */
+
+    .about-cta {
+      margin-top: 75px;
+
+      padding: 45px 30px;
+
+      text-align: center;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .about-cta h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 32px;
+
+      margin-bottom: 12px;
+    }
+
+    .about-cta p {
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.7;
+
+      max-width: 650px;
+
+      margin: auto;
+    }
+
+    .about-cta .btn {
+      margin-top: 23px;
+    }
+
+            footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+            background: var(--card);
+        }
+
+        .footer-container {
+            max-width: 1450px;
+            margin: auto;
+            padding: 45px 25px 25px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand p {
+            color: var(--muted);
+            max-width: 350px;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .footer h3 {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .footer ul li {
+            margin: 9px 0;
+        }
+
+        .footer ul li a {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .footer ul li a:hover {
+            color: var(--gold);
+        }
+
+        .social {
+            display: flex;
+            gap: 9px;
+        }
+
+        .social a {
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .social a:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .copyright {
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 18px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+/* =========================================================
+   NEW BRAND FASHION — ABOUT PAGE RESPONSIVE
+   ONLY RESPONSIVE CSS
+   DESKTOP DESIGN UNCHANGED
+========================================================= */
+
+
+/* =========================
+   LAPTOP / SMALL DESKTOP
+========================= */
+
+@media (max-width: 1200px) {
+
+  .navbar {
+    padding: 0 20px;
+    gap: 18px;
+  }
+
+  .logo {
+    min-width: 200px;
+  }
+
+  .search-box {
+    max-width: 500px;
+  }
+
+  .about-section {
+    padding: 0 20px;
+  }
+
+  .about-hero {
+    padding: 50px;
+    gap: 35px;
+  }
+
+  .hero-content h1 {
+    font-size: 42px;
+  }
+
+  .brand-circle {
+    width: 240px;
+    height: 240px;
+  }
+
+  .brand-circle .nb {
+    font-size: 58px;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-container {
+    grid-template-columns: 1.7fr 1fr 1fr 1fr;
+    gap: 25px;
+  }
+
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    min-height: 68px;
+    padding: 0 16px;
+    gap: 15px;
+  }
+
+  .logo {
+    min-width: auto;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .logo-text strong {
+    font-size: 15px;
+  }
+
+  .logo-text span {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .nav-right {
+    margin-left: auto;
+    gap: 12px;
+  }
+
+  .nav-icon {
+    font-size: 17px;
+  }
+
+  .theme-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+
+  /* ---------- BREADCRUMB ---------- */
+
+  .breadcrumb {
+    padding: 20px 16px;
+    font-size: 12px;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  .about-section {
+    margin-top: 5px;
+    padding: 0 16px;
+  }
+
+  .about-hero {
+    min-height: auto;
+    padding: 45px 35px;
+    grid-template-columns: 1fr;
+    gap: 45px;
+    text-align: center;
+  }
+
+  .hero-content .small-title {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+  }
+
+  .hero-content p {
+    max-width: 600px;
+    margin: auto;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .brand-circle {
+    width: 220px;
+    height: 220px;
+  }
+
+  .brand-circle .nb {
+    font-size: 55px;
+  }
+
+
+  /* ---------- STORY ---------- */
+
+  .section-title {
+    margin: 60px 0 30px;
+  }
+
+  .section-title h2 {
+    font-size: 31px;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .story-card {
+    padding: 25px;
+  }
+
+  .story-card h3 {
+    font-size: 17px;
+  }
+
+  .story-card p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+
+  /* ---------- VALUES ---------- */
+
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .value-card {
+    padding: 24px 18px;
+  }
+
+
+  /* ---------- CATEGORIES ---------- */
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+
+  /* ---------- CTA ---------- */
+
+  .about-cta {
+    margin-top: 60px;
+    padding: 40px 25px;
+  }
+
+  .about-cta h2 {
+    font-size: 29px;
+  }
+
+
+  /* ---------- FOOTER ---------- */
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 25px;
+    padding: 40px 20px 22px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+   600px AND BELOW
+========================= */
+
+@media (max-width: 600px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  /* ---------- NAVBAR ---------- */
+
+  .navbar {
+    min-height: 61px;
+    width: 100%;
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .logo {
+    min-width: 0;
+    gap: 7px;
+  }
+
+  .logo-icon {
+    width: 37px;
+    height: 37px;
+    min-width: 37px;
+    font-size: 13px;
+  }
+
+  .logo-text {
+    min-width: 0;
+  }
+
+  .logo-text strong {
+    font-size: 12.5px;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+  }
+
+  .logo-text span {
+    font-size: 7.5px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .nav-right {
+    gap: 8px;
+  }
+
+  .nav-icon {
+    font-size: 16px;
+  }
+
+  .theme-btn {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    font-size: 12px;
+  }
+
+
+  /* ---------- CART BADGE ---------- */
+
+  .cart-count {
+    width: 16px;
+    height: 16px;
+    top: -8px;
+    right: -9px;
+    font-size: 9px;
+  }
+
+
+  /* ---------- BREADCRUMB ---------- */
+
+  .breadcrumb {
+    padding: 14px 12px;
+    font-size: 10.5px;
+  }
+
+
+  /* ---------- MAIN ---------- */
+
+  main {
+    min-height: auto;
+  }
+
+
+  /* ---------- ABOUT HERO ---------- */
+
+  .about-section {
+    width: 100%;
+    padding: 0 12px;
+    margin: 3px auto 60px;
+  }
+
+  .about-hero {
+    width: 100%;
+    padding: 32px 18px;
+    border-radius: 12px;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .brand-circle {
+    width: 170px;
+    height: 170px;
+  }
+
+  .brand-circle .nb {
+    font-size: 45px;
+  }
+
+  .brand-circle span {
+    font-size: 9px;
+    letter-spacing: 4px;
+  }
+
+
+  /* ---------- HERO CONTENT ---------- */
+
+  .hero-content .small-title {
+    font-size: 8.5px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .hero-content h1 {
+    font-size: 29px;
+    line-height: 1.18;
+    margin-bottom: 13px;
+  }
+
+  .hero-content p {
+    width: 100%;
+    font-size: 11.5px;
+    line-height: 1.7;
+  }
+
+
+  /* ---------- HERO BUTTONS ---------- */
+
+  .hero-buttons {
+    width: 100%;
+    margin-top: 20px;
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 11px 15px;
+    min-height: 41px;
+    border-radius: 6px;
+    font-size: 11px;
+  }
+
+
+  /* ---------- SECTION TITLES ---------- */
+
+  .section-title {
+    margin: 45px 0 22px;
+  }
+
+  .section-title h2 {
+    font-size: 25px;
+    margin-bottom: 7px;
+  }
+
+  .section-title p {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+
+  /* ---------- STORY ---------- */
+
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .story-card {
+    padding: 19px;
+    border-radius: 9px;
+  }
+
+  .story-card i {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 13px;
+    font-size: 16px;
+  }
+
+  .story-card h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .story-card p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+
+  /* ---------- VALUES ---------- */
+
+  .values-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .value-card {
+    padding: 18px 10px;
+    border-radius: 9px;
+  }
+
+  .value-icon {
+    width: 43px;
+    height: 43px;
+    margin-bottom: 11px;
+    font-size: 16px;
+  }
+
+  .value-card h3 {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .value-card p {
+    font-size: 9.5px;
+    line-height: 1.55;
+  }
+
+
+  /* ---------- CATEGORIES ---------- */
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .category-card {
+    padding: 18px 8px;
+    border-radius: 8px;
+  }
+
+  .category-card i {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .category-card h3 {
+    font-size: 11px;
+  }
+
+
+  /* ---------- CTA ---------- */
+
+  .about-cta {
+    margin-top: 45px;
+    padding: 28px 15px;
+    border-radius: 10px;
+  }
+
+  .about-cta h2 {
+    font-size: 23px;
+    line-height: 1.25;
+    margin-bottom: 9px;
+  }
+
+  .about-cta p {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .about-cta .btn {
+    width: 100%;
+    margin-top: 18px;
+  }
+
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    margin-top: 40px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 18px;
+    padding: 32px 12px 20px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand .logo {
+    margin-bottom: 5px;
+  }
+
+  .footer-brand p {
+    max-width: 100%;
+    font-size: 10.5px;
+    line-height: 1.65;
+    margin: 11px 0;
+  }
+
+  .footer h3 {
+    font-size: 12px;
+    margin-bottom: 11px;
+  }
+
+  .footer ul li {
+    margin: 7px 0;
+  }
+
+  .footer ul li a {
+    font-size: 10px;
+  }
+
+  .social {
+    gap: 6px;
+  }
+
+  .social a {
+    width: 31px;
+    height: 31px;
+    font-size: 11px;
+  }
+
+  .copyright {
+    padding: 14px 10px;
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================
+   SMALL PHONES
+   430px AND BELOW
+========================= */
+
+@media (max-width: 430px) {
+
+  .navbar {
+    padding: 0 9px;
+  }
+
+  .logo {
+    gap: 6px;
+  }
+
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    font-size: 12px;
+  }
+
+  .logo-text strong {
+    font-size: 11.5px;
+  }
+
+  .logo-text span {
+    font-size: 6.8px;
+    letter-spacing: 1.7px;
+  }
+
+  .nav-right {
+    gap: 6px;
+  }
+
+  .nav-icon {
+    font-size: 15px;
+  }
+
+  .theme-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .breadcrumb {
+    padding: 12px 9px;
+    font-size: 10px;
+  }
+
+  .about-section {
+    padding: 0 9px;
+  }
+
+  .about-hero {
+    padding: 28px 14px;
+    gap: 26px;
+  }
+
+  .brand-circle {
+    width: 150px;
+    height: 150px;
+  }
+
+  .brand-circle .nb {
+    font-size: 39px;
+  }
+
+  .brand-circle span {
+    font-size: 8px;
+    letter-spacing: 3.5px;
+  }
+
+  .hero-content .small-title {
+    font-size: 7.5px;
+    letter-spacing: 1.7px;
+  }
+
+  .hero-content h1 {
+    font-size: 26px;
+  }
+
+  .hero-content p {
+    font-size: 10.5px;
+  }
+
+  .section-title {
+    margin: 40px 0 20px;
+  }
+
+  .section-title h2 {
+    font-size: 23px;
+  }
+
+  .section-title p {
+    font-size: 10px;
+  }
+
+  .story-card {
+    padding: 17px;
+  }
+
+  .story-card p {
+    font-size: 10.5px;
+  }
+
+  .value-card {
+    padding: 16px 8px;
+  }
+
+  .value-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .value-card h3 {
+    font-size: 12px;
+  }
+
+  .value-card p {
+    font-size: 9px;
+  }
+
+  .category-card {
+    padding: 16px 6px;
+  }
+
+  .category-card i {
+    font-size: 18px;
+  }
+
+  .category-card h3 {
+    font-size: 10px;
+  }
+
+  .about-cta {
+    padding: 25px 12px;
+  }
+
+  .about-cta h2 {
+    font-size: 21px;
+  }
+
+  .about-cta p {
+    font-size: 10px;
+  }
+
+  .footer-container {
+    padding-left: 9px;
+    padding-right: 9px;
+    gap: 24px 14px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+   360px AND BELOW
+========================= */
+
+@media (max-width: 360px) {
+
+  .navbar {
+    min-height: 57px;
+    padding: 0 7px;
+  }
+
+  .logo {
+    gap: 5px;
+  }
+
+  .logo-icon {
+    width: 31px;
+    height: 31px;
+    min-width: 31px;
+    font-size: 10px;
+  }
+
+  .logo-text strong {
+    font-size: 10.5px;
+    letter-spacing: 0.6px;
+  }
+
+  .logo-text span {
+    font-size: 6px;
+    letter-spacing: 1.4px;
+  }
+
+  .nav-right {
+    gap: 5px;
+  }
+
+  .nav-icon {
+    font-size: 14px;
+  }
+
+  .theme-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    font-size: 11px;
+  }
+
+  .cart-count {
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
+    top: -7px;
+    right: -8px;
+  }
+
+  .breadcrumb {
+    padding: 10px 7px;
+    font-size: 9px;
+  }
+
+  .about-section {
+    padding: 0 7px;
+    margin-bottom: 45px;
+  }
+
+  .about-hero {
+    padding: 24px 11px;
+    gap: 22px;
+    border-radius: 9px;
+  }
+
+  .brand-circle {
+    width: 135px;
+    height: 135px;
+  }
+
+  .brand-circle .nb {
+    font-size: 35px;
+  }
+
+  .brand-circle span {
+    font-size: 7px;
+    letter-spacing: 3px;
+  }
+
+  .hero-content .small-title {
+    font-size: 6.5px;
+    letter-spacing: 1.4px;
+  }
+
+  .hero-content h1 {
+    font-size: 23px;
+  }
+
+  .hero-content p {
+    font-size: 9.5px;
+    line-height: 1.6;
+  }
+
+  .btn {
+    min-height: 38px;
+    padding: 9px 12px;
+    font-size: 10px;
+  }
+
+  .section-title {
+    margin: 35px 0 17px;
+  }
+
+  .section-title h2 {
+    font-size: 21px;
+  }
+
+  .section-title p {
+    font-size: 9px;
+  }
+
+  .story-card {
+    padding: 15px;
+  }
+
+  .story-card i {
+    width: 37px;
+    height: 37px;
+    font-size: 14px;
+  }
+
+  .story-card h3 {
+    font-size: 14px;
+  }
+
+  .story-card p {
+    font-size: 9.5px;
+  }
+
+  .value-card {
+    padding: 14px 7px;
+  }
+
+  .value-icon {
+    width: 37px;
+    height: 37px;
+    font-size: 14px;
+    margin-bottom: 9px;
+  }
+
+  .value-card h3 {
+    font-size: 11px;
+  }
+
+  .value-card p {
+    font-size: 8px;
+  }
+
+  .category-card {
+    padding: 14px 5px;
+  }
+
+  .category-card i {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .category-card h3 {
+    font-size: 9px;
+  }
+
+  .about-cta {
+    margin-top: 35px;
+    padding: 22px 10px;
+  }
+
+  .about-cta h2 {
+    font-size: 19px;
+  }
+
+  .about-cta p {
+    font-size: 9px;
+  }
+
+  .footer-container {
+    padding: 28px 7px 17px;
+  }
+
+  .footer-brand p {
+    font-size: 9px;
+  }
+
+  .footer h3 {
+    font-size: 11px;
+  }
+
+  .footer ul li a {
+    font-size: 9px;
+  }
+
+  .copyright {
+    font-size: 8px;
+    padding: 12px 7px;
+  }
+
+}
+
+
+/* =========================
+   LANDSCAPE MOBILE
+========================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .about-hero {
+    grid-template-columns: 1.2fr 0.8fr;
+    text-align: left;
+    align-items: center;
+    padding: 35px 30px;
+  }
+
+  .hero-visual {
+    order: initial;
+  }
+
+  .hero-buttons {
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+
+  .hero-buttons .btn {
+    width: auto;
+  }
+
+  .brand-circle {
+    width: 180px;
+    height: 180px;
+  }
+
+  .brand-circle .nb {
+    font-size: 45px;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+
+/* =========================
+   TOUCH DEVICES
+========================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+  .value-card:hover,
+  .category-card:hover {
+    transform: none;
+  }
+
+  .btn,
+  .nav-icon,
+  .theme-btn,
+  .category-card,
+  .value-card,
+  .social a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+}
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          NB
+        </div>
+        <div class="logo-text">
+          <strong>NEW BRAND</strong>
+          <span>FASHION</span>
+        </div>
+      </a>
+
+      
+      <div class="nav-right">
+
+        <a
+          href="index.html"
+          class="nav-icon"
+        >
+          <i class="fa-solid fa-home"></i>
+        </a>
+
+        <a
+          href="profile.html"
+          class="nav-icon"
+        >
+          <i class="fa-solid fa-user"></i>
+
+          <span
+            class="cart-count"
+            id="cartCount"
+          >
+            0
+          </span>
+        </a>
+
+        <button
+          class="theme-btn"
+          id="themeBtn"
+          title="Toggle Theme"
+        >
+          <i
+            class="fa-solid fa-moon"
+            id="themeIcon"
+          ></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="breadcrumb">
+      <a href="index.html">
+        Home
+      </a>
+      <span> / </span>
+      <span>
+        About Us
+      </span>
+    </div>
+
+    <section class="about-section">
+      <div class="about-hero">
+        <div class="hero-content">
+          <div class="small-title">
+            Welcome To New Brand Fashion
+          </div>
+          <h1>
+            Style That Fits
+            <span>Your Life.</span>
+          </h1>
+          <p>
+            New Brand Fashion is a garments brand focused on
+            bringing quality, comfortable and stylish clothing
+            to everyday customers. From T-Shirts and Pants to
+            Pajamas, Jackets, Hoodies and more, we aim to make
+            fashion simple and accessible.
+          </p>
+
+          <div class="hero-buttons">
+            <a
+              href="shop.html"
+              class="btn btn-primary"
+            >
+              <i class="fa-solid fa-bag-shopping"></i>
+              Shop Now
+            </a>
+            <a
+              href="contact.html"
+              class="btn btn-outline"
+            >
+              Contact Us
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="brand-circle">
+            <div class="nb">
+              NB
+            </div>
+            <span>
+              FASHION
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>
+          Our Story
+        </h2>
+        <p>
+          Built around quality, comfort and everyday style.
+        </p>
+      </div>
+
+      <div class="story-grid">
+        <div class="story-card">
+          <i class="fa-solid fa-shirt"></i>
+          <h3>
+            What We Do
+          </h3>
+          <p>
+            We offer a growing collection of garments designed
+            for everyday wear. Our collection includes T-Shirts,
+            Pants, Pajamas, Jackets, Hoodies, Chaddars,
+            Banyans and other clothing essentials.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <i class="fa-solid fa-bullseye"></i>
+          <h3>
+            Our Mission
+          </h3>
+          <p>
+            Our mission is to provide customers with reliable
+            clothing products, a smooth shopping experience
+            and excellent customer service while keeping
+            fashion practical and affordable.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <i class="fa-solid fa-eye"></i>
+          <h3>
+            Our Vision
+          </h3>
+          <p>
+            We want New Brand Fashion to become a trusted
+            clothing destination where customers can easily
+            discover products they like and confidently order
+            them from home.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <i class="fa-solid fa-handshake"></i>
+          <h3>
+            Our Promise
+          </h3>
+          <p>
+            We believe customers deserve clear product
+            information, friendly support and a simple
+            shopping process. Customer satisfaction remains
+            at the heart of our business.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>
+          Why Choose Us?
+        </h2>
+        <p>
+          The things we care about most.
+        </p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fa-solid fa-gem"></i>
+          </div>
+          <h3>
+            Quality
+          </h3>
+          <p>
+            We focus on offering clothing products
+            made for comfortable everyday use.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fa-solid fa-tags"></i>
+          </div>
+          <h3>
+            Fair Prices
+          </h3>
+          <p>
+            We aim to keep our products accessible
+            while maintaining good value.
+          </p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fa-solid fa-truck-fast"></i>
+          </div>
+          <h3>
+            Easy Shopping
+          </h3>
+          <p>
+            Browse products, add them to your cart
+            and place your order with ease.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h3>
+            Customer Support
+          </h3>
+          <p>
+            We are committed to helping customers
+            with their questions and orders.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>
+          What We Sell
+        </h2>
+        <p>
+          Explore our clothing categories.
+        </p>
+      </div>
+      <div class="category-grid">
+        <a
+          href="shop.html?category=tshirts"
+          class="category-card"
+        >
+          <i class="fa-solid fa-shirt"></i>
+          <h3>
+            T-Shirts
+          </h3>
+        </a>
+
+        <a
+          href="shop.html?category=pants"
+          class="category-card"
+        >
+          <i class="fa-solid fa-person"></i>
+          <h3>
+            Pants
+          </h3>
+        </a>
+
+        <a
+          href="shop.html?category=pajamas"
+          class="category-card"
+        >
+          <i class="fa-solid fa-bed"></i>
+          <h3>
+            Pajamas
+          </h3>
+        </a>
+
+        <a
+          href="shop.html?category=jackets"
+          class="category-card"
+        >
+          <i class="fa-solid fa-user-tie"></i>
+          <h3>
+            Jackets
+          </h3>
+        </a>
+        
+        <a
+          href="shop.html?category=hoodies"
+          class="category-card"
+        >
+
+          <i class="fa-solid fa-person-walking"></i>
+          <h3>
+            Hoodies
+          </h3>
+        </a>
+      </div>
+
+      <div class="about-cta">
+        <h2>
+          Ready To Find Your Style?
+        </h2>
+        <p>
+          Explore the New Brand Fashion collection
+          and discover clothing made for your everyday style.
+        </p>
+        <a
+          href="shop.html"
+          class="btn btn-primary"
+        >
+          <i class="fa-solid fa-bag-shopping"></i>
+          Explore Collection
+        </a>
+      </div>
+    </section>
+  </main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-brand">
+            <div class="logo">
+                <div class="logo-icon">NB</div>
+                <div class="logo-text">
+                    <strong>NEW BRAND</strong>
+                    <span>FASHION</span>
+                </div>
+            </div>
+            <p>
+                New Brand Fashion — quality garments,
+                modern style and affordable prices.
+                Shop T-Shirts, Pants, Pajamas, Jackets,
+                Hoodies and more.
+            </p>
+
+            <div class="social">
+                <a href="https://www.facebook.com/profile.php?id=61593994877151" target="_blank" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a
+                    href="https://tiktok.com/@newbrandfashion_pk"
+                    target="_blank"
+                    aria-label="TikTok"
+                >
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+
+                <a
+                    href="https://youtube.com/@newbrandfashion_pk"
+                    target="_blank"
+                    aria-label="YouTube"
+                >
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+                <a
+                    href="https://wa.me/923138984192"
+                    target="_blank"
+                    aria-label="WhatsApp"
+                >
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+
+            <h3>Shop</h3>
+
+            <ul>
+                <li><a href="shop.html">All Products</a></li>
+                <li><a href="shop.html">T-Shirts</a></li>
+                <li><a href="shop.html">Hoodies</a></li>
+                <li><a href="shop.html">Pajamas</a></li>
+                <li><a href="shop.html">Jackets</a></li>
+            </ul>
+
+        </div>
+
+        <div class="footer">
+            <h3>Account</h3>
+            <ul>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="messages.html">Admin Contact</a></li>
+                <li><a href="wishlist.html">Wishlist</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="track-order.html">Track Order</a></li>
+            </ul>
+
+        </div>
+
+        <div class="footer">
+
+            <h3>Information</h3>
+
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="track-order.html">Delivery Information</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 New Brand Fashion. All Rights Reserved.
+    </div>
+</footer>
+
+
+  <script>
+
+
+    /* ================= THEME ================= */
+
+    const themeBtn =
+      document.getElementById("themeBtn");
+
+    const themeIcon =
+      document.getElementById("themeIcon");
+
+
+    function applyTheme() {
+
+      const savedTheme =
+        localStorage.getItem("theme");
+
+
+      if (savedTheme === "light") {
+
+        document.body.classList.add("light");
+
+        themeIcon.classList.remove(
+          "fa-moon"
+        );
+
+        themeIcon.classList.add(
+          "fa-sun"
+        );
+
+      } else {
+
+        document.body.classList.remove(
+          "light"
+        );
+
+        themeIcon.classList.remove(
+          "fa-sun"
+        );
+
+        themeIcon.classList.add(
+          "fa-moon"
+        );
+
+      }
+
+    }
+
+
+    themeBtn.addEventListener(
+      "click",
+      function () {
+
+        document.body.classList.toggle(
+          "light"
+        );
+
+
+        if (
+          document.body.classList.contains(
+            "light"
+          )
+        ) {
+
+          localStorage.setItem(
+            "theme",
+            "light"
+          );
+
+          themeIcon.classList.remove(
+            "fa-moon"
+          );
+
+          themeIcon.classList.add(
+            "fa-sun"
+          );
+
+        } else {
+
+          localStorage.setItem(
+            "theme",
+            "dark"
+          );
+
+          themeIcon.classList.remove(
+            "fa-sun"
+          );
+
+          themeIcon.classList.add(
+            "fa-moon"
+          );
+
+        }
+
+      }
+    );
+
+
+    applyTheme();
+
+
+    /* ================= CART COUNT ================= */
+
+    function updateCartCount() {
+
+      const cart =
+        JSON.parse(
+          localStorage.getItem(
+            "cart"
+          ) || "[]"
+        );
+
+
+      const count =
+        cart.reduce(
+          (total, item) =>
+            total +
+            Number(
+              item.quantity || 1
+            ),
+          0
+        );
+
+
+      document.getElementById(
+        "cartCount"
+      ).textContent =
+        count;
+
+    }
+
+
+    updateCartCount();
+
+
+  </script>
+
+</body>
+</html>

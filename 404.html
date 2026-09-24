@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | New Brand Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+
+    :root {
+      --bg: #070707;
+      --card: #101010;
+      --card2: #151515;
+      --text: #ffffff;
+      --muted: #a5a5a5;
+      --border: #292929;
+      --gold: #d5ad55;
+      --gold-dark: #b58d35;
+      --input: #151515;
+    }
+
+    body.light {
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --card2: #f1f1f1;
+      --text: #111111;
+      --muted: #666666;
+      --border: #dddddd;
+      --gold: #b7892e;
+      --gold-dark: #966d20;
+      --input: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      transition: 0.3s ease;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      min-height: 75px;
+      max-width: 1450px;
+      margin: auto;
+      padding: 0 25px;
+
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+
+    /* Logo */
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 210px;
+    }
+
+    .logo-icon {
+      width: 46px;
+      height: 46px;
+
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 17px;
+      letter-spacing: 1.5px;
+    }
+
+    .logo-text span {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 3px;
+    }
+
+
+    /* Search */
+
+    .search-box {
+      flex: 1;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 44px;
+
+      padding: 0 45px 0 17px;
+
+      background: var(--input);
+      color: var(--text);
+
+      border: 1px solid var(--border);
+      border-radius: 8px;
+
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: var(--gold);
+    }
+
+    .search-box i {
+      position: absolute;
+      right: 16px;
+      top: 14px;
+
+      color: var(--muted);
+    }
+
+
+    /* Navbar Right */
+
+    .nav-right {
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+      gap: 17px;
+
+      white-space: nowrap;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      color: var(--muted);
+      transition: 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .separator {
+      width: 1px;
+      height: 22px;
+      background: var(--border);
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      position: relative;
+
+      transition: 0.2s;
+    }
+
+    .icon-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .cart-count {
+      position: absolute;
+
+      top: -6px;
+      right: -6px;
+
+      width: 18px;
+      height: 18px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+      color: #000;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    /* ================= BREADCRUMB ================= */
+
+    .breadcrumb-area {
+      max-width: 1450px;
+      margin: auto;
+
+      padding: 22px 25px 0;
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+
+    .breadcrumb span {
+      margin: 0 8px;
+      color: var(--border);
+    }
+
+
+    /* ================= 404 ================= */
+
+    .error-section {
+      min-height: calc(100vh - 150px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 70px 20px 100px;
+    }
+
+    .error-content {
+      width: 100%;
+      max-width: 700px;
+
+      text-align: center;
+    }
+
+
+    /* 404 Number */
+
+    .error-number {
+      font-family: "Playfair Display", serif;
+
+      font-size: clamp(120px, 22vw, 240px);
+
+      line-height: 0.85;
+
+      color: var(--gold);
+
+      letter-spacing: -10px;
+
+      margin-bottom: 30px;
+    }
+
+
+    /* Icon */
+
+    .error-icon {
+      width: 70px;
+      height: 70px;
+
+      margin: 0 auto 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--card2);
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      color: var(--gold);
+
+      font-size: 27px;
+    }
+
+
+    .error-content h1 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 38px;
+
+      margin-bottom: 12px;
+    }
+
+    .error-content p {
+      color: var(--muted);
+
+      max-width: 520px;
+
+      margin: 0 auto;
+
+      line-height: 1.7;
+
+      font-size: 14px;
+    }
+
+
+    /* Buttons */
+
+    .error-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+
+      margin-top: 28px;
+    }
+
+    .btn {
+      height: 46px;
+
+      padding: 0 22px;
+
+      border-radius: 8px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 8px;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #080808;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+
+    /* Quick Links */
+
+    .quick-links {
+      margin-top: 45px;
+
+      padding-top: 25px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .quick-links p {
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .quick-links-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-links-list a {
+      padding: 9px 14px;
+
+      background: var(--card2);
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      transition: 0.2s;
+    }
+
+    .quick-links-list a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+
+      padding: 55px 25px 25px;
+    }
+
+    .footer-container {
+      max-width: 1450px;
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+
+      gap: 40px;
+    }
+
+    .footer-logo {
+      margin-bottom: 16px;
+    }
+
+    .footer-about {
+      color: var(--muted);
+
+      max-width: 340px;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+
+      margin-top: 18px;
+    }
+
+    .socials a {
+      width: 35px;
+      height: 35px;
+
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--muted);
+
+      transition: 0.2s;
+    }
+
+    .socials a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .footer-col h3 {
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .footer-col a {
+      display: block;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      margin-bottom: 11px;
+
+      transition: 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold);
+      padding-left: 3px;
+    }
+
+    .copyright {
+      max-width: 1450px;
+
+      margin: 40px auto 0;
+
+      padding-top: 20px;
+
+      border-top: 1px solid var(--border);
+
+      color: var(--muted);
+
+      text-align: center;
+
+      font-size: 12px;
+    }
+
+/* =========================================================
+   NEW BRAND FASHION — 404 RESPONSIVE CSS
+   ONLY RESPONSIVE — EXISTING DESIGN UNCHANGED
+========================================================= */
+
+
+/* =========================
+   LARGE TABLETS / LAPTOP
+========================= */
+
+@media (max-width: 1200px) {
+
+  .navbar {
+    padding: 0 20px;
+    gap: 18px;
+  }
+
+  .logo {
+    min-width: 190px;
+  }
+
+  .search-box {
+    max-width: 500px;
+  }
+
+  .breadcrumb-area {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .error-section {
+    padding: 60px 20px 80px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1.7fr 1fr 1fr;
+    gap: 30px;
+  }
+
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    min-height: 68px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    min-width: auto;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .logo-text strong {
+    font-size: 15px;
+    letter-spacing: 1.2px;
+  }
+
+  .logo-text span {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .nav-right {
+    gap: 10px;
+  }
+
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .breadcrumb-area {
+    padding: 18px 16px 0;
+  }
+
+  .error-section {
+    min-height: calc(100vh - 120px);
+    padding: 55px 18px 75px;
+  }
+
+  .error-content {
+    max-width: 620px;
+  }
+
+  .error-number {
+    font-size: clamp(110px, 20vw, 190px);
+    letter-spacing: -7px;
+    margin-bottom: 26px;
+  }
+
+  .error-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .error-content h1 {
+    font-size: 34px;
+  }
+
+  .error-content p {
+    max-width: 500px;
+    font-size: 13px;
+  }
+
+  .error-buttons {
+    margin-top: 25px;
+  }
+
+  footer {
+    padding: 45px 20px 22px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 25px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  /* ---------- NAVBAR ---------- */
+
+  header {
+    width: 100%;
+  }
+
+  .navbar {
+    min-height: 62px;
+    width: 100%;
+    padding: 0 13px;
+    gap: 10px;
+  }
+
+  .logo {
+    gap: 7px;
+    min-width: 0;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    font-size: 13px;
+    border-width: 1.5px;
+  }
+
+  .logo-text {
+    min-width: 0;
+  }
+
+  .logo-text strong {
+    font-size: 13px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .logo-text span {
+    font-size: 8px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .nav-right {
+    margin-left: auto;
+    gap: 7px;
+  }
+
+  .icon-btn {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    border-radius: 7px;
+  }
+
+
+  /* ---------- BREADCRUMB ---------- */
+
+  .breadcrumb-area {
+    padding: 14px 13px 0;
+  }
+
+  .breadcrumb {
+    font-size: 11px;
+  }
+
+  .breadcrumb span {
+    margin: 0 6px;
+  }
+
+
+  /* ---------- ERROR SECTION ---------- */
+
+  .error-section {
+    min-height: auto;
+    padding: 55px 13px 65px;
+  }
+
+  .error-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  /* ---------- 404 NUMBER ---------- */
+
+  .error-number {
+    font-size: clamp(90px, 30vw, 145px);
+    line-height: 0.82;
+    letter-spacing: -6px;
+    margin-bottom: 24px;
+  }
+
+
+  /* ---------- ICON ---------- */
+
+  .error-icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 18px;
+    font-size: 22px;
+  }
+
+
+  /* ---------- HEADING ---------- */
+
+  .error-content h1 {
+    font-size: 27px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+
+  /* ---------- DESCRIPTION ---------- */
+
+  .error-content p {
+    width: 100%;
+    max-width: 360px;
+    padding: 0 5px;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+
+  /* ---------- BUTTONS ---------- */
+
+  .error-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 24px;
+  }
+
+  .btn {
+    width: 100%;
+    height: 43px;
+    padding: 0 15px;
+    border-radius: 7px;
+    font-size: 12px;
+  }
+
+
+  /* ---------- QUICK LINKS ---------- */
+
+  .quick-links {
+    margin-top: 34px;
+    padding-top: 20px;
+  }
+
+  .quick-links p {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .quick-links-list {
+    gap: 7px;
+  }
+
+  .quick-links-list a {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+  }
+
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    padding: 35px 13px 20px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-about {
+    max-width: 100%;
+    font-size: 12px;
+  }
+
+  .footer-col h3 {
+    font-size: 13px;
+    margin-bottom: 13px;
+  }
+
+  .footer-col a {
+    font-size: 12px;
+    margin-bottom: 9px;
+  }
+
+  .socials {
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .socials a {
+    width: 33px;
+    height: 33px;
+    border-radius: 6px;
+  }
+
+  .copyright {
+    margin-top: 28px;
+    padding-top: 16px;
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================
+   SMALL PHONES
+   430px and below
+========================= */
+
+@media (max-width: 430px) {
+
+  .navbar {
+    padding: 0 10px;
+  }
+
+  .logo-icon {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    font-size: 12px;
+  }
+
+  .logo-text strong {
+    font-size: 12px;
+  }
+
+  .logo-text span {
+    font-size: 7px;
+    letter-spacing: 1.8px;
+  }
+
+  .icon-btn {
+    width: 33px;
+    height: 33px;
+    min-width: 33px;
+    font-size: 12px;
+  }
+
+  .breadcrumb-area {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .error-section {
+    padding: 48px 10px 55px;
+  }
+
+  .error-number {
+    font-size: 105px;
+    letter-spacing: -5px;
+    margin-bottom: 21px;
+  }
+
+  .error-icon {
+    width: 53px;
+    height: 53px;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .error-content h1 {
+    font-size: 24px;
+  }
+
+  .error-content p {
+    max-width: 330px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .error-buttons {
+    margin-top: 21px;
+  }
+
+  .btn {
+    height: 41px;
+    font-size: 11px;
+  }
+
+  .quick-links {
+    margin-top: 29px;
+    padding-top: 18px;
+  }
+
+  .quick-links-list {
+    gap: 6px;
+  }
+
+  .quick-links-list a {
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+   360px and below
+========================= */
+
+@media (max-width: 360px) {
+
+  .navbar {
+    min-height: 58px;
+    padding: 0 8px;
+  }
+
+  .logo {
+    gap: 6px;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 11px;
+  }
+
+  .logo-text strong {
+    font-size: 11px;
+    letter-spacing: 0.8px;
+  }
+
+  .logo-text span {
+    font-size: 6px;
+    letter-spacing: 1.5px;
+  }
+
+  .icon-btn {
+    width: 31px;
+    height: 31px;
+    min-width: 31px;
+  }
+
+  .error-section {
+    padding: 42px 8px 48px;
+  }
+
+  .error-number {
+    font-size: 92px;
+    letter-spacing: -4px;
+  }
+
+  .error-icon {
+    width: 49px;
+    height: 49px;
+    font-size: 18px;
+  }
+
+  .error-content h1 {
+    font-size: 22px;
+  }
+
+  .error-content p {
+    font-size: 10.5px;
+    max-width: 300px;
+  }
+
+  .btn {
+    height: 39px;
+    font-size: 10.5px;
+  }
+
+  .quick-links-list a {
+    padding: 6px 8px;
+    font-size: 8.5px;
+  }
+
+}
+
+
+/* =========================
+   LANDSCAPE MOBILE
+========================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .error-section {
+    padding-top: 35px;
+    padding-bottom: 45px;
+  }
+
+  .error-number {
+    font-size: 105px;
+    margin-bottom: 18px;
+  }
+
+  .error-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 14px;
+  }
+
+  .error-content h1 {
+    font-size: 25px;
+  }
+
+  .error-buttons {
+    flex-direction: row;
+  }
+
+  .btn {
+    width: auto;
+    min-width: 145px;
+  }
+
+}
+
+
+/* =========================
+   TOUCH DEVICES
+========================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .quick-links-list a:hover,
+  .icon-btn:hover,
+  .nav-link:hover,
+  .socials a:hover {
+    transform: none;
+    padding-left: initial;
+  }
+
+  .btn,
+  .icon-btn,
+  .quick-links-list a,
+  .socials a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+}
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <nav class="navbar">
+
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          NB
+        </div>
+        <div class="logo-text">
+          <strong>NEW BRAND</strong>
+          <span>FASHION</span>
+        </div>
+      </a>
+
+
+      <div class="nav-right">
+
+        <button
+          class="icon-btn"
+          id="themeToggle"
+          title="Change Theme"
+        >
+          <i class="fa-solid fa-sun"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="breadcrumb-area">
+    <div class="breadcrumb">
+      <a href="index.html">
+        Home
+      </a>
+      <span>/</span>
+      404
+    </div>
+  </div>
+
+  <main class="error-section">
+    <div class="error-content">
+      <div class="error-number">
+        404
+      </div>
+      <div class="error-icon">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <h1>
+        Page Not Found
+      </h1>
+      <p>
+        Sorry, the page you are looking for doesn't exist
+        or may have been moved. Let's get you back to
+        New Brand Fashion.
+      </p>
+
+      <div class="error-buttons">
+        <a
+          href="index.html"
+          class="btn btn-primary"
+        >
+          <i class="fa-solid fa-house"></i>
+          Back to Home
+        </a>
+        <a
+          href="shop.html"
+          class="btn btn-secondary"
+        >
+          <i class="fa-solid fa-bag-shopping"></i>
+          Continue Shopping
+        </a>
+      </div>
+
+      <div class="quick-links">
+        <p>
+          You may also want to visit:
+        </p>
+        <div class="quick-links-list">
+          <a href="shop.html">
+            All Products
+          </a>
+          <a href="shop.html?category=tshirts">
+            T-Shirts
+          </a>
+          <a href="shop.html?category=pants">
+            Pants
+          </a>
+          <a href="shop.html?category=pajamas">
+            Pajamas
+          </a>
+          <a href="shop.html?category=jackets">
+            Jackets
+          </a>
+          <a href="contact.html">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+
+
+    const themeToggle =
+      document.getElementById("themeToggle");
+
+
+    function applyTheme() {
+
+      const savedTheme =
+        localStorage.getItem("theme") || "dark";
+
+
+      if (savedTheme === "light") {
+
+        document.body.classList.add("light");
+
+        themeToggle.innerHTML =
+          '<i class="fa-solid fa-moon"></i>';
+
+      } else {
+
+        document.body.classList.remove("light");
+
+        themeToggle.innerHTML =
+          '<i class="fa-solid fa-sun"></i>';
+
+      }
+
+    }
+
+
+    applyTheme();
+
+
+    themeToggle.addEventListener(
+      "click",
+      function() {
+
+        const isLight =
+          document.body.classList.toggle("light");
+
+
+        localStorage.setItem(
+          "theme",
+          isLight ? "light" : "dark"
+        );
+
+
+        themeToggle.innerHTML = isLight
+
+          ? '<i class="fa-solid fa-moon"></i>'
+
+          : '<i class="fa-solid fa-sun"></i>';
+
+      }
+    );
+
+
+    /* ================= CART COUNT ================= */
+
+    function updateCartCount() {
+
+      const cart =
+        JSON.parse(
+          localStorage.getItem("cart")
+        ) || [];
+
+
+      let total = 0;
+
+
+      cart.forEach(item => {
+
+        total +=
+          Number(item.quantity) || 1;
+
+      });
+
+
+      document.getElementById(
+        "cartCount"
+      ).textContent = total;
+
+    }
+
+
+    updateCartCount();
+
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — New Brand Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #070707;
+      --card: #101010;
+      --card2: #151515;
+      --text: #ffffff;
+      --muted: #a5a5a5;
+      --border: #292929;
+      --gold: #d5ad55;
+      --gold-dark: #b58d35;
+      --input: #151515;
+      --danger: #e05252;
+    }
+
+    body.light {
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --card2: #f1f1f1;
+      --text: #111111;
+      --muted: #666666;
+      --border: #dddddd;
+      --gold: #b7892e;
+      --gold-dark: #966d20;
+      --input: #ffffff;
+      --danger: #d33d3d;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      max-width: 1450px;
+      min-height: 75px;
+      margin: auto;
+      padding: 0 25px;
+
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 230px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+
+      background: var(--gold);
+      color: #111;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .logo-text {
+      line-height: 1.05;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+    }
+
+    .nav-right {
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      white-space: nowrap;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .separator {
+      width: 1px;
+      height: 25px;
+      background: var(--border);
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .theme-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    main {
+      min-height: calc(100vh - 75px);
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .breadcrumb {
+      width: 100%;
+      max-width: 1450px;
+      margin: auto;
+      padding: 25px;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+
+    .login-section {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 30px 20px 90px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 470px;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 14px;
+
+      padding: 40px;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-icon {
+      width: 62px;
+      height: 62px;
+
+      margin: 0 auto 18px;
+
+      border-radius: 50%;
+
+      background: var(--card2);
+      border: 1px solid var(--border);
+
+      color: var(--gold);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 23px;
+    }
+
+    .login-header h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .login-header p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap > i {
+      position: absolute;
+
+      left: 14px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      height: 46px;
+
+      background: var(--input);
+      color: var(--text);
+
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      outline: none;
+
+      padding: 0 45px;
+      font-size: 13px;
+
+      transition: 0.2s;
+    }
+
+    .input-wrap input:focus {
+      border-color: var(--gold);
+    }
+
+    .input-wrap input::placeholder {
+      color: var(--muted);
+    }
+
+    .password-toggle {
+      position: absolute;
+
+      right: 14px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: none;
+      background: transparent;
+
+      color: var(--muted);
+
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .password-toggle:hover {
+      color: var(--gold);
+    }
+
+    .form-options {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-bottom: 22px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color: var(--muted);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .remember input {
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      color: var(--gold);
+      font-size: 12px;
+      transition: 0.2s;
+    }
+
+    .forgot-link:hover {
+      color: var(--gold-dark);
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 48px;
+
+      border: none;
+      border-radius: 7px;
+
+      background: var(--gold);
+      color: #111;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      transition: 0.2s;
+    }
+
+    .login-btn:hover {
+      background: var(--gold-dark);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .form-message {
+      display: none;
+
+      margin-top: 15px;
+
+      padding: 12px;
+
+      border-radius: 7px;
+
+      font-size: 12px;
+      line-height: 1.5;
+
+      text-align: center;
+    }
+
+    .form-message.error {
+      display: block;
+
+      background: rgba(224, 82, 82, 0.10);
+      border: 1px solid var(--danger);
+
+      color: var(--danger);
+    }
+
+    .form-message.success {
+      display: block;
+
+      background: rgba(213, 173, 85, 0.10);
+      border: 1px solid var(--gold);
+
+      color: var(--gold);
+    }
+
+    .register-text {
+      margin-top: 25px;
+      padding-top: 23px;
+
+      border-top: 1px solid var(--border);
+
+      text-align: center;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .register-text a {
+      color: var(--gold);
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .register-text a:hover {
+      color: var(--gold-dark);
+    }
+.copyright {
+      margin-top: 45px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    
+    /* =========================================
+   RESPONSIVE DESIGN
+   LOGIN PAGE
+========================================= */
+
+
+/* =========================================
+   TABLET / SMALL LAPTOP
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .navbar {
+    padding: 0 20px;
+    gap: 18px;
+  }
+
+  .logo {
+    min-width: 210px;
+  }
+
+  .nav-right {
+    gap: 13px;
+  }
+
+  .login-section {
+    padding: 25px 20px 70px;
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    min-height: 70px;
+    padding: 12px 18px;
+  }
+
+  .logo {
+    min-width: auto;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 43px;
+    height: 43px;
+    font-size: 15px;
+  }
+
+  .logo-text strong {
+    font-size: 16px;
+  }
+
+  .logo-text span {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+
+  .nav-right {
+    gap: 11px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+  }
+
+  .separator {
+    height: 22px;
+  }
+
+  .theme-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+
+  .breadcrumb {
+    padding: 18px;
+    font-size: 12px;
+  }
+
+
+  .login-section {
+    padding: 20px 18px 65px;
+    align-items: flex-start;
+  }
+
+  .login-container {
+    max-width: 470px;
+    padding: 32px;
+    border-radius: 13px;
+  }
+
+
+  .login-header {
+    margin-bottom: 26px;
+  }
+
+  .login-icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 15px;
+    font-size: 21px;
+  }
+
+  .login-header h1 {
+    font-size: 29px;
+  }
+
+  .login-header p {
+    font-size: 12px;
+  }
+
+
+  .form-group {
+    margin-bottom: 17px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 7px;
+  }
+
+  .input-wrap input {
+    height: 45px;
+    padding: 0 43px;
+    font-size: 12px;
+  }
+
+  .input-wrap > i {
+    left: 13px;
+    font-size: 13px;
+  }
+
+  .password-toggle {
+    right: 13px;
+    font-size: 13px;
+  }
+
+
+  .form-options {
+    margin-bottom: 20px;
+  }
+
+  .remember,
+  .forgot-link {
+    font-size: 11px;
+  }
+
+
+  .login-btn {
+    height: 46px;
+    font-size: 13px;
+  }
+
+  .form-message {
+    font-size: 11px;
+  }
+
+  .register-text {
+    margin-top: 22px;
+    padding-top: 20px;
+    font-size: 12px;
+  }
+
+
+  .copyright {
+    margin-top: 35px;
+    padding: 18px 15px;
+    font-size: 11px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    min-height: auto;
+    padding: 11px 14px;
+  }
+
+  .logo {
+    gap: 7px;
+  }
+
+  .logo-icon {
+    width: 39px;
+    height: 39px;
+    font-size: 14px;
+  }
+
+  .logo-text strong {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+
+  .logo-text span {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+
+  .nav-right {
+    gap: 9px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+  }
+
+  .separator {
+    height: 20px;
+  }
+
+  .theme-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+
+
+  .breadcrumb {
+    padding: 15px 14px;
+    font-size: 11px;
+  }
+
+
+  .login-section {
+    padding: 12px 14px 50px;
+   margin-top: 100px;
+  }
+
+  .login-container {
+    padding: 25px 18px;
+    border-radius: 11px;
+  }
+
+
+  .login-header {
+    margin-bottom: 23px;
+  }
+
+  .login-icon {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 13px;
+    font-size: 20px;
+  }
+
+  .login-header h1 {
+    font-size: 27px;
+    line-height: 1.2;
+    margin-bottom: 7px;
+  }
+
+  .login-header p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 7px;
+  }
+
+
+  .input-wrap input {
+    height: 44px;
+    padding: 0 41px;
+    font-size: 12px;
+  }
+
+  .input-wrap > i {
+    left: 13px;
+    font-size: 13px;
+  }
+
+  .password-toggle {
+    right: 13px;
+    font-size: 13px;
+  }
+
+
+  .form-options {
+    gap: 8px;
+    margin-bottom: 19px;
+  }
+
+  .remember,
+  .forgot-link {
+    font-size: 11px;
+  }
+
+
+  .remember {
+    gap: 7px;
+  }
+
+
+  .login-btn {
+    height: 45px;
+    font-size: 13px;
+    gap: 8px;
+  }
+
+
+  .form-message {
+    margin-top: 13px;
+    padding: 11px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+
+  .register-text {
+    margin-top: 21px;
+    padding-top: 19px;
+    font-size: 12px;
+  }
+
+
+  .copyright {
+    margin-top: 30px;
+    padding: 17px 12px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 9px 11px;
+  }
+
+  .logo {
+    gap: 6px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .logo-text strong {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .logo-text span {
+    font-size: 8px;
+    letter-spacing: 1.7px;
+  }
+
+
+  .nav-right {
+    gap: 7px;
+  }
+
+  .nav-link {
+    font-size: 11px;
+  }
+
+  .separator {
+    height: 18px;
+  }
+
+  .theme-btn {
+    width: 31px;
+    height: 31px;
+    font-size: 11px;
+  }
+
+
+  .breadcrumb {
+    padding: 13px 11px;
+    font-size: 10px;
+  }
+
+
+  .login-section {
+    padding: 8px 11px 40px;
+  }
+
+  .login-container {
+    padding: 22px 14px;
+    border-radius: 10px;
+  }
+
+
+  .login-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    margin-bottom: 11px;
+  }
+
+  .login-header {
+    margin-bottom: 20px;
+  }
+
+  .login-header h1 {
+    font-size: 24px;
+  }
+
+  .login-header p {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+
+  .input-wrap input {
+    height: 42px;
+    padding: 0 38px;
+    font-size: 11px;
+  }
+
+  .input-wrap > i {
+    left: 12px;
+    font-size: 12px;
+  }
+
+  .password-toggle {
+    right: 12px;
+    font-size: 12px;
+  }
+
+
+  .form-options {
+    margin-bottom: 17px;
+  }
+
+  .remember,
+  .forgot-link {
+    font-size: 10px;
+  }
+
+  .remember {
+    gap: 6px;
+  }
+
+
+  .login-btn {
+    height: 43px;
+    font-size: 12px;
+  }
+
+
+  .form-message {
+    padding: 10px;
+    font-size: 10px;
+  }
+
+
+  .register-text {
+    margin-top: 19px;
+    padding-top: 17px;
+    font-size: 11px;
+  }
+
+
+  .copyright {
+    margin-top: 25px;
+    padding: 15px 8px;
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================================
+   EXTRA SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+
+  .navbar {
+    padding: 8px 9px;
+  }
+
+  .logo {
+    gap: 5px;
+  }
+
+  .logo-icon {
+    width: 33px;
+    height: 33px;
+    font-size: 12px;
+  }
+
+  .logo-text strong {
+    font-size: 11px;
+  }
+
+  .logo-text span {
+    font-size: 7px;
+    letter-spacing: 1.3px;
+  }
+
+
+  .nav-right {
+    gap: 6px;
+  }
+
+  .nav-link {
+    font-size: 10px;
+  }
+
+  .separator {
+    height: 17px;
+  }
+
+  .theme-btn {
+    width: 29px;
+    height: 29px;
+    font-size: 10px;
+  }
+
+
+  .breadcrumb {
+    padding: 11px 9px;
+    font-size: 9px;
+  }
+
+
+  .login-section {
+    padding: 7px 9px 35px;
+  }
+
+  .login-container {
+    padding: 20px 11px;
+  }
+
+
+  .login-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 17px;
+  }
+
+  .login-header {
+    margin-bottom: 18px;
+  }
+
+  .login-header h1 {
+    font-size: 22px;
+  }
+
+  .login-header p {
+    font-size: 10px;
+  }
+
+
+  .form-group {
+    margin-bottom: 13px;
+  }
+
+  .form-group label {
+    font-size: 10px;
+  }
+
+
+  .input-wrap input {
+    height: 40px;
+    padding: 0 35px;
+    font-size: 10px;
+  }
+
+  .input-wrap > i {
+    left: 10px;
+    font-size: 11px;
+  }
+
+  .password-toggle {
+    right: 10px;
+    font-size: 11px;
+  }
+
+
+  .form-options {
+    gap: 5px;
+    margin-bottom: 16px;
+  }
+
+  .remember,
+  .forgot-link {
+    font-size: 9px;
+  }
+
+
+  .login-btn {
+    height: 41px;
+    font-size: 11px;
+  }
+
+
+  .form-message {
+    font-size: 9px;
+    padding: 9px;
+  }
+
+
+  .register-text {
+    margin-top: 17px;
+    padding-top: 15px;
+    font-size: 10px;
+  }
+
+
+  .copyright {
+    margin-top: 22px;
+    padding: 14px 6px;
+    font-size: 8px;
+  }
+
+}
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          NB
+        </div>
+        <div class="logo-text">
+          <strong>
+            NEW BRAND
+          </strong>
+
+          <span>
+            FASHION
+          </span>
+
+        </div>
+
+      </a>
+
+      <div class="nav-right">
+
+        <a
+          href="login.html"
+          class="nav-link login-link"
+        >
+          Login
+        </a>
+
+        <div class="separator"></div>
+
+        <a
+          href="register.html"
+          class="nav-link login-link"
+        >
+          Register
+        </a>
+
+        <button
+          class="theme-btn"
+          id="themeBtn"
+          title="Toggle Theme"
+        >
+
+          <i
+            class="fa-solid fa-moon"
+            id="themeIcon"
+          ></i>
+
+        </button>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <div class="breadcrumb">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <span> / </span>
+
+      <span>
+        Login
+      </span>
+
+    </div>
+
+
+    <section class="login-section">
+
+      <div class="login-container">
+
+        <div class="login-header">
+
+          <div class="login-icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+
+          <h1>
+            Welcome Back
+          </h1>
+
+          <p>
+            Login to your New Brand Fashion account.
+          </p>
+
+        </div>
+
+
+        <form id="loginForm">
+
+          <div class="form-group">
+
+            <label>
+              Email Address
+            </label>
+
+            <div class="input-wrap">
+
+              <i class="fa-solid fa-envelope"></i>
+
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Password
+            </label>
+
+            <div class="input-wrap">
+
+              <i class="fa-solid fa-lock"></i>
+
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                id="passwordToggle"
+                title="Show Password"
+              >
+
+                <i
+                  class="fa-solid fa-eye"
+                  id="passwordIcon"
+                ></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-options">
+
+            <label class="remember">
+
+              <input
+                type="checkbox"
+                id="remember"
+              >
+
+              Remember me
+
+            </label>
+
+
+            <a
+              href="#"
+              class="forgot-link"
+              id="forgotPassword"
+            >
+              Forgot Password?
+            </a>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="login-btn"
+            id="loginBtn"
+          >
+
+            <i
+              class="fa-solid fa-right-to-bracket"
+              id="loginIcon"
+            ></i>
+
+            <span id="loginBtnText">
+              Login
+            </span>
+
+          </button>
+
+
+          <div
+            class="form-message"
+            id="formMessage"
+          ></div>
+
+        </form>
+
+
+        <div class="register-text">
+
+          Don't have an account?
+
+          <a href="register.html">
+            Create Account
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+<footer class="copyright">
+      © 2026 New Brand Fashion. All Rights Reserved.
+</footer>
+
+
+  <script>
+
+    /* =========================
+       THEME
+    ========================= */
+
+    const themeBtn =
+      document.getElementById("themeBtn");
+
+    const themeIcon =
+      document.getElementById("themeIcon");
+
+
+    function applyTheme() {
+
+      const savedTheme =
+        localStorage.getItem("theme");
+
+
+      if (savedTheme === "light") {
+
+        document.body.classList.add("light");
+
+        themeIcon.classList.remove("fa-moon");
+
+        themeIcon.classList.add("fa-sun");
+
+      } else {
+
+        document.body.classList.remove("light");
+
+        themeIcon.classList.remove("fa-sun");
+
+        themeIcon.classList.add("fa-moon");
+
+      }
+
+    }
+
+
+    themeBtn.addEventListener(
+      "click",
+      function () {
+
+        document.body.classList.toggle("light");
+
+
+        if (
+          document.body.classList.contains("light")
+        ) {
+
+          localStorage.setItem(
+            "theme",
+            "light"
+          );
+
+          themeIcon.classList.remove("fa-moon");
+
+          themeIcon.classList.add("fa-sun");
+
+        } else {
+
+          localStorage.setItem(
+            "theme",
+            "dark"
+          );
+
+          themeIcon.classList.remove("fa-sun");
+
+          themeIcon.classList.add("fa-moon");
+
+        }
+
+      }
+    );
+
+
+    applyTheme();
+
+
+    /* =========================
+       PASSWORD SHOW / HIDE
+    ========================= */
+
+    const passwordInput =
+      document.getElementById("password");
+
+    const passwordToggle =
+      document.getElementById("passwordToggle");
+
+    const passwordIcon =
+      document.getElementById("passwordIcon");
+
+
+    passwordToggle.addEventListener(
+      "click",
+      function () {
+
+        if (
+          passwordInput.type === "password"
+        ) {
+
+          passwordInput.type = "text";
+
+          passwordIcon.classList.remove(
+            "fa-eye"
+          );
+
+          passwordIcon.classList.add(
+            "fa-eye-slash"
+          );
+
+          passwordToggle.title =
+            "Hide Password";
+
+        } else {
+
+          passwordInput.type =
+            "password";
+
+          passwordIcon.classList.remove(
+            "fa-eye-slash"
+          );
+
+          passwordIcon.classList.add(
+            "fa-eye"
+          );
+
+          passwordToggle.title =
+            "Show Password";
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const loginBtnText =
+      document.getElementById("loginBtnText");
+
+    const loginIcon =
+      document.getElementById("loginIcon");
+
+    const formMessage =
+      document.getElementById("formMessage");
+
+
+    loginForm.addEventListener(
+      "submit",
+      async function (e) {
+
+        e.preventDefault();
+
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        const password =
+          document.getElementById("password").value;
+
+
+        const remember =
+          document.getElementById("remember").checked;
+
+
+        /* Basic validation */
+
+        if (!email || !password) {
+
+          formMessage.className =
+            "form-message error";
+
+          formMessage.textContent =
+            "Please enter your email and password.";
+
+          return;
+
+        }
+
+
+        /* Loading */
+
+        loginBtn.disabled = true;
+
+        loginBtnText.textContent =
+          "Logging in...";
+
+        loginIcon.className =
+          "fa-solid fa-spinner fa-spin";
+
+        formMessage.className =
+          "form-message";
+
+        formMessage.textContent = "";
+
+
+        try {
+
+          /* Backend Login API */
+
+          const response =
+            await fetch(
+              "http://localhost:5000/api/auth/login",
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+                  email: email,
+                  password: password
+                })
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          /* Backend error */
+
+          if (!response.ok || !data.success) {
+
+            formMessage.className =
+              "form-message error";
+
+            formMessage.textContent =
+              data.message ||
+              "Invalid email or password.";
+
+            loginBtn.disabled = false;
+
+            loginBtnText.textContent =
+              "Login";
+
+            loginIcon.className =
+              "fa-solid fa-right-to-bracket";
+
+            return;
+
+          }
+
+
+          /* =========================
+             SAVE LOGIN DATA
+          ========================= */
+
+          localStorage.setItem(
+            "userLoggedIn",
+            "true"
+          );
+
+
+          /* JWT TOKEN */
+
+          localStorage.setItem(
+            "token",
+            data.token
+          );
+
+
+          /* Safe user information */
+
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({
+              id: data.user.id,
+              name: data.user.name,
+              email: data.user.email,
+              phone: data.user.phone || "",
+              address: data.user.address || ""
+            })
+          );
+
+
+          /* Remember me */
+
+          if (remember) {
+
+            localStorage.setItem(
+              "rememberLogin",
+              "true"
+            );
+
+          } else {
+
+            localStorage.removeItem(
+              "rememberLogin"
+            );
+
+          }
+
+
+          /* Success message */
+
+          formMessage.className =
+            "form-message success";
+
+          formMessage.textContent =
+            "Login successful! Redirecting...";
+
+
+          /* Redirect */
+
+          const redirect =
+            localStorage.getItem(
+              "redirectAfterLogin"
+            );
+
+
+          setTimeout(
+            function () {
+
+              if (redirect) {
+
+                localStorage.removeItem(
+                  "redirectAfterLogin"
+                );
+
+                window.location.href =
+                  redirect;
+
+              } else {
+
+                window.location.href =
+                  "index.html";
+
+              }
+
+            },
+            900
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "Login error:",
+            error
+          );
+
+
+          formMessage.className =
+            "form-message error";
+
+          formMessage.textContent =
+            "Unable to connect to the backend. Make sure the backend server is running.";
+
+
+          loginBtn.disabled = false;
+
+          loginBtnText.textContent =
+            "Login";
+
+          loginIcon.className =
+            "fa-solid fa-right-to-bracket";
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       FORGOT PASSWORD
+    ========================= */
+
+    document
+      .getElementById("forgotPassword")
+      .addEventListener(
+        "click",
+        function (e) {
+
+          e.preventDefault();
+
+          alert(
+            "Password recovery will be connected with the backend later."
+          );
+
+        }
+      );
+
+  </script>
+
+</body>
+</html>

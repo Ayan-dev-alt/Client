@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — New Brand Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #070707;
+      --card: #101010;
+      --card2: #151515;
+      --text: #ffffff;
+      --muted: #a5a5a5;
+      --border: #292929;
+      --gold: #d5ad55;
+      --gold-dark: #b58d35;
+      --input: #151515;
+      --danger: #e05252;
+      --success: #59c779;
+    }
+
+    body.light {
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --card2: #f1f1f1;
+      --text: #111111;
+      --muted: #666666;
+      --border: #dddddd;
+      --gold: #b7892e;
+      --gold-dark: #966d20;
+      --input: #ffffff;
+      --danger: #d33d3d;
+      --success: #239b48;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      max-width: 1450px;
+      min-height: 75px;
+      margin: auto;
+      padding: 0 25px;
+
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 230px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+      color: #111;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .logo-text {
+      line-height: 1.05;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+    }
+
+    .nav-right {
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      white-space: nowrap;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .separator {
+      width: 1px;
+      height: 25px;
+      background: var(--border);
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+
+      border-radius: 50%;
+
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .theme-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    main {
+      min-height: calc(100vh - 75px);
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .breadcrumb {
+      width: 100%;
+      max-width: 1450px;
+
+      margin: auto;
+      padding: 25px;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+
+    .register-section {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 30px 20px 90px;
+    }
+
+    .register-container {
+      width: 100%;
+      max-width: 500px;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 14px;
+
+      padding: 40px;
+    }
+
+    .register-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .register-icon {
+      width: 62px;
+      height: 62px;
+
+      margin: 0 auto 18px;
+
+      border-radius: 50%;
+
+      background: var(--card2);
+      border: 1px solid var(--border);
+
+      color: var(--gold);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 23px;
+    }
+
+    .register-header h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .register-header p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap > i {
+      position: absolute;
+
+      left: 14px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: var(--muted);
+      font-size: 14px;
+
+      z-index: 2;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      height: 46px;
+
+      background: var(--input);
+      color: var(--text);
+
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      outline: none;
+
+      padding: 0 45px;
+
+      font-size: 13px;
+
+      transition: 0.2s;
+    }
+
+    .input-wrap input:focus {
+      border-color: var(--gold);
+    }
+
+    .input-wrap input::placeholder {
+      color: var(--muted);
+    }
+
+    .password-toggle {
+      position: absolute;
+
+      right: 14px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: none;
+      background: transparent;
+
+      color: var(--muted);
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+      z-index: 3;
+    }
+
+    .password-toggle:hover {
+      color: var(--gold);
+    }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+
+      margin: 5px 0 22px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .terms input {
+      margin-top: 3px;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+
+    .terms a {
+      color: var(--gold);
+    }
+
+    .terms a:hover {
+      color: var(--gold-dark);
+    }
+
+    .register-btn {
+      width: 100%;
+      height: 48px;
+
+      border: none;
+      border-radius: 7px;
+
+      background: var(--gold);
+      color: #111;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      transition: 0.2s;
+    }
+
+    .register-btn:hover {
+      background: var(--gold-dark);
+    }
+
+    .register-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .form-message {
+      display: none;
+
+      margin-top: 15px;
+
+      padding: 12px;
+
+      border-radius: 7px;
+
+      font-size: 12px;
+      line-height: 1.5;
+
+      text-align: center;
+    }
+
+    .form-message.error {
+      display: block;
+
+      background: rgba(224, 82, 82, 0.10);
+      border: 1px solid var(--danger);
+
+      color: var(--danger);
+    }
+
+    .form-message.success {
+      display: block;
+
+      background: rgba(89, 199, 121, 0.10);
+      border: 1px solid var(--success);
+
+      color: var(--success);
+    }
+
+    .login-text {
+      margin-top: 25px;
+      padding-top: 23px;
+
+      border-top: 1px solid var(--border);
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .login-text a {
+      color: var(--gold);
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .login-text a:hover {
+      color: var(--gold-dark);
+    }
+.copyright {
+      margin-top: 45px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+@media (max-width: 1000px) {
+
+  .navbar {
+    padding: 0 20px;
+    gap: 18px;
+  }
+
+  .logo {
+    min-width: 210px;
+  }
+
+  .nav-right {
+    gap: 13px;
+  }
+
+  .register-section {
+    padding: 25px 20px 70px;
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    min-height: 70px;
+    padding: 12px 18px;
+  }
+
+  .logo {
+    min-width: auto;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 43px;
+    height: 43px;
+    font-size: 15px;
+  }
+
+  .logo-text strong {
+    font-size: 16px;
+  }
+
+  .logo-text span {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+  .nav-right {
+    gap: 11px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+  }
+
+  .separator {
+    height: 22px;
+  }
+
+  .theme-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+
+  .breadcrumb {
+    padding: 18px;
+    font-size: 12px;
+  }
+
+
+  .register-section {
+    padding: 20px 18px 65px;
+    align-items: flex-start;
+  }
+
+  .register-container {
+    max-width: 500px;
+    padding: 32px;
+    border-radius: 13px;
+  }
+
+  .register-header {
+    margin-bottom: 26px;
+  }
+
+  .register-icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 15px;
+    font-size: 21px;
+  }
+
+  .register-header h1 {
+    font-size: 29px;
+  }
+
+  .register-header p {
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    min-height: auto;
+    padding: 11px 14px;
+  }
+
+  .logo {
+    gap: 7px;
+  }
+
+  .logo-icon {
+    width: 39px;
+    height: 39px;
+    font-size: 14px;
+  }
+
+  .logo-text strong {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+
+  .logo-text span {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+
+  .nav-right {
+    gap: 9px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+  }
+
+  .separator {
+    height: 20px;
+  }
+
+  .theme-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+
+
+  .breadcrumb {
+    padding: 15px 14px;
+    font-size: 11px;
+  }
+
+
+  .register-section {
+    padding: 12px 14px 50px;
+    margin-top: 40px;
+  }
+
+  .register-container {
+    padding: 25px 18px;
+    border-radius: 11px;
+  }
+
+
+  .register-header {
+    margin-bottom: 23px;
+  }
+
+  .register-icon {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 13px;
+    font-size: 20px;
+  }
+
+  .register-header h1 {
+    font-size: 27px;
+    line-height: 1.2;
+    margin-bottom: 7px;
+  }
+
+  .register-header p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 7px;
+  }
+
+
+  .input-wrap input {
+    height: 44px;
+    padding: 0 42px;
+    font-size: 12px;
+  }
+
+  .input-wrap > i {
+    left: 13px;
+    font-size: 13px;
+  }
+
+  .password-toggle {
+    right: 13px;
+    font-size: 13px;
+  }
+
+
+  .terms {
+    gap: 8px;
+    margin: 4px 0 19px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .terms input {
+    margin-top: 2px;
+  }
+
+
+  .register-btn {
+    height: 45px;
+    font-size: 13px;
+    gap: 8px;
+  }
+
+
+  .form-message {
+    margin-top: 13px;
+    padding: 11px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+
+  .login-text {
+    margin-top: 21px;
+    padding-top: 19px;
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 9px 11px;
+  }
+
+  .logo {
+    gap: 6px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .logo-text strong {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .logo-text span {
+    font-size: 8px;
+    letter-spacing: 1.7px;
+  }
+
+
+  .nav-right {
+    gap: 7px;
+  }
+
+  .nav-link {
+    font-size: 11px;
+  }
+
+  .separator {
+    height: 18px;
+  }
+
+  .theme-btn {
+    width: 31px;
+    height: 31px;
+    font-size: 11px;
+  }
+
+
+  .breadcrumb {
+    padding: 13px 11px;
+    font-size: 10px;
+  }
+
+
+  .register-section {
+    padding: 8px 11px 40px;
+  }
+
+  .register-container {
+    padding: 22px 14px;
+    border-radius: 10px;
+  }
+
+
+  .register-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    margin-bottom: 11px;
+  }
+
+  .register-header {
+    margin-bottom: 20px;
+  }
+
+  .register-header h1 {
+    font-size: 24px;
+  }
+
+  .register-header p {
+    font-size: 11px;
+  }
+
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+
+  .input-wrap input {
+    height: 42px;
+    padding: 0 39px;
+    font-size: 11px;
+  }
+
+  .input-wrap > i {
+    left: 12px;
+    font-size: 12px;
+  }
+
+  .password-toggle {
+    right: 12px;
+    font-size: 12px;
+  }
+
+
+  .terms {
+    gap: 7px;
+    margin: 3px 0 17px;
+    font-size: 10px;
+  }
+
+
+  .register-btn {
+    height: 43px;
+    font-size: 12px;
+  }
+
+
+  .form-message {
+    font-size: 10px;
+    padding: 10px;
+  }
+
+
+  .login-text {
+    margin-top: 19px;
+    padding-top: 17px;
+    font-size: 11px;
+  }
+
+}
+
+
+/* =========================================
+   EXTRA SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+
+  .navbar {
+    padding: 8px 9px;
+  }
+
+  .logo {
+    gap: 5px;
+  }
+
+  .logo-icon {
+    width: 33px;
+    height: 33px;
+    font-size: 12px;
+  }
+
+  .logo-text strong {
+    font-size: 11px;
+  }
+
+  .logo-text span {
+    font-size: 7px;
+    letter-spacing: 1.3px;
+  }
+
+
+  .nav-right {
+    gap: 6px;
+  }
+
+  .nav-link {
+    font-size: 10px;
+  }
+
+  .separator {
+    height: 17px;
+  }
+
+  .theme-btn {
+    width: 29px;
+    height: 29px;
+    font-size: 10px;
+  }
+
+
+  .breadcrumb {
+    padding: 11px 9px;
+    font-size: 9px;
+  }
+
+
+  .register-section {
+    padding: 7px 9px 35px;
+  }
+
+  .register-container {
+    padding: 20px 11px;
+  }
+
+
+  .register-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 17px;
+  }
+
+  .register-header h1 {
+    font-size: 22px;
+  }
+
+  .register-header p {
+    font-size: 10px;
+  }
+
+
+  .form-group {
+    margin-bottom: 13px;
+  }
+
+  .form-group label {
+    font-size: 10px;
+  }
+
+
+  .input-wrap input {
+    height: 40px;
+    padding: 0 36px;
+    font-size: 10px;
+  }
+
+  .input-wrap > i {
+    left: 10px;
+    font-size: 11px;
+  }
+
+  .password-toggle {
+    right: 10px;
+    font-size: 11px;
+  }
+
+
+  .terms {
+    font-size: 9px;
+    gap: 6px;
+  }
+
+
+  .register-btn {
+    height: 41px;
+    font-size: 11px;
+  }
+
+
+  .form-message {
+    font-size: 9px;
+  }
+
+
+  .login-text {
+    font-size: 10px;
+  }
+
+}
+
+  </style>
+</head>
+
+<body>
+
+
+  <header>
+
+    <nav class="navbar">
+
+      <a href="index.html" class="logo">
+
+        <div class="logo-icon">
+          NB
+        </div>
+
+        <div class="logo-text">
+
+          <strong>
+            NEW BRAND
+          </strong>
+
+          <span>
+            FASHION
+          </span>
+
+        </div>
+
+      </a>
+
+      <div class="nav-right">
+
+        <a
+          href="login.html"
+          class="nav-link login-link"
+        >
+          Login
+        </a>
+
+        <div class="separator"></div>
+
+        <a
+          href="register.html"
+          class="nav-link login-link"
+        >
+          Register
+        </a>
+
+        <button
+          class="theme-btn"
+          id="themeBtn"
+          title="Toggle Theme"
+          type="button"
+        >
+          <i
+            class="fa-solid fa-moon"
+            id="themeIcon"
+          ></i>
+        </button>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <div class="breadcrumb">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <span> / </span>
+
+      <span>
+        Register
+      </span>
+
+    </div>
+
+
+    <section class="register-section">
+
+      <div class="register-container">
+
+        <div class="register-header">
+
+          <div class="register-icon">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+          </div>
+
+          <h1>
+            Create Account
+          </h1>
+
+          <p>
+            Join New Brand Fashion and start shopping.
+          </p>
+
+        </div>
+
+
+        <!-- ================= REGISTER FORM ================= -->
+
+        <form id="registerForm">
+
+          <!-- NAME -->
+
+          <div class="form-group">
+
+            <label for="name">
+              Full Name
+            </label>
+
+            <div class="input-wrap">
+
+              <i class="fa-solid fa-user"></i>
+
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="form-group">
+
+            <label for="email">
+              Email Address
+            </label>
+
+            <div class="input-wrap">
+
+              <i class="fa-solid fa-envelope"></i>
+
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- PHONE -->
+
+          <div class="form-group">
+
+            <label for="phone">
+              Phone Number
+            </label>
+
+            <div class="input-wrap">
+
+              <i class="fa-solid fa-phone"></i>
+
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                autocomplete="tel"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- PASSWORD -->
+
+          <div class="form-group">
+
+            <label for="password">
+              Password
+            </label>
+
+            <div class="input-wrap">
+
+              <i class="fa-solid fa-lock"></i>
+
+              <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                id="passwordToggle"
+                title="Show Password"
+              >
+
+                <i
+                  class="fa-solid fa-eye"
+                  id="passwordIcon"
+                ></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- CONFIRM PASSWORD -->
+
+          <div class="form-group">
+
+            <label for="confirmPassword">
+              Confirm Password
+            </label>
+
+            <div class="input-wrap">
+
+              <i class="fa-solid fa-lock"></i>
+
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                autocomplete="new-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                id="confirmPasswordToggle"
+                title="Show Password"
+              >
+
+                <i
+                  class="fa-solid fa-eye"
+                  id="confirmPasswordIcon"
+                ></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- TERMS -->
+
+          <label class="terms">
+
+            <input
+              type="checkbox"
+              id="terms"
+              required
+            >
+
+            <span>
+              I agree to the
+              <a href="#">
+                Terms & Conditions
+              </a>
+              and
+              <a href="#">
+                Privacy Policy
+              </a>.
+            </span>
+
+          </label>
+
+
+          <!-- REGISTER BUTTON -->
+
+          <button
+            type="submit"
+            class="register-btn"
+            id="registerBtn"
+          >
+
+            <i class="fa-solid fa-user-plus"></i>
+
+            <span id="registerBtnText">
+              Create Account
+            </span>
+
+          </button>
+
+
+          <!-- MESSAGE -->
+
+          <div
+            class="form-message"
+            id="message"
+          ></div>
+
+        </form>
+
+
+        <!-- LOGIN LINK -->
+
+        <div class="login-text">
+
+          Already have an account?
+
+          <a href="login.html">
+            Login
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="copyright">
+      © 2026 New Brand Fashion. All Rights Reserved.
+</footer>
+
+
+<script>
+
+// ==========================================
+// THEME
+// ==========================================
+const themeBtn = document.getElementById("themeBtn");
+const themeIcon = document.getElementById("themeIcon");
+
+function applyTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+        document.body.classList.add("light");
+        themeIcon.classList.remove("fa-moon");
+        themeIcon.classList.add("fa-sun");
+    } else {
+        document.body.classList.remove("light");
+        themeIcon.classList.remove("fa-sun");
+        themeIcon.classList.add("fa-moon");
+    }
+}
+themeBtn.addEventListener("click", function () {
+    document.body.classList.toggle("light");
+    if (document.body.classList.contains("light")) {
+        localStorage.setItem("theme", "light");
+        themeIcon.classList.remove("fa-moon");
+        themeIcon.classList.add("fa-sun");
+    } else {
+        localStorage.setItem("theme", "dark");
+        themeIcon.classList.remove("fa-sun");
+        themeIcon.classList.add("fa-moon");
+    }
+});
+applyTheme();
+
+// ==========================================
+// PASSWORD SHOW / HIDE
+// ==========================================
+const passwordInput = document.getElementById("password");
+const passwordToggle = document.getElementById("passwordToggle");
+const passwordIcon = document.getElementById("passwordIcon");
+passwordToggle.addEventListener("click", function () {
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        passwordIcon.classList.remove("fa-eye");
+        passwordIcon.classList.add("fa-eye-slash");
+    } else {
+        passwordInput.type = "password";
+        passwordIcon.classList.remove("fa-eye-slash");
+        passwordIcon.classList.add("fa-eye");
+    }
+});
+
+const confirmPasswordInput = document.getElementById("confirmPassword");
+const confirmPasswordToggle = document.getElementById("confirmPasswordToggle");
+const confirmPasswordIcon = document.getElementById("confirmPasswordIcon");
+confirmPasswordToggle.addEventListener("click", function () {
+    if (confirmPasswordInput.type === "password") {
+        confirmPasswordInput.type = "text";
+        confirmPasswordIcon.classList.remove("fa-eye");
+        confirmPasswordIcon.classList.add("fa-eye-slash");
+    } else {
+        confirmPasswordInput.type = "password";
+        confirmPasswordIcon.classList.remove("fa-eye-slash");
+        confirmPasswordIcon.classList.add("fa-eye");
+    }
+});
+
+// ==========================================
+// REGISTER FORM - FIXED
+// ==========================================
+const registerForm = document.getElementById("registerForm");
+const message = document.getElementById("message");
+const registerBtn = document.getElementById("registerBtn");
+const registerBtnText = document.getElementById("registerBtnText");
+
+registerForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const phone = document.getElementById("phone").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const terms = document.getElementById("terms").checked;
+
+    message.className = "form-message";
+    message.textContent = "";
+
+    if (!name) return showError("Please enter your full name.");
+    if (!email) return showError("Please enter your email address.");
+    if (password.length < 6) return showError("Password must be at least 6 characters.");
+    if (password !== confirmPassword) return showError("Passwords do not match.");
+    if (!terms) return showError("Please agree to the Terms & Conditions.");
+
+    registerBtn.disabled = true;
+    registerBtnText.textContent = "Creating Account...";
+
+    try {
+        const response = await fetch("http://localhost:5000/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, phone, password })
+        });
+
+        const data = await response.json();
+        console.log("Register response:", data);
+
+        if (!response.ok) {
+            showError(data.message || "Registration failed.");
+            registerBtn.disabled = false;
+            registerBtnText.textContent = "Create Account";
+            return;
+        }
+
+        // SUCCESS - Token save karo
+        message.className = "form-message success";
+        message.textContent = "Account created! Redirecting to home...";
+
+        if (data.token) {
+            localStorage.setItem("token", data.token);
+        }
+        if (data.user) {
+            localStorage.setItem("currentUser", JSON.stringify(data.user));
+        }
+
+        // FORCED REDIRECT TO HOME
+        window.location.replace("index.html");
+
+    } catch (error) {
+        console.error("Registration error:", error);
+        showError("Unable to connect to backend. Make sure backend is running on port 5000.");
+        registerBtn.disabled = false;
+        registerBtnText.textContent = "Create Account";
+    }
+});
+
+function showError(text) {
+    message.className = "form-message error";
+    message.textContent = text;
+}
+</script>
+</body>
+</html>

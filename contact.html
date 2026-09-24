@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — New Brand Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #070707;
+      --card: #101010;
+      --card2: #151515;
+      --text: #ffffff;
+      --muted: #a5a5a5;
+      --border: #292929;
+      --gold: #d5ad55;
+      --gold-dark: #b58d35;
+      --input: #151515;
+      --danger: #e05252;
+    }
+
+    body.light {
+      --bg: #f7f7f7;
+      --card: #ffffff;
+      --card2: #f1f1f1;
+      --text: #111111;
+      --muted: #666666;
+      --border: #dddddd;
+      --gold: #b7892e;
+      --gold-dark: #966d20;
+      --input: #ffffff;
+      --danger: #d33d3d;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font-family: inherit;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      max-width: 1450px;
+      min-height: 75px;
+      margin: auto;
+      padding: 0 25px;
+
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 230px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+      color: #111;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .logo-text {
+      line-height: 1.05;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+    }
+
+    .nav-right {
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      white-space: nowrap;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .separator {
+      width: 1px;
+      height: 25px;
+      background: var(--border);
+    }
+
+    .nav-icon {
+      position: relative;
+
+      font-size: 18px;
+      color: var(--text);
+
+      transition: 0.2s;
+    }
+
+    .nav-icon:hover {
+      color: var(--gold);
+    }
+
+    .cart-count {
+      position: absolute;
+
+      top: -9px;
+      right: -11px;
+
+      width: 18px;
+      height: 18px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+      color: #111;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--border);
+
+      background: var(--card2);
+      color: var(--text);
+
+      border-radius: 50%;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .theme-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ================= MAIN ================= */
+
+    main {
+      min-height: calc(100vh - 75px);
+    }
+
+    .breadcrumb {
+      max-width: 1450px;
+      margin: auto;
+
+      padding: 25px;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+
+    .contact-section {
+      max-width: 1450px;
+      margin: 10px auto 100px;
+
+      padding: 0 25px;
+    }
+
+    /* ================= PAGE TITLE ================= */
+
+    .page-title {
+      text-align: center;
+      margin: 10px 0 45px;
+    }
+
+    .page-title .small-title {
+      color: var(--gold);
+
+      font-size: 12px;
+      font-weight: 700;
+
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      margin-bottom: 12px;
+    }
+
+    .page-title h1 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 45px;
+
+      margin-bottom: 12px;
+    }
+
+    .page-title p {
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.7;
+
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* ================= CONTACT GRID ================= */
+
+    .contact-grid {
+      display: grid;
+
+      grid-template-columns: 0.8fr 1.2fr;
+
+      gap: 25px;
+
+      align-items: start;
+    }
+
+    /* ================= CONTACT INFO ================= */
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .info-card {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      padding: 25px;
+
+      display: flex;
+      align-items: flex-start;
+
+      gap: 17px;
+
+      transition: 0.2s;
+    }
+
+    .info-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .info-icon {
+      width: 48px;
+      height: 48px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: var(--card2);
+      color: var(--gold);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 18px;
+    }
+
+    .info-content h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .info-content p,
+    .info-content a {
+      color: var(--muted);
+
+      font-size: 13px;
+      line-height: 1.7;
+
+      transition: 0.2s;
+    }
+
+    .info-content a:hover {
+      color: var(--gold);
+    }
+
+    /* ================= SOCIAL ================= */
+
+    .social-card {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      padding: 25px;
+    }
+
+    .social-card h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .social-card p {
+      color: var(--muted);
+
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .socials a {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--muted);
+
+      transition: 0.2s;
+    }
+
+    .socials a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ================= CONTACT FORM ================= */
+
+    .contact-form {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      padding: 35px;
+    }
+
+    .form-heading {
+      margin-bottom: 25px;
+    }
+
+    .form-heading h2 {
+      font-family: "Playfair Display", serif;
+
+      font-size: 28px;
+
+      margin-bottom: 7px;
+    }
+
+    .form-heading p {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .form-row {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 17px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      margin-bottom: 8px;
+    }
+
+    .form-group label span {
+      color: var(--gold);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+
+      background: var(--input);
+      color: var(--text);
+
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      outline: none;
+
+      padding: 13px 14px;
+
+      font-size: 13px;
+
+      transition: 0.2s;
+    }
+
+    .form-group input,
+    .form-group select {
+      height: 45px;
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group select option {
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .submit-btn {
+      width: 100%;
+
+      height: 48px;
+
+      border: none;
+      border-radius: 7px;
+
+      background: var(--gold);
+      color: #111;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: var(--gold-dark);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .form-message {
+      display: none;
+
+      margin-top: 15px;
+
+      padding: 12px;
+
+      border-radius: 7px;
+
+      background: rgba(213, 173, 85, 0.12);
+
+      border: 1px solid var(--gold);
+
+      color: var(--gold);
+
+      font-size: 13px;
+
+      text-align: center;
+    }
+
+    /* ================= FAQ / NOTE ================= */
+
+    .contact-note {
+      margin-top: 25px;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      padding: 25px;
+
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .contact-note i {
+      color: var(--gold);
+      font-size: 19px;
+      margin-top: 2px;
+    }
+
+    .contact-note h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .contact-note p {
+      color: var(--muted);
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .copyright {
+      margin-top: 45px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+
+@media (max-width: 1200px) {
+
+  .navbar {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .logo {
+    min-width: 200px;
+  }
+
+  .breadcrumb {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .contact-section {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 20px;
+  }
+
+  .contact-form {
+    padding: 30px;
+  }
+
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    min-height: 70px;
+    gap: 15px;
+  }
+
+  .logo {
+    min-width: 0;
+  }
+
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .logo-text strong {
+    font-size: 16px;
+  }
+
+  .logo-text span {
+    font-size: 10px;
+  }
+
+  .nav-right {
+    gap: 12px;
+  }
+
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contact-info {
+    width: 100%;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+
+  .contact-note {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  /* ================= NAVBAR ================= */
+
+  .navbar {
+    min-height: 68px;
+    padding: 0 16px;
+    gap: 10px;
+  }
+
+  .logo {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .logo-text strong {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+
+  .logo-text span {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .nav-right {
+    margin-left: auto;
+    gap: 11px;
+  }
+
+  .nav-link {
+    display: none;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .nav-icon {
+    font-size: 16px;
+  }
+
+  .theme-btn {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+
+  /* ================= MAIN ================= */
+
+  main {
+    min-height: auto;
+  }
+
+
+  /* ================= BREADCRUMB ================= */
+
+  .breadcrumb {
+    padding: 17px 16px;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+
+  /* ================= CONTACT SECTION ================= */
+
+  .contact-section {
+    width: 100%;
+    margin: 5px auto 60px;
+    padding: 0 16px;
+  }
+
+
+  /* ================= PAGE TITLE ================= */
+
+  .page-title {
+    margin: 8px 0 30px;
+  }
+
+  .page-title .small-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 9px;
+  }
+
+  .page-title h1 {
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .page-title p {
+    font-size: 12px;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+
+  /* ================= CONTACT GRID ================= */
+
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+  }
+
+
+  /* ================= CONTACT INFO ================= */
+
+  .contact-info {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .info-card {
+    width: 100%;
+    padding: 18px;
+    gap: 13px;
+    border-radius: 10px;
+  }
+
+  .info-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    font-size: 16px;
+  }
+
+  .info-content {
+    min-width: 0;
+  }
+
+  .info-content h3 {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .info-content p,
+  .info-content a {
+    font-size: 11px;
+    line-height: 1.6;
+    word-break: break-word;
+  }
+
+
+  /* ================= SOCIAL ================= */
+
+  .social-card {
+    width: 100%;
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .social-card h3 {
+    font-size: 13px;
+    margin-bottom: 7px;
+  }
+
+  .social-card p {
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+
+  .socials {
+    gap: 8px;
+  }
+
+  .socials a {
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+
+
+  /* ================= CONTACT FORM ================= */
+
+  .contact-form {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .form-heading {
+    margin-bottom: 20px;
+  }
+
+  .form-heading h2 {
+    font-size: 23px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .form-heading p {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+
+  /* ================= FORM ROW ================= */
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+    margin-bottom: 7px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    max-width: 100%;
+    font-size: 12px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 44px;
+    padding: 11px 12px;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+    padding: 12px;
+  }
+
+
+  /* ================= SUBMIT ================= */
+
+  .submit-btn {
+    width: 100%;
+    height: 47px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+
+  .form-message {
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 10px;
+  }
+
+
+  /* ================= CONTACT NOTE ================= */
+
+  .contact-note {
+    width: 100%;
+    margin-top: 18px;
+    padding: 18px;
+    gap: 11px;
+    border-radius: 10px;
+  }
+
+  .contact-note i {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .contact-note h3 {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .contact-note p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+
+  /* ================= FOOTER ================= */
+
+  .copyright {
+    margin-top: 30px;
+    padding: 17px 12px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+}
+
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 0 12px;
+  }
+
+  .logo {
+    gap: 7px;
+  }
+
+  .logo-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+
+  .logo-text strong {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .logo-text span {
+    font-size: 8px;
+    letter-spacing: 1.8px;
+  }
+
+  .nav-right {
+    gap: 9px;
+  }
+
+  .nav-icon {
+    font-size: 15px;
+  }
+
+  .theme-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+
+  .breadcrumb {
+    padding: 15px 12px;
+    font-size: 10px;
+  }
+
+
+  .contact-section {
+    padding: 0 12px;
+    margin-bottom: 50px;
+  }
+
+
+  .page-title {
+    margin-bottom: 25px;
+  }
+
+  .page-title .small-title {
+    font-size: 9px;
+    letter-spacing: 1.7px;
+  }
+
+  .page-title h1 {
+    font-size: 28px;
+  }
+
+  .page-title p {
+    font-size: 11px;
+  }
+
+
+  .info-card {
+    padding: 15px;
+    gap: 11px;
+  }
+
+  .info-icon {
+    width: 39px;
+    height: 39px;
+    min-width: 39px;
+    font-size: 15px;
+  }
+
+  .info-content h3 {
+    font-size: 12px;
+  }
+
+  .info-content p,
+  .info-content a {
+    font-size: 10px;
+  }
+
+
+  .social-card {
+    padding: 15px;
+  }
+
+  .social-card h3 {
+    font-size: 12px;
+  }
+
+  .social-card p {
+    font-size: 10px;
+  }
+
+  .socials a {
+    width: 33px;
+    height: 33px;
+  }
+
+
+  .contact-form {
+    padding: 16px;
+  }
+
+  .form-heading h2 {
+    font-size: 21px;
+  }
+
+  .form-heading p {
+    font-size: 10px;
+  }
+
+  .form-group label {
+    font-size: 10px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 42px;
+    font-size: 11px;
+  }
+
+  .form-group textarea {
+    min-height: 110px;
+    font-size: 11px;
+  }
+
+
+  .contact-note {
+    padding: 15px;
+  }
+
+  .contact-note h3 {
+    font-size: 12px;
+  }
+
+  .contact-note p {
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL PHONE
+========================= */
+
+@media (max-width: 360px) {
+
+  .navbar {
+    padding: 0 9px;
+  }
+
+  .logo-icon {
+    width: 33px;
+    height: 33px;
+    font-size: 11px;
+  }
+
+  .logo-text strong {
+    font-size: 11px;
+  }
+
+  .logo-text span {
+    font-size: 7px;
+  }
+
+  .nav-right {
+    gap: 7px;
+  }
+
+  .nav-icon {
+    font-size: 14px;
+  }
+
+  .theme-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+
+  .breadcrumb {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+
+  .contact-section {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+
+  .page-title h1 {
+    font-size: 26px;
+  }
+
+  .page-title p {
+    font-size: 10px;
+  }
+
+
+  .info-card {
+    padding: 13px;
+  }
+
+  .info-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 14px;
+  }
+
+  .info-content h3 {
+    font-size: 11px;
+  }
+
+  .info-content p,
+  .info-content a {
+    font-size: 9px;
+  }
+
+
+  .social-card {
+    padding: 13px;
+  }
+
+
+  .contact-form {
+    padding: 13px;
+  }
+
+  .form-heading h2 {
+    font-size: 19px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 41px;
+  }
+
+  .form-group textarea {
+    min-height: 105px;
+  }
+
+
+  .contact-note {
+    padding: 13px;
+  }
+
+  .contact-note p {
+    font-size: 9px;
+  }
+
+}
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          NB
+        </div>
+        <div class="logo-text">
+          <strong>
+            NEW BRAND
+          </strong>
+          <span>
+            FASHION
+          </span>
+        </div>
+      </a>
+
+      <div class="nav-right">
+        <a
+          href="index.html"
+          class="nav-icon"
+        >
+          <i class="fa-solid fa-house"></i>
+        </a>
+
+          <a
+          href="profile.html"
+          class="nav-icon"
+        >
+          <i class="fa-solid fa-user"></i>
+        </a>
+        
+        <a
+          href="messages.html"
+          class="nav-icon"
+          title="My Messages"
+        >
+          <i class="fa-regular fa-comments"></i>
+        </a>
+
+        <button
+          class="theme-btn"
+          id="themeBtn"
+          title="Toggle Theme"
+        >
+          <i
+            class="fa-solid fa-moon"
+            id="themeIcon"
+          ></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="breadcrumb">
+      <a href="index.html">
+        Home
+      </a>
+      <span> / </span>
+      <span>
+        Contact Us
+      </span>
+    </div>
+
+    <section class="contact-section">
+
+      <div class="page-title">
+        <div class="small-title">
+          Get In Touch
+        </div>
+        <h1>
+          Contact Us
+        </h1>
+        <p>
+          Have a question about our products or your order?
+          Send us a message and our team will get back to you.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="info-content">
+              <h3>
+                Phone
+              </h3>
+              <a href="tel:+923138984192" target="_blank">
+                +92 3138984192
+              </a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div class="info-content">
+              <h3>
+                WhatsApp
+              </h3>
+              <a href="https://wa.me/923138984192" target="_blank">
+                Chat with us on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <div class="info-card">
+  <div class="info-icon">
+    <i class="fa-solid fa-envelope"></i>
+  </div>
+  <div class="info-content">
+    <h3>Email</h3>
+    <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=newbrandfashion38@gmail.com"
+       target="_blank"
+       rel="noopener noreferrer">
+      newbrandfashion38@gmail.com
+    </a>
+  </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div class="info-content">
+              <h3>
+                Business Hours
+              </h3>
+              <p>
+                Monday — Saturday<br>
+                10:00 AM — 12:00 PM
+              </p>
+            </div>
+          </div>
+
+          <div class="social-card">
+            <h3>
+              Follow New Brand Fashion
+            </h3>
+            <p>
+              Stay connected and see our latest products.
+            </p>
+            <div class="socials">
+              <a href="https://www.facebook.com/profile.php?id=61593994877151" target="_blank">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+
+              <a href="https://youtube.com/@newbrandfashion_pk" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+
+              <a href="https://wa.me/923138984192" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+
+              <a href="https://tiktok.com/@newbrandfashion_pk" target="_blank">
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ================= RIGHT FORM ================= -->
+
+        <div class="contact-form">
+          <div class="form-heading">
+            <h2>
+              Send Us A Message
+            </h2>
+            <p>
+              Fill out the form below and we'll get back to you.
+            </p>
+          </div>
+
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>
+                  Your Name <span>*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Enter your name"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label>
+                  Phone Number <span>*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  placeholder="03XX XXXXXXX"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="your@email.com"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>
+                  Subject <span>*</span>
+                </label>
+                <select
+                  id="subject"
+                  required
+                >
+                  <option value="">
+                    Select Subject
+                  </option>
+                  <option value="Product Question">
+                    Product Question
+                  </option>
+                  <option value="Order Question">
+                    Order Question
+                  </option>
+                  <option value="Delivery">
+                    Delivery
+                  </option>
+                  <option value="Return / Exchange">
+                    Return / Exchange
+                  </option>
+                  <option value="Other">
+                    Other
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>
+                Message <span>*</span>
+              </label>
+              <textarea
+                id="message"
+                placeholder="Write your message here..."
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="submit-btn"
+            >
+              <i class="fa-solid fa-paper-plane"></i>
+              Send Message
+            </button>
+
+            <div
+              class="form-message"
+              id="formMessage"
+            >
+              Your message has been submitted successfully.
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="contact-note">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+          <h3>
+            Need help with an order?
+          </h3>
+          <p>
+            Please keep your Order ID ready when contacting
+            us about an existing order. This helps us assist
+            you more quickly.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<footer class="copyright">
+   © 2026 New Brand Fashion. All Rights Reserved.
+
+</footer>
+  
+  <script>
+
+    /* =====================================================
+       THEME
+    ===================================================== */
+
+    const themeBtn =
+        document.getElementById("themeBtn");
+
+    const themeIcon =
+        document.getElementById("themeIcon");
+
+
+    function applyTheme() {
+
+        const savedTheme =
+            localStorage.getItem("theme");
+
+
+        if (savedTheme === "light") {
+
+            document.body.classList.add("light");
+
+            themeIcon.classList.remove("fa-moon");
+
+            themeIcon.classList.add("fa-sun");
+
+        } else {
+
+            document.body.classList.remove("light");
+
+            themeIcon.classList.remove("fa-sun");
+
+            themeIcon.classList.add("fa-moon");
+
+        }
+
+    }
+
+
+    themeBtn.addEventListener(
+        "click",
+        function () {
+
+            document.body.classList.toggle("light");
+
+
+            if (
+                document.body.classList.contains("light")
+            ) {
+
+                localStorage.setItem(
+                    "theme",
+                    "light"
+                );
+
+                themeIcon.classList.remove("fa-moon");
+
+                themeIcon.classList.add("fa-sun");
+
+            } else {
+
+                localStorage.setItem(
+                    "theme",
+                    "dark"
+                );
+
+                themeIcon.classList.remove("fa-sun");
+
+                themeIcon.classList.add("fa-moon");
+
+            }
+
+        }
+    );
+
+
+    applyTheme();
+
+
+    /* =====================================================
+       CART COUNT
+    ===================================================== */
+
+    function updateCartCount() {
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem("cart") || "[]"
+            );
+
+
+        const count =
+            cart.reduce(
+                (total, item) =>
+                    total +
+                    Number(item.quantity || 1),
+                0
+            );
+
+
+        const cartCount =
+            document.getElementById("cartCount");
+
+
+        if (cartCount) {
+
+            cartCount.textContent =
+                count;
+
+        }
+
+    }
+
+
+    updateCartCount();
+
+
+
+    /* =====================================================
+       CONTACT API
+    ===================================================== */
+
+    const CONTACT_API =
+        "http://localhost:5000/api/messages";
+
+
+    /* =====================================================
+       CONTACT FORM
+    ===================================================== */
+
+    document.getElementById(
+        "contactForm"
+    ).addEventListener(
+        "submit",
+        async function (e) {
+
+            e.preventDefault();
+
+
+            /* ================= GET FORM DATA ================= */
+
+            const name =
+                document.getElementById(
+                    "name"
+                ).value.trim();
+
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+
+            const subject =
+                document.getElementById(
+                    "subject"
+                ).value;
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                ).value.trim();
+
+
+            const formMessage =
+                document.getElementById(
+                    "formMessage"
+                );
+
+
+            const submitBtn =
+                document.querySelector(
+                    ".submit-btn"
+                );
+
+
+            /* ================= VALIDATION ================= */
+
+            if (
+                !name ||
+                !phone ||
+                !subject ||
+                !message
+            ) {
+
+                formMessage.style.display =
+                    "block";
+
+                formMessage.style.borderColor =
+                    "var(--danger)";
+
+                formMessage.style.color =
+                    "var(--danger)";
+
+                formMessage.textContent =
+                    "Please fill all required fields.";
+
+                return;
+
+            }
+
+
+            /* ================= BUTTON LOADING ================= */
+
+            const originalButtonHTML =
+                submitBtn.innerHTML;
+
+
+            submitBtn.disabled =
+                true;
+
+
+            submitBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+
+            try {
+
+                /* ================= SEND TO BACKEND ================= */
+
+                const response =
+                    await fetch(
+                        CONTACT_API,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body: JSON.stringify({
+
+                                customer_name:
+                                    name,
+
+                                customer_email:
+                                    email,
+
+                                customer_phone:
+                                    phone,
+
+                                subject:
+                                    subject,
+
+                                message:
+                                    message,
+
+                                sender_type:
+                                    "customer"
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                /* ================= ERROR ================= */
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Message send nahi ho saka."
+                    );
+
+                }
+
+
+                /* =================================================
+                   SAVE CONVERSATION ID
+                ================================================= */
+
+                if (
+                    data.conversationId
+                ) {
+
+                    localStorage.setItem(
+                        "conversationId",
+                        data.conversationId
+                    );
+
+                }
+
+
+                /* =================================================
+                   SAVE CUSTOMER INFO
+                ================================================= */
+
+                localStorage.setItem(
+                    "userName",
+                    name
+                );
+
+
+                localStorage.setItem(
+                    "userPhone",
+                    phone
+                );
+
+
+                if (email) {
+
+                    localStorage.setItem(
+                        "userEmail",
+                        email
+                    );
+
+                }
+
+
+                /* ================= SUCCESS ================= */
+
+                formMessage.style.display =
+                    "block";
+
+                formMessage.style.borderColor =
+                    "var(--gold)";
+
+                formMessage.style.color =
+                    "var(--gold)";
+
+                formMessage.textContent =
+                    "Message successfully sent. Opening your messages...";
+
+
+                /* ================= RESET ================= */
+
+                document.getElementById(
+                    "contactForm"
+                ).reset();
+
+
+                /* =================================================
+                   OPEN CUSTOMER MESSAGES
+                ================================================= */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "messages.html";
+
+                    },
+                    1000
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Contact form error:",
+                    error
+                );
+
+
+                formMessage.style.display =
+                    "block";
+
+                formMessage.style.borderColor =
+                    "var(--danger)";
+
+                formMessage.style.color =
+                    "var(--danger)";
+
+                formMessage.textContent =
+                    error.message ||
+                    "Something went wrong. Please try again.";
+
+            } finally {
+
+                /* ================= RESTORE BUTTON ================= */
+
+                setTimeout(
+                    function () {
+
+                        submitBtn.disabled =
+                            false;
+
+                        submitBtn.innerHTML =
+                            originalButtonHTML;
+
+                    },
+                    1000
+                );
+
+            }
+
+        }
+    );
+
+  </script>
+
+</body>
+</html>

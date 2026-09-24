@@ -1,0 +1,2998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings — New Brand Fashion Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        :root {
+            --bg: #070707;
+            --card: #101010;
+            --card2: #151515;
+            --text: #ffffff;
+            --muted: #a5a5a5;
+            --border: #292929;
+            --gold: #d5ad55;
+            --gold-dark: #b58d35;
+            --input: #151515;
+
+            --success: #3fc77a;
+            --danger: #e05252;
+        }
+
+        body.light {
+            --bg: #f7f7f7;
+            --card: #ffffff;
+            --card2: #f1f1f1;
+            --text: #111111;
+            --muted: #666666;
+            --border: #dddddd;
+            --gold: #b7892e;
+            --gold-dark: #966d20;
+            --input: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            padding: 24px 15px;
+            z-index: 1000;
+            transition: .3s;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 0 8px 25px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-family: "Playfair Display", serif;
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .logo-text h3 {
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            font-size: 10px;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 8px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 15px;
+        }
+
+        .admin-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .admin-profile strong {
+            font-size: 13px;
+            display: block;
+        }
+
+        .admin-profile small {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .menu-title {
+            color: var(--muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 10px 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 7px;
+            color: var(--muted);
+            font-size: 13px;
+            transition: .25s;
+        }
+
+        .nav-menu a i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: var(--card2);
+            color: var(--gold);
+        }
+
+        .nav-menu a.logout {
+            margin-top: 8px;
+            color: var(--danger);
+        }
+
+        .nav-menu a.logout:hover {
+            background: rgba(224,82,82,.1);
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 75px;
+            border-bottom: 1px solid var(--border);
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .topbar-left h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 25px;
+        }
+
+        .mobile-menu {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            background: var(--card2);
+            color: var(--text);
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: var(--card2);
+            color: var(--text);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .notification-dot {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background: var(--gold);
+            border-radius: 50%;
+            top: 8px;
+            right: 8px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 30px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .breadcrumb span {
+            color: var(--gold);
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+        }
+
+        .page-heading p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* ================= SETTINGS LAYOUT ================= */
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .settings-menu {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .settings-menu button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            text-align: left;
+            padding: 12px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: .2s;
+        }
+
+        .settings-menu button i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .settings-menu button:hover,
+        .settings-menu button.active {
+            background: var(--card2);
+            color: var(--gold);
+        }
+
+        .settings-content {
+            min-width: 0;
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .settings-card-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .settings-card-header h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .settings-card-header p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .settings-body {
+            padding: 20px;
+        }
+
+        /* ================= FORMS ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .form-group small {
+            color: var(--muted);
+            font-size: 9px;
+            margin-top: -2px;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 43px;
+            border: 1px solid var(--border);
+            background: var(--input);
+            color: var(--text);
+            border-radius: 7px;
+            padding: 0 12px;
+            outline: none;
+            font-size: 11px;
+        }
+
+        textarea.form-control {
+            height: 100px;
+            resize: vertical;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold);
+        }
+
+        /* ================= PROFILE ================= */
+
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .profile-avatar {
+            width: 72px;
+            height: 72px;
+            background: var(--gold);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .profile-info h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .profile-info p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .upload-btn {
+            margin-top: 9px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--gold);
+            padding: 7px 11px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        /* ================= SAVE BUTTON ================= */
+
+        .card-footer {
+            border-top: 1px solid var(--border);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 9px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 7px;
+            padding: 11px 17px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: .25s;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-dark);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* ================= TOGGLE ================= */
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setting-row:first-child {
+            padding-top: 0;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .setting-info strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .setting-info span {
+            color: var(--muted);
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .toggle {
+            position: relative;
+            width: 43px;
+            height: 23px;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 17px;
+            height: 17px;
+            left: 3px;
+            top: 3px;
+            background: #fff;
+            border-radius: 50%;
+            transition: .25s;
+        }
+
+        .toggle input:checked + .slider {
+            background: var(--gold);
+        }
+
+        .toggle input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* ================= SECURITY ================= */
+
+        .security-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .security-item:last-child {
+            border-bottom: none;
+        }
+
+        .security-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .security-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--card2);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 7px;
+        }
+
+        .security-left strong {
+            display: block;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .security-left span {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        /* ================= DANGER ================= */
+
+        .danger-card {
+            border-color: rgba(224,82,82,.35);
+        }
+
+        .danger-card .settings-card-header h3 {
+            color: var(--danger);
+        }
+
+        .danger-text {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .danger-btn {
+            background: transparent;
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .danger-btn:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        /* ================= TOAST ================= */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: var(--card);
+            border: 1px solid var(--gold);
+            color: var(--text);
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: var(--gold);
+        }
+
+        /* ================= LOADING ================= */
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .loading-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px 28px;
+            color: var(--text);
+            font-size: 12px;
+        }
+
+        .loading-box i {
+            color: var(--gold);
+            margin-right: 8px;
+        }
+
+        /* ================= OVERLAY ================= */
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.65);
+            z-index: 999;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-menu {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 5px;
+            }
+
+            .settings-menu button {
+                justify-content: center;
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .topbar {
+                padding: 0 22px;
+            }
+
+            .content {
+                padding: 22px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .content {
+                padding: 16px;
+            }
+
+            .topbar {
+                padding: 0 16px;
+            }
+
+            .topbar-left h1 {
+                font-size: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .settings-menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .setting-row,
+            .security-item {
+                align-items: flex-start;
+            }
+
+            .profile-box {
+                align-items: flex-start;
+            }
+
+        }
+
+        @media (max-width: 420px) {
+
+            .settings-menu button {
+                font-size: 10px;
+            }
+
+            .settings-body {
+                padding: 15px;
+            }
+
+            .card-footer {
+                padding: 14px 15px;
+            }
+
+            .profile-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="logo-area">
+            <div class="logo">
+                NB
+            </div>
+            <div class="logo-text">
+                <h3>NEW BRAND</h3>
+                <span>FASHION</span>
+            </div>
+        </div>
+
+        <div class="admin-profile">
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+                <strong id="sidebarAdminName"><strong>
+                <small>Admin For website</small>
+            </div>
+        </div>
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+        <nav class="nav-menu">
+
+            <a href="admin-dashboard.html">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+
+            <a href="admin-orders.html">
+                <i class="fa-solid fa-bag-shopping"></i>
+                Orders
+            </a>
+
+            <a href="admin-product.html">
+                <i class="fa-solid fa-box"></i>
+                Products
+            </a>
+
+            <a href="admin-customer.html">
+                <i class="fa-solid fa-users"></i>
+                Customers
+            </a>
+
+            <a href="admin-add-product.html">
+                <i class="fa-solid fa-plus"></i>
+                Add Product
+            </a>
+
+            <a href="admin-messages.html">
+                <i class="fa-solid fa-message"></i>
+                Messages
+            </a>
+
+            <a href="admin-setting.html" class="active">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+            <a href="index.html">
+                <i class="fa-solid fa-store"></i>
+                View Store
+            </a>
+
+            <a href="#" class="logout" onclick="logoutAdmin(); return false;">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="mobile-menu" id="mobileMenu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <h1>Settings</h1>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <button
+                    class="icon-btn"
+                    onclick="showToast('You have 5 new notifications')">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+                <button class="icon-btn" id="themeToggle">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="content">
+
+            <div class="breadcrumb">
+
+                <a href="admin-dashboard.html">
+                    Dashboard
+                </a>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </div>
+
+
+            <div class="page-heading">
+
+                <h2>
+                    Settings
+                </h2>
+
+                <p>
+                    Manage your store, account, notifications and security.
+                </p>
+
+            </div>
+
+
+            <!-- ================= SETTINGS LAYOUT ================= -->
+
+            <div class="settings-layout">
+
+                <!-- SETTINGS MENU -->
+
+                <div class="settings-menu">
+
+                    <button
+                        class="setting-tab active"
+                        data-target="store">
+
+                        <i class="fa-solid fa-store"></i>
+                        Store Settings
+
+                    </button>
+
+                    <button
+                        class="setting-tab"
+                        data-target="profile">
+
+                        <i class="fa-solid fa-user"></i>
+                        My Profile
+
+                    </button>
+
+                    <button
+                        class="setting-tab"
+                        data-target="notifications">
+
+                        <i class="fa-solid fa-bell"></i>
+                        Notifications
+
+                    </button>
+
+                    <button
+                        class="setting-tab"
+                        data-target="security">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Security
+
+                    </button>
+
+                </div>
+
+
+                <!-- SETTINGS CONTENT -->
+
+                <div class="settings-content">
+
+
+                    <!-- ================= STORE SETTINGS ================= -->
+
+                    <div
+                        class="settings-section active"
+                        id="store">
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <h3>
+                                    Store Information
+                                </h3>
+
+                                <p>
+                                    Basic information about New Brand Fashion.
+                                </p>
+
+                            </div>
+
+                            <div class="settings-body">
+
+                                <div class="form-grid">
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Store Name
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="storeName"
+                                            value="New Brand Fashion">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Store Email
+                                        </label>
+
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            id="storeEmail"
+                                            value="info@newbrandfashion.com">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Phone Number
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="storePhone"
+                                            value="03XX-XXXXXXX">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Currency
+                                        </label>
+
+                                        <select
+                                            class="form-control"
+                                            id="storeCurrency">
+
+                                            <option value="PKR">
+                                                Pakistani Rupee (PKR)
+                                            </option>
+
+                                            <option value="USD">
+                                                US Dollar (USD)
+                                            </option>
+
+                                            <option value="GBP">
+                                                British Pound (GBP)
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group full">
+
+                                        <label>
+                                            Store Address
+                                        </label>
+
+                                        <textarea
+                                            class="form-control"
+                                            id="storeAddress">Karachi, Sindh, Pakistan</textarea>
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Shipping Charge
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="shippingCharge"
+                                            value="250">
+
+                                        <small>
+                                            Default shipping fee in PKR.
+                                        </small>
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Free Shipping Above
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="freeShippingAbove"
+                                            value="5000">
+
+                                        <small>
+                                            Orders above this amount get free shipping.
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <button
+                                    class="btn btn-outline"
+                                    onclick="resetStoreForm()">
+
+                                    Cancel
+
+                                </button>
+
+                                <button
+                                    class="btn btn-gold"
+                                    onclick="saveStoreSettings()">
+
+                                    <i class="fa-solid fa-check"></i>
+                                    Save Changes
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <h3>
+                                    Store Preferences
+                                </h3>
+
+                                <p>
+                                    Control important store behavior.
+                                </p>
+
+                            </div>
+
+                            <div class="settings-body">
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Store Status
+                                        </strong>
+
+                                        <span>
+                                            Allow customers to place orders on your website.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="storeStatus"
+                                            checked>
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Cash on Delivery
+                                        </strong>
+
+                                        <span>
+                                            Allow customers to pay when their order arrives.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="codEnabled"
+                                            checked>
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Customer Registration
+                                        </strong>
+
+                                        <span>
+                                            Allow new customers to create an account.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="registrationEnabled"
+                                            checked>
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= PROFILE ================= -->
+
+                    <div
+                        class="settings-section"
+                        id="profile">
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <h3>
+                                    Admin Profile
+                                </h3>
+
+                                <p>
+                                    Update your administrator information.
+                                </p>
+
+                            </div>
+
+                            <div class="settings-body">
+
+                                <div class="profile-box">
+
+                                    <div
+                                        class="profile-avatar"
+                                        id="profileAvatar">
+                                        A
+                                    </div>
+
+                                    <div class="profile-info">
+
+                                        <h3 id="profileDisplayName">
+                                            Administrator
+                                        </h3>
+
+                                        <p>
+                                            Super Admin
+                                        </p>
+
+                                        <button
+                                            class="upload-btn"
+                                            onclick="showToast('Profile photo upload coming soon')">
+
+                                            <i class="fa-solid fa-camera"></i>
+                                            Change Photo
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-grid">
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Full Name
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="adminName"
+                                            value="Administrator">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Email Address
+                                        </label>
+
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            id="adminEmail"
+                                            value="admin@newbrandfashion.com">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Phone Number
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="adminPhone"
+                                            value="03XX-XXXXXXX">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>
+                                            Role
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            value="Super Admin"
+                                            disabled>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <button
+                                    class="btn btn-gold"
+                                    onclick="saveProfileSettings()">
+
+                                    <i class="fa-solid fa-check"></i>
+                                    Save Profile
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= NOTIFICATIONS ================= -->
+
+                    <div
+                        class="settings-section"
+                        id="notifications">
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <h3>
+                                    Notification Settings
+                                </h3>
+
+                                <p>
+                                    Choose which notifications you want to receive.
+                                </p>
+
+                            </div>
+
+                            <div class="settings-body">
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            New Orders
+                                        </strong>
+
+                                        <span>
+                                            Get notified whenever a customer places a new order.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="notifyOrders"
+                                            checked>
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            New Customers
+                                        </strong>
+
+                                        <span>
+                                            Receive a notification when someone creates an account.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="notifyCustomers"
+                                            checked>
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Customer Messages
+                                        </strong>
+
+                                        <span>
+                                            Get notified when customers send you a message.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="notifyMessages"
+                                            checked>
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Low Stock Alerts
+                                        </strong>
+
+                                        <span>
+                                            Receive alerts when a product reaches low stock.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="notifyLowStock"
+                                            checked>
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Email Notifications
+                                        </strong>
+
+                                        <span>
+                                            Send important admin notifications to your email.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="notifyEmail">
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <button
+                                    class="btn btn-gold"
+                                    onclick="saveNotificationSettings()">
+
+                                    <i class="fa-solid fa-check"></i>
+                                    Save Notifications
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= SECURITY ================= -->
+
+                    <div
+                        class="settings-section"
+                        id="security">
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <h3>
+                                    Security
+                                </h3>
+
+                                <p>
+                                    Manage your administrator account security.
+                                </p>
+
+                            </div>
+
+                            <div class="settings-body">
+
+                                <div class="security-item">
+
+                                    <div class="security-left">
+
+                                        <div class="security-icon">
+                                            <i class="fa-solid fa-key"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Change Password
+                                            </strong>
+
+                                            <span>
+                                                Update your admin login password.
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <button
+                                        class="btn btn-outline"
+                                        onclick="showToast('Change password form coming soon')">
+
+                                        Change
+
+                                    </button>
+
+                                </div>
+
+
+                                <div class="security-item">
+
+                                    <div class="security-left">
+
+                                        <div class="security-icon">
+                                            <i class="fa-solid fa-shield-halved"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Two-Factor Authentication
+                                            </strong>
+
+                                            <span>
+                                                Add an extra layer of protection to your account.
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="twoFactor">
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="security-item">
+
+                                    <div class="security-left">
+
+                                        <div class="security-icon">
+                                            <i class="fa-solid fa-clock-rotate-left"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Login Session
+                                            </strong>
+
+                                            <span>
+                                                Current session is active on this device.
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <span style="color:var(--success);font-size:10px;">
+                                        Active
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <button
+                                    class="btn btn-gold"
+                                    onclick="saveSecuritySettings()">
+
+                                    <i class="fa-solid fa-check"></i>
+                                    Save Security
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card danger-card">
+
+                            <div class="settings-card-header">
+
+                                <h3>
+                                    Danger Zone
+                                </h3>
+
+                                <p>
+                                    These actions can affect your store account.
+                                </p>
+
+                            </div>
+
+                            <div class="settings-body">
+
+                                <p class="danger-text">
+                                    Deleting or resetting your store data can permanently
+                                    remove information. Use these options carefully.
+                                </p>
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <button
+                                    class="btn danger-btn"
+                                    onclick="confirmReset()">
+
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Reset Demo Settings
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div class="toast" id="toast">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span id="toastMessage">
+            Done
+        </span>
+
+    </div>
+
+
+    <!-- ================= LOADING ================= -->
+
+    <div class="loading-overlay" id="loadingOverlay">
+
+        <div class="loading-box">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <span id="loadingText">
+                Loading...
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ==================================================
+           ADMIN AUTHENTICATION
+        ================================================== */
+
+        const adminLoggedIn =
+            localStorage.getItem("adminLoggedIn");
+
+        const adminToken =
+            localStorage.getItem("adminToken");
+
+
+        if (
+            adminLoggedIn !== "true" ||
+            !adminToken
+        ) {
+
+            localStorage.removeItem("adminLoggedIn");
+            localStorage.removeItem("adminToken");
+            localStorage.removeItem("adminUserId");
+            localStorage.removeItem("adminUser");
+            localStorage.removeItem("adminRemember");
+
+            window.location.replace(
+                "admin-login.html"
+            );
+
+            throw new Error(
+                "Admin authentication required."
+            );
+        }
+
+
+        /* ==================================================
+           BACKEND API
+        ================================================== */
+
+        const API_URL =
+            "http://localhost:5000/api/settings";
+
+
+        /* ==================================================
+           ADMIN HEADERS
+        ================================================== */
+
+        function getAdminHeaders() {
+
+            const token =
+                localStorage.getItem("adminToken");
+
+            return {
+                "Authorization":
+                    `Bearer ${token}`,
+
+                "Content-Type":
+                    "application/json"
+            };
+        }
+
+
+        /* ==================================================
+           UNAUTHORIZED HANDLER
+        ================================================== */
+
+        function handleUnauthorized(response) {
+
+            if (
+                response.status === 401 ||
+                response.status === 403
+            ) {
+
+                localStorage.removeItem(
+                    "adminLoggedIn"
+                );
+
+                localStorage.removeItem(
+                    "adminToken"
+                );
+
+                localStorage.removeItem(
+                    "adminUserId"
+                );
+
+                localStorage.removeItem(
+                    "adminUser"
+                );
+
+                localStorage.removeItem(
+                    "adminRemember"
+                );
+
+                window.location.replace(
+                    "admin-login.html"
+                );
+
+                return true;
+            }
+
+            return false;
+        }
+
+
+        /* ==================================================
+           GLOBAL SETTINGS
+        ================================================== */
+
+        let savedSettings = null;
+
+
+        /* ==================================================
+           THEME
+        ================================================== */
+
+        const themeToggle =
+            document.getElementById("themeToggle");
+
+
+        function setThemeIcon() {
+
+            if (
+                document.body.classList.contains("light")
+            ) {
+
+                themeToggle.innerHTML =
+                    '<i class="fa-solid fa-moon"></i>';
+
+            } else {
+
+                themeToggle.innerHTML =
+                    '<i class="fa-solid fa-sun"></i>';
+            }
+        }
+
+
+        if (
+            localStorage.getItem("theme") === "light"
+        ) {
+
+            document.body.classList.add("light");
+
+        }
+
+
+        setThemeIcon();
+
+
+        themeToggle.addEventListener(
+            "click",
+            () => {
+
+                document.body.classList.toggle(
+                    "light"
+                );
+
+                localStorage.setItem(
+                    "theme",
+                    document.body.classList.contains("light")
+                        ? "light"
+                        : "dark"
+                );
+
+                setThemeIcon();
+
+            }
+        );
+
+
+        /* ==================================================
+           MOBILE SIDEBAR
+        ================================================== */
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+        const overlay =
+            document.getElementById("overlay");
+
+
+        mobileMenu.addEventListener(
+            "click",
+            () => {
+
+                sidebar.classList.toggle(
+                    "show"
+                );
+
+                overlay.classList.toggle(
+                    "show"
+                );
+
+            }
+        );
+
+
+        overlay.addEventListener(
+            "click",
+            () => {
+
+                sidebar.classList.remove(
+                    "show"
+                );
+
+                overlay.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+        /* ==================================================
+           SETTINGS TABS
+        ================================================== */
+
+        const tabs =
+            document.querySelectorAll(
+                ".setting-tab"
+            );
+
+        const sections =
+            document.querySelectorAll(
+                ".settings-section"
+            );
+
+
+        tabs.forEach(tab => {
+
+            tab.addEventListener(
+                "click",
+                () => {
+
+                    const target =
+                        tab.dataset.target;
+
+
+                    tabs.forEach(item => {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                    sections.forEach(section => {
+
+                        section.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                    tab.classList.add(
+                        "active"
+                    );
+
+
+                    document
+                        .getElementById(target)
+                        .classList.add(
+                            "active"
+                        );
+
+                }
+            );
+
+        });
+
+
+        /* ==================================================
+           TOAST
+        ================================================== */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+            const toastMessage =
+                document.getElementById(
+                    "toastMessage"
+                );
+
+
+            toastMessage.textContent =
+                message;
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                2500
+            );
+
+        }
+
+
+        /* ==================================================
+           LOADING
+        ================================================== */
+
+        function showLoading(message) {
+
+            const loadingOverlay =
+                document.getElementById(
+                    "loadingOverlay"
+                );
+
+            const loadingText =
+                document.getElementById(
+                    "loadingText"
+                );
+
+
+            loadingText.textContent =
+                message || "Loading...";
+
+
+            loadingOverlay.classList.add(
+                "show"
+            );
+
+        }
+
+
+        function hideLoading() {
+
+            document
+                .getElementById(
+                    "loadingOverlay"
+                )
+                .classList.remove(
+                    "show"
+                );
+
+        }
+
+
+        /* ==================================================
+           LOAD SETTINGS FROM DATABASE
+        ================================================== */
+
+        async function loadSettings() {
+
+            try {
+
+                showLoading(
+                    "Loading settings..."
+                );
+
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+                            method: "GET",
+                            headers:
+                                getAdminHeaders()
+                        }
+                    );
+
+
+                if (
+                    handleUnauthorized(
+                        response
+                    )
+                ) {
+
+                    return;
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Settings could not be loaded."
+                    );
+                }
+
+
+                savedSettings =
+                    data.settings;
+
+
+                fillSettings(
+                    savedSettings
+                );
+
+
+                hideLoading();
+
+            } catch (error) {
+
+                hideLoading();
+
+
+                console.error(
+                    "Load settings error:",
+                    error
+                );
+
+
+                showToast(
+                    error.message ||
+                    "Could not load settings"
+                );
+
+            }
+
+        }
+
+
+        /* ==================================================
+           FILL PAGE WITH DATABASE SETTINGS
+        ================================================== */
+
+        function fillSettings(settings) {
+
+            /* STORE */
+
+            document.getElementById(
+                "storeName"
+            ).value =
+                settings.store_name ||
+                "New Brand Fashion";
+
+
+            document.getElementById(
+                "storeEmail"
+            ).value =
+                settings.store_email || "";
+
+
+            document.getElementById(
+                "storePhone"
+            ).value =
+                settings.store_phone || "";
+
+
+            document.getElementById(
+                "storeCurrency"
+            ).value =
+                settings.currency ||
+                "PKR";
+
+
+            document.getElementById(
+                "storeAddress"
+            ).value =
+                settings.store_address ||
+                "";
+
+
+            document.getElementById(
+                "shippingCharge"
+            ).value =
+                settings.shipping_charge ??
+                0;
+
+
+            document.getElementById(
+                "freeShippingAbove"
+            ).value =
+                settings.free_shipping_above ??
+                0;
+
+
+            /* STORE PREFERENCES */
+
+            document.getElementById(
+                "storeStatus"
+            ).checked =
+                Number(
+                    settings.store_status
+                ) === 1;
+
+
+            document.getElementById(
+                "codEnabled"
+            ).checked =
+                Number(
+                    settings.cod_enabled
+                ) === 1;
+
+
+            document.getElementById(
+                "registrationEnabled"
+            ).checked =
+                Number(
+                    settings.registration_enabled
+                ) === 1;
+
+
+            /* PROFILE */
+
+            const adminName =
+                settings.admin_name ||
+                "Administrator";
+
+
+            document.getElementById(
+                "adminName"
+            ).value =
+                adminName;
+
+
+            document.getElementById(
+                "adminEmail"
+            ).value =
+                settings.admin_email ||
+                "";
+
+
+            document.getElementById(
+                "adminPhone"
+            ).value =
+                settings.admin_phone ||
+                "";
+
+
+            document.getElementById(
+                "profileDisplayName"
+            ).textContent =
+                adminName;
+
+
+            document.getElementById(
+                "sidebarAdminName"
+            ).textContent =
+                adminName;
+
+
+            document.getElementById(
+                "profileAvatar"
+            ).textContent =
+                getInitial(adminName);
+
+
+            /* NOTIFICATIONS */
+
+            document.getElementById(
+                "notifyOrders"
+            ).checked =
+                Number(
+                    settings.notify_orders
+                ) === 1;
+
+
+            document.getElementById(
+                "notifyCustomers"
+            ).checked =
+                Number(
+                    settings.notify_customers
+                ) === 1;
+
+
+            document.getElementById(
+                "notifyMessages"
+            ).checked =
+                Number(
+                    settings.notify_messages
+                ) === 1;
+
+
+            document.getElementById(
+                "notifyLowStock"
+            ).checked =
+                Number(
+                    settings.notify_low_stock
+                ) === 1;
+
+
+            document.getElementById(
+                "notifyEmail"
+            ).checked =
+                Number(
+                    settings.notify_email
+                ) === 1;
+
+
+            /* SECURITY */
+
+            document.getElementById(
+                "twoFactor"
+            ).checked =
+                Number(
+                    settings.two_factor
+                ) === 1;
+
+        }
+
+
+        /* ==================================================
+           INITIAL LETTER
+        ================================================== */
+
+        function getInitial(name) {
+
+            const cleanName =
+                String(
+                    name || ""
+                ).trim();
+
+
+            if (!cleanName) {
+
+                return "A";
+
+            }
+
+
+            return cleanName
+                .charAt(0)
+                .toUpperCase();
+
+        }
+
+
+        /* ==================================================
+           GET CURRENT FORM DATA
+        ================================================== */
+
+        function getFormData() {
+
+            return {
+
+                store_name:
+                    document.getElementById(
+                        "storeName"
+                    ).value.trim(),
+
+
+                store_email:
+                    document.getElementById(
+                        "storeEmail"
+                    ).value.trim(),
+
+
+                store_phone:
+                    document.getElementById(
+                        "storePhone"
+                    ).value.trim(),
+
+
+                currency:
+                    document.getElementById(
+                        "storeCurrency"
+                    ).value,
+
+
+                store_address:
+                    document.getElementById(
+                        "storeAddress"
+                    ).value.trim(),
+
+
+                shipping_charge:
+                    Number(
+                        document.getElementById(
+                            "shippingCharge"
+                        ).value
+                    ) || 0,
+
+
+                free_shipping_above:
+                    Number(
+                        document.getElementById(
+                            "freeShippingAbove"
+                        ).value
+                    ) || 0,
+
+
+                store_status:
+                    document.getElementById(
+                        "storeStatus"
+                    ).checked,
+
+
+                cod_enabled:
+                    document.getElementById(
+                        "codEnabled"
+                    ).checked,
+
+
+                registration_enabled:
+                    document.getElementById(
+                        "registrationEnabled"
+                    ).checked,
+
+
+                notify_orders:
+                    document.getElementById(
+                        "notifyOrders"
+                    ).checked,
+
+
+                notify_customers:
+                    document.getElementById(
+                        "notifyCustomers"
+                    ).checked,
+
+
+                notify_messages:
+                    document.getElementById(
+                        "notifyMessages"
+                    ).checked,
+
+
+                notify_low_stock:
+                    document.getElementById(
+                        "notifyLowStock"
+                    ).checked,
+
+
+                notify_email:
+                    document.getElementById(
+                        "notifyEmail"
+                    ).checked,
+
+
+                admin_name:
+                    document.getElementById(
+                        "adminName"
+                    ).value.trim(),
+
+
+                admin_email:
+                    document.getElementById(
+                        "adminEmail"
+                    ).value.trim(),
+
+
+                admin_phone:
+                    document.getElementById(
+                        "adminPhone"
+                    ).value.trim(),
+
+
+                two_factor:
+                    document.getElementById(
+                        "twoFactor"
+                    ).checked
+
+            };
+
+        }
+
+
+        /* ==================================================
+           SAVE TO DATABASE
+        ================================================== */
+
+        async function saveToDatabase(
+            successMessage
+        ) {
+
+            try {
+
+                showLoading(
+                    "Saving settings..."
+                );
+
+
+                const settings =
+                    getFormData();
+
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+                            method: "PUT",
+
+                            headers:
+                                getAdminHeaders(),
+
+                            body:
+                                JSON.stringify(
+                                    settings
+                                )
+                        }
+                    );
+
+
+                if (
+                    handleUnauthorized(
+                        response
+                    )
+                ) {
+
+                    return;
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Settings could not be saved."
+                    );
+                }
+
+
+                if (data.settings) {
+
+                    savedSettings =
+                        data.settings;
+
+
+                    fillSettings(
+                        savedSettings
+                    );
+
+                }
+
+
+                hideLoading();
+
+
+                showToast(
+                    successMessage
+                );
+
+
+            } catch (error) {
+
+                hideLoading();
+
+
+                console.error(
+                    "Save settings error:",
+                    error
+                );
+
+
+                showToast(
+                    error.message ||
+                    "Settings could not be saved"
+                );
+
+            }
+
+        }
+
+
+        /* ==================================================
+           SAVE STORE SETTINGS
+        ================================================== */
+
+        function saveStoreSettings() {
+
+            saveToDatabase(
+                "Store settings saved successfully"
+            );
+
+        }
+
+
+        /* ==================================================
+           SAVE PROFILE
+        ================================================== */
+
+        function saveProfileSettings() {
+
+            saveToDatabase(
+                "Profile saved successfully"
+            );
+
+        }
+
+
+        /* ==================================================
+           SAVE NOTIFICATIONS
+        ================================================== */
+
+        function saveNotificationSettings() {
+
+            saveToDatabase(
+                "Notification settings saved successfully"
+            );
+
+        }
+
+
+        /* ==================================================
+           SAVE SECURITY
+        ================================================== */
+
+        function saveSecuritySettings() {
+
+            saveToDatabase(
+                "Security settings saved successfully"
+            );
+
+        }
+
+
+        /* ==================================================
+           RESET STORE FORM
+        ================================================== */
+
+        function resetStoreForm() {
+
+            if (!savedSettings) {
+
+                showToast(
+                    "Saved settings are not available"
+                );
+
+                return;
+
+            }
+
+
+            fillSettings(
+                savedSettings
+            );
+
+
+            showToast(
+                "Changes cancelled"
+            );
+
+        }
+
+
+        /* ==================================================
+           RESET DEMO SETTINGS
+        ================================================== */
+
+        async function confirmReset() {
+
+            const confirmAction =
+                confirm(
+                    "Are you sure you want to reset demo settings?"
+                );
+
+
+            if (!confirmAction) {
+
+                return;
+
+            }
+
+
+            try {
+
+                showLoading(
+                    "Resetting settings..."
+                );
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}/reset`,
+                        {
+                            method: "POST",
+                            headers:
+                                getAdminHeaders()
+                        }
+                    );
+
+
+                if (
+                    handleUnauthorized(
+                        response
+                    )
+                ) {
+
+                    return;
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Settings could not be reset."
+                    );
+                }
+
+
+                const settingsResponse =
+                    await fetch(
+                        API_URL,
+                        {
+                            method: "GET",
+                            headers:
+                                getAdminHeaders()
+                        }
+                    );
+
+
+                if (
+                    handleUnauthorized(
+                        settingsResponse
+                    )
+                ) {
+
+                    return;
+                }
+
+
+                const settingsData =
+                    await settingsResponse.json();
+
+
+                if (
+                    settingsResponse.ok &&
+                    settingsData.success
+                ) {
+
+                    savedSettings =
+                        settingsData.settings;
+
+
+                    fillSettings(
+                        savedSettings
+                    );
+
+                }
+
+
+                hideLoading();
+
+
+                showToast(
+                    "Demo settings reset successfully"
+                );
+
+
+            } catch (error) {
+
+                hideLoading();
+
+
+                console.error(
+                    "Reset settings error:",
+                    error
+                );
+
+
+                showToast(
+                    error.message ||
+                    "Settings could not be reset"
+                );
+
+            }
+
+        }
+
+
+        /* ==================================================
+           LOGOUT
+        ================================================== */
+
+        function logoutAdmin() {
+
+            localStorage.removeItem(
+                "adminLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "adminRemember"
+            );
+
+            localStorage.removeItem(
+                "adminToken"
+            );
+
+            localStorage.removeItem(
+                "adminUserId"
+            );
+
+            localStorage.removeItem(
+                "adminUser"
+            );
+
+
+            window.location.replace(
+                "admin-login.html"
+            );
+
+        }
+
+
+        /* ==================================================
+           PAGE LOAD
+        ================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+                loadSettings();
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
