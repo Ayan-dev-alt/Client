@@ -1,0 +1,136 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isSelf(uid) { return signedIn() && request.auth.uid == uid; }
+    function isAdmin() {
+      return signedIn() && (
+        (request.auth.token.email in ['hafizjunaid09478@gmail.com', 'm.ayanali051@gmail.com']
+          && request.auth.token.email_verified == true)
+        || (exists(/databases/$(database)/documents/users/$(request.auth.uid))
+          && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+      );
+    }
+    function accountActive() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && (!('accountStatus' in get(/databases/$(database)/documents/users/$(request.auth.uid)).data)
+          || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.accountStatus != 'restricted'
+          || (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.restrictedUntil is timestamp
+            && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.restrictedUntil < request.time));
+    }
+    function isSeller() {
+      return accountActive() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'seller';
+    }
+
+    match /users/{uid} {
+      allow read: if isSelf(uid) || isAdmin();
+      allow create: if isSelf(uid)
+        && request.resource.data.uid == uid
+        && request.resource.data.role in ['buyer', 'seller']
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 80
+        && request.resource.data.email is string
+        && (!('phone' in request.resource.data)
+          || (request.resource.data.phone is string && request.resource.data.phone.size() <= 20));
+      allow update: if (isSelf(uid)
+        && request.resource.data.uid == resource.data.uid
+        && (request.resource.data.role == resource.data.role
+          || (resource.data.role == 'buyer' && request.resource.data.role == 'seller'))
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'email', 'photoURL', 'role', 'createdAt', 'updatedAt', 'phone', 'isOnline', 'lastSeen']))
+        || (isAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['accountStatus', 'restrictedUntil', 'updatedAt']));
+      allow delete: if isSelf(uid);
+    }
+
+    match /wishlists/{uid} {
+      allow read: if isSelf(uid);
+      allow create, update: if accountActive() && isSelf(uid)
+        && get(/databases/$(database)/documents/users/$(uid)).data.role == 'buyer'
+        && request.resource.data.buyerUid == uid
+        && request.resource.data.productIds is list;
+      allow delete: if isSelf(uid);
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow create: if isSeller()
+        && request.resource.data.sellerUid == request.auth.uid
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 120
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 4000
+        && request.resource.data.imageUrl is string
+        && request.resource.data.imageUrl.size() <= 2048
+        && request.resource.data.price is number
+        && request.resource.data.price > 0
+        && request.resource.data.stock is number
+        && request.resource.data.stock >= 0;
+      allow update: if (isSeller()
+        && resource.data.sellerUid == request.auth.uid
+        && request.resource.data.sellerUid == request.auth.uid)
+        || (isAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['active', 'updatedAt']));
+      allow delete: if isSeller() && resource.data.sellerUid == request.auth.uid;
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if accountActive()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'buyer'
+        && request.resource.data.buyerUid == request.auth.uid
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5
+        && request.resource.data.text is string
+        && request.resource.data.text.size() <= 1000
+        && get(/databases/$(database)/documents/products/$(request.resource.data.productId)).data.sellerUid != request.auth.uid;
+      allow update: if (accountActive()
+        && resource.data.buyerUid == request.auth.uid
+        && request.resource.data.buyerUid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['rating', 'text', 'updatedAt']))
+        || (isAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['hidden', 'updatedAt']));
+      allow delete: if accountActive() && resource.data.buyerUid == request.auth.uid;
+    }
+
+    match /messages/{messageId} {
+      allow create: if (accountActive()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'buyer'
+        && request.resource.data.buyerUid == request.auth.uid
+        && request.resource.data.sellerUid is string
+        && request.resource.data.text is string
+        && request.resource.data.text.size() <= 2000)
+        || (isAdmin()
+          && request.resource.data.senderUid == request.auth.uid
+          && request.resource.data.senderRole == 'admin'
+          && request.resource.data.recipientUid is string
+          && request.resource.data.text is string
+          && request.resource.data.text.size() <= 2000);
+      allow read: if isAdmin() || (signedIn()
+        && (resource.data.buyerUid == request.auth.uid || resource.data.sellerUid == request.auth.uid || resource.data.recipientUid == request.auth.uid));
+      allow update: if signedIn()
+        && (resource.data.buyerUid == request.auth.uid || resource.data.sellerUid == request.auth.uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read']);
+      allow delete: if signedIn() && (resource.data.buyerUid == request.auth.uid
+        || resource.data.sellerUid == request.auth.uid
+        || resource.data.recipientUid == request.auth.uid);
+    }
+
+    match /orders/{orderId} {
+      allow create: if false;
+      allow read: if isAdmin() || (signedIn()
+        && (resource.data.buyerUid == request.auth.uid || request.auth.uid in resource.data.sellerIds));
+      allow update: if signedIn()
+        && accountActive()
+        && ((isAdmin() || request.auth.uid in resource.data.sellerIds)
+          && request.resource.data.status in ['new', 'confirmed', 'shipped', 'completed', 'cancelled']
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+          || (resource.data.buyerUid == request.auth.uid
+            && request.resource.data.buyerUid == 'deleted'
+            && request.resource.data.buyerDeleted == true
+            && request.resource.data.buyerName == 'Deleted account'
+            && request.resource.data.buyerEmail == ''
+            && request.resource.data.phone == ''
+            && request.resource.data.address == ''
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['buyerUid', 'buyerDeleted', 'buyerName', 'buyerEmail', 'phone', 'address', 'updatedAt'])));
+      allow delete: if false;
+    }
+  }
+}
