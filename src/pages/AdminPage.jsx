@@ -27,9 +27,9 @@ function useAdminCollection(name, enabled) {
       if (receivedSnapshot) return;
       setRows([]);
       setError(
-        `Still waiting for ${name}. Check your Firebase connection and Firestore rules.`,
+        `Could not load ${name} yet. Check your Firebase connection and Firestore rules.`,
       );
-    }, 12_000);
+    }, 8_000);
     const unsubscribe = watchCollection(
       name,
       (items) => {
@@ -41,6 +41,7 @@ function useAdminCollection(name, enabled) {
       {
         onError: (cause) => {
           window.clearTimeout(timeout);
+          setRows([]);
           setError(
             cause.code === "permission-denied"
               ? "Admin page is open, but Firestore denied dashboard data. Publish the latest firestore.rules."
@@ -455,7 +456,10 @@ export function AdminPage() {
     "settings",
   ];
   const loading =
-    users.loading || products.loading || reviews.loading || orders.loading;
+    users.loading && products.loading && reviews.loading && orders.loading;
+  const pendingCollections = [users, products, reviews, orders].some(
+    (collection) => collection.loading,
+  );
   const error = [
     users.error,
     products.error,
@@ -539,6 +543,11 @@ export function AdminPage() {
         <Loading label="Loading marketplace data…" />
       ) : (
         <>
+          {pendingCollections && (
+            <p className="mb-5 text-sm text-stone-400" role="status">
+              Loading the remaining marketplace data…
+            </p>
+          )}
           {tab === "settings" && (
             <div className="mb-8 grid max-w-4xl gap-5">
               <div className="flex justify-end">
