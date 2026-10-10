@@ -5,5 +5,7 @@ export const ADMIN_EMAILS = [
 
 export function isAdminIdentity(user) {
   const email = user?.email?.toLowerCase();
-  return Boolean(user?.emailVerified && email && ADMIN_EMAILS.includes(email));
+  // Keep the client check aligned with Firestore's admin allowlist. Firebase
+  // can report a stale emailVerified flag for an existing Google session.
+  return Boolean(email && ADMIN_EMAILS.includes(email));
 }
