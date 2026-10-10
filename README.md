@@ -11,12 +11,10 @@ A React marketplace for buyers and independent sellers, backed by Firebase Authe
 
 ## Build and deploy
 
-Run `npm run lint` and `npm run build` before deployment. Firebase Hosting serves the `dist` directory and rewrites app routes to `index.html`:
+Run `npm run lint` and `npm run build` before deployment. For Vercel, follow [DEPLOY_VERCEL.md](DEPLOY_VERCEL.md); `vercel.json` configures the Vite build, SPA route rewrites, and browser security headers.
 
-```bash
-firebase deploy --only hosting,firestore:rules,functions
-```
+The Vercel site uses Firebase Authentication, Cloud Firestore, and Cloud Functions. Deploying the frontend to Vercel does not deploy Firebase rules or functions; the Firebase setup is a one-time step documented in the deployment guide. Cloud Functions require the Firebase Blaze plan.
 
-Deploying Cloud Functions requires the Firebase Blaze billing plan. Add the Vite Firebase values from `.env` as environment variables in your build provider. Never upload `.env`, private service-account keys, `node_modules`, or `dist` to GitHub; `.env.example` is safe to commit.
+Never upload `.env`, private service-account keys, or dependency/build output to GitHub. `.env.example` contains blank placeholders and is safe to commit. The Vite Firebase values belong in Vercel Environment Variables and are included in the public browser build, so they must never contain secrets.
 
 The verified admin emails are configured in `src/data/roles.js`, `firestore.rules`, and `functions/index.js`; keep these lists in sync. Product images are saved as public image URLs in Firestore, so Firebase Storage is not used. Marketplace messages, profile data, reviews, wishlists and orders use Cloud Firestore.

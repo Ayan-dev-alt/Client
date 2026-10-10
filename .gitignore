@@ -7,19 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-.env
-.env.*
-!.env.example
 
-node_modules
-functions/node_modules
-dist
-dist-ssr
-coverage
-.npm-cache
-.vite
-*.local
-*.zip
 
 # Firebase local state and debug output
 .firebase/
@@ -47,3 +35,8 @@ serviceAccount*.json
 *.njsproj
 *.sln
 *.sw?
+node_modules/
+dist/
+.vercel/
+.env*
+!.env.example
