@@ -4,8 +4,6 @@ export const ADMIN_EMAILS = [
 ];
 
 export function isAdminIdentity(user) {
-  return Boolean(
-    user?.emailVerified &&
-      ADMIN_EMAILS.includes(user.email?.toLowerCase()),
-  );
+  const email = user?.email?.toLowerCase();
+  return Boolean(user?.emailVerified && email && ADMIN_EMAILS.includes(email));
 }

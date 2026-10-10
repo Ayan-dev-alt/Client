@@ -61,45 +61,129 @@ function AdminNotifications({ items }) {
   const [error, setError] = useState("");
   const sectionRef = useRef(null);
   const sorted = [...items].sort((a, b) => {
-    const aTime = a.createdAt?.toDate?.().getTime() || a.createdAt?.seconds * 1000 || 0;
-    const bTime = b.createdAt?.toDate?.().getTime() || b.createdAt?.seconds * 1000 || 0;
+    const aTime =
+      a.createdAt?.toDate?.().getTime() || a.createdAt?.seconds * 1000 || 0;
+    const bTime =
+      b.createdAt?.toDate?.().getTime() || b.createdAt?.seconds * 1000 || 0;
     return bTime - aTime;
   });
   useEffect(() => {
-    if (!items.some((item) => item.read !== true) || !sectionRef.current) return undefined;
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      items.filter((item) => item.read !== true).forEach((item) => {
-        markMessageRead(item.id).catch((cause) => setError(cause.message || "Could not mark notification as read."));
-      });
-      observer.disconnect();
-    }, { threshold: 0.2 });
+    if (!items.some((item) => item.read !== true) || !sectionRef.current)
+      return undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        items
+          .filter((item) => item.read !== true)
+          .forEach((item) => {
+            markMessageRead(item.id).catch((cause) =>
+              setError(cause.message || "Could not mark notification as read."),
+            );
+          });
+        observer.disconnect();
+      },
+      { threshold: 0.2 },
+    );
     observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, [items]);
   const remove = async (id) => {
     setDeleting(id);
     setError("");
-    try { await deleteMessage(id); }
-    catch (cause) { setError(cause.code === "permission-denied" ? "Firestore denied this action. Publish the latest firestore.rules." : cause.message || "Could not delete the notification."); }
-    finally { setDeleting(""); }
+    try {
+      await deleteMessage(id);
+    } catch (cause) {
+      setError(
+        cause.code === "permission-denied"
+          ? "Firestore denied this action. Publish the latest firestore.rules."
+          : cause.message || "Could not delete the notification.",
+      );
+    } finally {
+      setDeleting("");
+    }
   };
 
-  return <section ref={sectionRef} id="notifications" className="mt-8 max-w-2xl scroll-mt-28 border border-line bg-panel p-4 sm:p-5">
-    <div className="flex items-center justify-between gap-3">
-      <div><p className="text-[10px] uppercase tracking-[.16em] text-gold">Marketplace updates</p><h2 className="mt-1 font-display text-xl">Notifications <span className="text-sm text-stone-400">({sorted.length})</span></h2></div>
-      {sorted.length > 0 && <span className="text-[10px] text-stone-500">Newest first</span>}
-    </div>
-    {error && <p role="alert" className="mt-3 border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs text-red-300">{error}</p>}
-    {sorted.length ? <div className="mt-3 space-y-2">{sorted.map((item) => <article key={item.id} className="flex items-start gap-3 border border-line px-3 py-2.5">
-      <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-gold/10 text-xs text-gold"><i className="fa-regular fa-bell"/></span>
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5"><strong className="truncate text-xs font-medium">From Admin</strong><span className="text-[10px] text-stone-500">{item.createdAt?.toDate?.().toLocaleString?.() || "Just now"}</span></div>
-        <details className="group mt-1"><summary className="line-clamp-2 cursor-pointer list-none text-xs leading-5 text-stone-300">{item.text}</summary><p className="mt-2 whitespace-pre-wrap border-t border-line pt-2 text-xs leading-5 text-stone-300">{item.text}</p></details>
+  return (
+    <section
+      ref={sectionRef}
+      id="notifications"
+      className="mt-8 max-w-2xl scroll-mt-28 border border-line bg-panel p-4 sm:p-5"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="text-[10px] uppercase tracking-[.16em] text-gold">
+            Marketplace updates
+          </p>
+          <h2 className="mt-1 font-display text-xl">
+            Notifications{" "}
+            <span className="text-sm text-stone-400">({sorted.length})</span>
+          </h2>
+        </div>
+        {sorted.length > 0 && (
+          <span className="text-[10px] text-stone-500">Newest first</span>
+        )}
       </div>
-      <button type="button" className="grid size-8 shrink-0 place-items-center rounded text-stone-500 transition hover:bg-red-500/10 hover:text-red-300 disabled:opacity-50" disabled={deleting === item.id} onClick={() => remove(item.id)} aria-label="Delete notification" title="Delete notification">{deleting === item.id ? <i className="fa-solid fa-spinner animate-spin text-xs"/> : <i className="fa-regular fa-trash-can text-sm"/>}</button>
-    </article>)}</div> : <p className="mt-3 border border-dashed border-line px-3 py-4 text-xs text-stone-400">You’re all caught up. New admin notifications will appear here.</p>}
-  </section>;
+      {error && (
+        <p
+          role="alert"
+          className="mt-3 border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs text-red-300"
+        >
+          {error}
+        </p>
+      )}
+      {sorted.length ? (
+        <div className="mt-3 space-y-2">
+          {sorted.map((item) => (
+            <article
+              key={item.id}
+              className="flex items-start gap-3 border border-line px-3 py-2.5"
+            >
+              <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-gold/10 text-xs text-gold">
+                <i className="fa-regular fa-bell" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                  <strong className="truncate text-xs font-medium">
+                    From Admin
+                  </strong>
+                  <span className="text-[10px] text-stone-500">
+                    {item.createdAt?.toDate?.().toLocaleString?.() ||
+                      "Just now"}
+                  </span>
+                </div>
+                <details className="group mt-1">
+                  <summary className="line-clamp-2 cursor-pointer list-none text-xs leading-5 text-stone-300">
+                    {item.text}
+                  </summary>
+                  <p className="mt-2 whitespace-pre-wrap border-t border-line pt-2 text-xs leading-5 text-stone-300">
+                    {item.text}
+                  </p>
+                </details>
+              </div>
+              <button
+                type="button"
+                className="grid size-8 shrink-0 place-items-center rounded text-stone-500 transition hover:bg-red-500/10 hover:text-red-300 disabled:opacity-50"
+                disabled={deleting === item.id}
+                onClick={() => remove(item.id)}
+                aria-label="Delete notification"
+                title="Delete notification"
+              >
+                {deleting === item.id ? (
+                  <i className="fa-solid fa-spinner animate-spin text-xs" />
+                ) : (
+                  <i className="fa-regular fa-trash-can text-sm" />
+                )}
+              </button>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p className="mt-3 border border-dashed border-line px-3 py-4 text-xs text-stone-400">
+          You’re all caught up. New admin notifications will appear here.
+        </p>
+      )}
+    </section>
+  );
 }
 
 const primaryButton =
@@ -157,27 +241,273 @@ function Catalog({ products }) {
   );
 }
 
+function ChatFeed({ messages, user, role }) {
+  const [openThread, setOpenThread] = useState("");
+  const threads = Object.values(
+    messages
+      .filter((item) => item.chatType === "conversation")
+      .reduce((all, item) => {
+        const key = item.conversationId || item.id;
+        (all[key] ||= []).push(item);
+        return all;
+      }, {}),
+  );
+  return (
+    <>
+      <div className="space-y-3">
+        {threads.map((thread) => {
+          const key = thread[0].conversationId || thread[0].id;
+          const latest = [...thread].sort(
+            (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
+          )[0];
+          return (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setOpenThread(key)}
+              className="flex w-full items-center gap-4 border border-line bg-panel p-4 text-left transition hover:border-gold/60"
+            >
+              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-gold/10 text-gold">
+                <i className="fa-regular fa-message" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <strong className="block truncate text-sm">
+                  {role === "buyer"
+                    ? thread[0].sellerName || "Seller"
+                    : thread[0].buyerName || "Buyer"}
+                </strong>
+                <span className="mt-1 block truncate text-xs text-stone-400">
+                  {latest.productTitle || "Shop conversation"} · {latest.text}
+                </span>
+              </span>
+              <i
+                className="fa-solid fa-chevron-right text-xs text-gold"
+                aria-hidden="true"
+              />
+            </button>
+          );
+        })}
+      </div>
+      {openThread &&
+        threads.find(
+          (thread) => (thread[0].conversationId || thread[0].id) === openThread,
+        ) && (
+          <ChatThread
+            messages={threads.find(
+              (thread) =>
+                (thread[0].conversationId || thread[0].id) === openThread,
+            )}
+            user={user}
+            role={role}
+            onClose={() => setOpenThread("")}
+          />
+        )}
+    </>
+  );
+}
+
+function ChatThread({ messages, user, role, onClose }) {
+  const [draft, setDraft] = useState("");
+  const [error, setError] = useState("");
+  const sorted = [...messages].sort(
+    (a, b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0),
+  );
+  const thread = sorted[0];
+  const context = sorted[sorted.length - 1];
+  const productsDiscussed = [
+    ...new Map(
+      sorted
+        .filter((item) => item.productTitle)
+        .map((item) => [item.productId || item.productTitle, item]),
+    ).values(),
+  ];
+  async function reply(event) {
+    event.preventDefault();
+    if (!draft.trim()) return;
+    try {
+      await sendMessage({
+        chatType: "conversation",
+        conversationId: thread.conversationId,
+        buyerUid: thread.buyerUid,
+        buyerName: thread.buyerName,
+        buyerEmail: thread.buyerEmail || "",
+        sellerUid: thread.sellerUid,
+        sellerName: thread.sellerName || "Seller",
+        productId: context.productId || "",
+        productTitle: context.productTitle || "Shop conversation",
+        senderUid: user.uid,
+        senderRole: role,
+        text: draft.trim(),
+      });
+      setDraft("");
+      setError("");
+    } catch (cause) {
+      setError(cause.message || "Could not send message.");
+    }
+  }
+  return (
+    <div className="fixed inset-0 z-[100] grid place-items-center bg-black/75 p-3 sm:p-6">
+      <article
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Chat with ${role === "buyer" ? thread.sellerName || "seller" : thread.buyerName || "buyer"}`}
+        className="flex h-[min(88vh,760px)] w-full max-w-3xl flex-col border border-line bg-panel shadow-2xl"
+      >
+        <header className="flex items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-6">
+          <div className="min-w-0">
+            <div className="flex flex-wrap gap-2">
+              {productsDiscussed.length ? (
+                productsDiscussed.map((product) =>
+                  product.productId ? (
+                    <Link
+                      key={product.productId}
+                      to={`/product/${product.productId}`}
+                      className="border border-gold/40 bg-gold/10 px-2 py-1 text-[10px] uppercase tracking-wider text-gold hover:border-gold"
+                    >
+                      Product: {product.productTitle}
+                    </Link>
+                  ) : (
+                    <span
+                      key={product.productTitle}
+                      className="border border-gold/40 bg-gold/10 px-2 py-1 text-[10px] uppercase tracking-wider text-gold"
+                    >
+                      Product: {product.productTitle}
+                    </span>
+                  ),
+                )
+              ) : (
+                <span className="text-xs text-gold">Shop conversation</span>
+              )}
+            </div>
+            <h2 className="mt-1 truncate font-display text-xl">
+              {role === "buyer"
+                ? thread.sellerName || "Seller"
+                : thread.buyerName || "Buyer"}
+            </h2>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close chat"
+            className="grid size-10 shrink-0 place-items-center text-stone-400 hover:text-gold"
+          >
+            <i className="fa-solid fa-xmark text-lg" />
+          </button>
+        </header>
+        <div className="flex-1 space-y-3 overflow-y-auto bg-ink/40 p-4 sm:p-6">
+          {sorted.map((item) => (
+            <div
+              key={item.id}
+              className={`max-w-[85%] rounded-lg px-4 py-3 ${item.senderUid === user.uid ? "ml-auto bg-gold/15 text-cream" : "bg-panel text-stone-300"}`}
+            >
+              <span className="mb-1 block text-[10px] uppercase tracking-wider text-gold">
+                {item.senderRole === "seller" ? "Seller" : "Buyer"}
+              </span>
+              <p className="whitespace-pre-wrap text-sm leading-6">
+                {item.text}
+              </p>
+              <span className="mt-2 block text-right text-[10px] text-stone-500">
+                {item.createdAt?.toDate?.().toLocaleString?.() || "Just now"}
+              </span>
+            </div>
+          ))}
+        </div>
+        <form
+          onSubmit={reply}
+          className="flex gap-2 border-t border-line p-3 sm:p-4"
+        >
+          <input
+            className="min-w-0 flex-1 border border-line bg-ink px-4 py-3 text-sm outline-none focus:border-gold"
+            value={draft}
+            onChange={(event) => setDraft(event.target.value)}
+            maxLength={2000}
+            placeholder="Write a message…"
+          />
+          <button className="bg-gold px-5 text-sm font-semibold text-ink">
+            <i className="fa-solid fa-paper-plane sm:mr-2" />
+            <span className="hidden sm:inline">Send</span>
+          </button>
+        </form>
+        {error && (
+          <p role="alert" className="px-4 pb-3 text-xs text-red-300">
+            {error}
+          </p>
+        )}
+      </article>
+    </div>
+  );
+}
+
 function ProductImagePicker({ imageUrl, onChange, onRemove, disabled }) {
   const [failedImageUrl, setFailedImageUrl] = useState("");
   const imageFailed = Boolean(imageUrl) && failedImageUrl === imageUrl;
-  return <div>
-    <label className="block text-xs text-stone-300" htmlFor="product-image-url">Product image URL</label>
-    <div className="mt-2 flex min-h-36 items-center gap-4 border border-dashed border-stone-700 bg-ink p-4">
-      {imageUrl && !imageFailed && <div className="relative size-24 shrink-0"><img className="h-full w-full object-cover" src={imageUrl} alt="Product preview" onError={() => setFailedImageUrl(imageUrl)}/><button type="button" disabled={disabled} className="absolute -right-2 -top-2 grid size-7 place-items-center rounded-full border border-line bg-panel text-sm text-cream shadow-md hover:text-red-300" aria-label="Remove product image" title="Remove image" onClick={onRemove}><i className="fa-solid fa-xmark"/></button></div>}
-      {imageUrl && imageFailed && <div className="grid size-24 shrink-0 place-items-center bg-panel text-xs text-red-300">Image link failed</div>}
-      <div className="min-w-0 flex-1"><input id="product-image-url" className={fieldClass} type="url" inputMode="url" autoComplete="url" placeholder="https://example.com/product.jpg" value={imageUrl} onChange={(event) => onChange(event.target.value)} disabled={disabled}/><p className="mt-2 text-xs leading-5 text-stone-500">Paste a public, direct image link (JPG, PNG or WebP). A link to a webpage may not display.</p></div>
+  return (
+    <div>
+      <label
+        className="block text-xs text-stone-300"
+        htmlFor="product-image-url"
+      >
+        Product image URL
+      </label>
+      <div className="mt-2 flex min-h-36 items-center gap-4 border border-dashed border-stone-700 bg-ink p-4">
+        {imageUrl && !imageFailed && (
+          <div className="relative size-24 shrink-0">
+            <img
+              className="h-full w-full object-cover"
+              src={imageUrl}
+              alt="Product preview"
+              onError={() => setFailedImageUrl(imageUrl)}
+            />
+            <button
+              type="button"
+              disabled={disabled}
+              className="absolute -right-2 -top-2 grid size-7 place-items-center rounded-full border border-line bg-panel text-sm text-cream shadow-md hover:text-red-300"
+              aria-label="Remove product image"
+              title="Remove image"
+              onClick={onRemove}
+            >
+              <i className="fa-solid fa-xmark" />
+            </button>
+          </div>
+        )}
+        {imageUrl && imageFailed && (
+          <div className="grid size-24 shrink-0 place-items-center bg-panel text-xs text-red-300">
+            Image link failed
+          </div>
+        )}
+        <div className="min-w-0 flex-1">
+          <input
+            id="product-image-url"
+            className={fieldClass}
+            type="url"
+            inputMode="url"
+            autoComplete="url"
+            placeholder="https://example.com/product.jpg"
+            value={imageUrl}
+            onChange={(event) => onChange(event.target.value)}
+            disabled={disabled}
+          />
+          <p className="mt-2 text-xs leading-5 text-stone-500">
+            Paste a public, direct image link (JPG, PNG or WebP). A link to a
+            webpage may not display.
+          </p>
+        </div>
+      </div>
     </div>
-  </div>;
+  );
 }
 
 export function HomePage() {
   const { user, profile, loading: authLoading } = useAuth();
+  const toggleWish = useProductWish();
+  const wishlist = useWishlist();
   const { data: products, error } = useLive("products");
+  const productsRailRef = useRef(null);
   if (!authLoading && profile?.role === "seller")
     return <Navigate to="/seller" replace />;
   const newest = [...products]
     .filter((item) => item.active !== false)
-    .slice(0, 4);
+    .slice(0, 12);
   return (
     <>
       <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:px-9 md:min-h-152.5 md:grid-cols-2 md:gap-14 md:py-14">
@@ -219,17 +549,17 @@ export function HomePage() {
             </strong>
           </div>
           <span className="absolute right-4 top-4 text-xs tracking-widest text-white">
-            NÂ° 01 â€” 26
+            N° 01 — 26
           </span>
         </div>
       </section>
       <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-y border-line px-4 py-5 text-[9px] font-medium tracking-[.16em] text-stone-400 sm:gap-x-8 sm:text-[10px]">
         <span>CURATED BY PEOPLE</span>
-        <span className="text-gold">â€¢</span>
+        <span className="text-gold">•</span>
         <span>BUILT FOR EVERYDAY</span>
-        <span className="text-gold">â€¢</span>
+        <span className="text-gold">•</span>
         <span>SHOP DIRECT WITH SELLERS</span>
-        <span className="text-gold">â€¢</span>
+        <span className="text-gold">•</span>
         <span>MADE TO BE YOURS</span>
       </div>
       <PageFrame>
@@ -248,7 +578,51 @@ export function HomePage() {
         </div>
         {error && <Notice kind="error">{error}</Notice>}
         {newest.length ? (
-          <Catalog products={newest} />
+          <div className="relative">
+            <button
+              type="button"
+              aria-label="Scroll products left"
+              onClick={() =>
+                productsRailRef.current?.scrollBy({
+                  left: -320,
+                  behavior: "smooth",
+                })
+              }
+              className="absolute -left-3 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-gold bg-gold text-ink shadow-lg transition hover:bg-[#e4c374] sm:-left-5"
+            >
+              <i className="fa-solid fa-arrow-left" />
+            </button>
+            <div
+              ref={productsRailRef}
+              className="flex snap-x snap-mandatory gap-2 overflow-x-auto scroll-smooth px-1 pb-4 md:gap-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {newest.map((product) => (
+                <div
+                  key={product.id}
+                  className="w-[calc(33.333%-0.333rem)] shrink-0 snap-start md:w-[calc(25%-0.75rem)] lg:w-[calc(20%-0.8rem)]"
+                >
+                  <ProductCard
+                    product={product}
+                    wished={wishlist.has(product.id)}
+                    onToggleWish={toggleWish}
+                  />
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              aria-label="Scroll products right"
+              onClick={() =>
+                productsRailRef.current?.scrollBy({
+                  left: 320,
+                  behavior: "smooth",
+                })
+              }
+              className="absolute -right-3 top-1/2 z-20 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-gold bg-gold text-ink shadow-lg transition hover:bg-[#e4c374] sm:-right-5"
+            >
+              <i className="fa-solid fa-arrow-right" />
+            </button>
+          </div>
         ) : (
           <EmptyState
             title={
@@ -415,7 +789,9 @@ export function ProductPage() {
   const autoAddHandled = useRef(false);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const product = products.find((item) => item.id === id && item.active !== false);
+  const product = products.find(
+    (item) => item.id === id && item.active !== false,
+  );
   const productReviews = reviews.filter(
     (item) => item.productId === id && !item.hidden,
   );
@@ -454,6 +830,8 @@ export function ProductPage() {
       return setNotice("Sign in with a buyer account to message this seller.");
     try {
       await sendMessage({
+        chatType: "conversation",
+        conversationId: `${user.uid}_${product.sellerUid}`,
         sellerUid: product.sellerUid,
         sellerName: product.sellerName,
         buyerUid: user.uid,
@@ -461,6 +839,8 @@ export function ProductPage() {
         buyerEmail: user.email,
         productId: id,
         productTitle: product.title,
+        senderUid: user.uid,
+        senderRole: "buyer",
         text: message.trim(),
       });
       setMessage("");
@@ -685,14 +1065,75 @@ export function ProductPage() {
         </div>
       </section>
       {bagDialog && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4" onMouseDown={(event) => { if (event.target === event.currentTarget) setBagDialog(false); }}>
-          <section role="dialog" aria-modal="true" aria-labelledby="bag-dialog-title" className="w-full max-w-md border border-line bg-panel p-6 shadow-2xl sm:p-8">
+        <div
+          className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setBagDialog(false);
+          }}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="bag-dialog-title"
+            className="w-full max-w-md border border-line bg-panel p-6 shadow-2xl sm:p-8"
+          >
             <div className="flex items-start justify-between gap-4">
-              <div><p className="text-xs uppercase tracking-[.18em] text-gold">Added to your bag</p><h2 id="bag-dialog-title" className="mt-2 font-display text-2xl">Keep shopping?</h2></div>
-              <button type="button" className="text-stone-400 hover:text-gold" aria-label="Close" onClick={() => setBagDialog(false)}><i className="fa-solid fa-xmark"/></button>
+              <div>
+                <p className="text-xs uppercase tracking-[.18em] text-gold">
+                  Added to your bag
+                </p>
+                <h2
+                  id="bag-dialog-title"
+                  className="mt-2 font-display text-2xl"
+                >
+                  Keep shopping?
+                </h2>
+              </div>
+              <button
+                type="button"
+                className="text-stone-400 hover:text-gold"
+                aria-label="Close"
+                onClick={() => setBagDialog(false)}
+              >
+                <i className="fa-solid fa-xmark" />
+              </button>
             </div>
-            <div className="mt-5 flex items-center gap-4 border-y border-line py-4">{product.imageUrl && <img className="size-16 object-cover" src={product.imageUrl} alt=""/>}<div><strong className="font-display text-lg">{product.title}</strong><p className="mt-1 text-sm text-stone-400">Rs. {Number(product.price).toLocaleString()}</p></div></div>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2"><button type="button" className={outlineButton} onClick={() => { setBagDialog(false); navigate("/shop"); }}>Keep shopping</button><button type="button" className={primaryButton} onClick={() => navigate("/checkout")}>Go to checkout <i className="fa-solid fa-arrow-right"/></button></div>
+            <div className="mt-5 flex items-center gap-4 border-y border-line py-4">
+              {product.imageUrl && (
+                <img
+                  className="size-16 object-cover"
+                  src={product.imageUrl}
+                  alt=""
+                />
+              )}
+              <div>
+                <strong className="font-display text-lg">
+                  {product.title}
+                </strong>
+                <p className="mt-1 text-sm text-stone-400">
+                  Rs. {Number(product.price).toLocaleString()}
+                </p>
+              </div>
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                className={outlineButton}
+                onClick={() => {
+                  setBagDialog(false);
+                  navigate("/shop");
+                }}
+              >
+                Keep shopping
+              </button>
+              <button
+                type="button"
+                className={primaryButton}
+                onClick={() => navigate("/checkout")}
+              >
+                Go to checkout <i className="fa-solid fa-arrow-right" />
+              </button>
+            </div>
           </section>
         </div>
       )}
@@ -711,7 +1152,11 @@ export function AuthPage({ mode = "signin" }) {
       ? requestedRedirect
       : "";
   const isAdmin = isAdminIdentity(user) || profile?.role === "admin";
-  const fallbackRoute = isAdmin ? "/admin" : sellerIntent ? "/seller" : "/account";
+  const fallbackRoute = isAdmin
+    ? "/admin"
+    : sellerIntent
+      ? "/seller"
+      : "/account";
   const isSignup = mode === "signup";
   const [form, setForm] = useState({
     name: "",
@@ -740,8 +1185,10 @@ export function AuthPage({ mode = "signin" }) {
     setBusy(true);
     setError("");
     try {
-      if (isSignup && form.phone.replace(/\D/g, "").length < 7) throw new Error("Enter a valid phone number with at least 7 digits.");
-      if (isSignup) await signup({ ...form, role: sellerIntent ? "seller" : "buyer" });
+      if (isSignup && form.phone.replace(/\D/g, "").length < 7)
+        throw new Error("Enter a valid phone number with at least 7 digits.");
+      if (isSignup)
+        await signup({ ...form, role: sellerIntent ? "seller" : "buyer" });
       else await signin(form.email, form.password);
       navigate(safeRedirect || fallbackRoute);
     } catch (cause) {
@@ -754,9 +1201,19 @@ export function AuthPage({ mode = "signin" }) {
     setBusy(true);
     setError("");
     try {
-      if (isSignup && form.phone.replace(/\D/g, "").length < 7) throw new Error("Enter a valid phone number before continuing with Google.");
-      const signedInUser = await google(sellerIntent ? "seller" : "buyer", form.phone);
-      navigate(isAdminIdentity(signedInUser) ? "/admin" : safeRedirect || fallbackRoute);
+      if (isSignup && form.phone.replace(/\D/g, "").length < 7)
+        throw new Error(
+          "Enter a valid phone number before continuing with Google.",
+        );
+      const signedInUser = await google(
+        sellerIntent ? "seller" : "buyer",
+        form.phone,
+      );
+      navigate(
+        isAdminIdentity(signedInUser)
+          ? "/admin"
+          : safeRedirect || fallbackRoute,
+      );
     } catch (cause) {
       setError(cause.message || "Google sign-in could not start.");
     } finally {
@@ -903,15 +1360,23 @@ export function AuthPage({ mode = "signin" }) {
 
 export function SellerPage() {
   const { user, profile, becomeSeller, loading: authLoading } = useAuth();
-  const { data: products, loading: productsLoading } = useLive("products");
-  const { data: messages } = useLive("messages", "sellerUid", user?.uid);
-  const { data: orders } = useLive(
+  const {
+    data: products,
+    loading: productsLoading,
+    error: productsError,
+  } = useLive("products");
+  const { data: messages, error: messagesError } = useLive(
+    "messages",
+    "sellerUid",
+    user?.uid,
+  );
+  const { data: orders, error: ordersError } = useLive(
     "orders",
     "sellerIds",
     user?.uid,
     "array-contains",
   );
-  const { data: reviews } = useLive("reviews");
+  const { data: reviews, error: reviewsError } = useLive("reviews");
   const [params, setParams] = useSearchParams();
   const tab = params.get("tab") || "overview";
   const [form, setForm] = useState({
@@ -975,8 +1440,15 @@ export function SellerPage() {
     item.sellerIds?.includes(user.uid),
   );
   const sellerMessages = messages.filter((item) => item.sellerUid === user.uid);
-  const sellerNotifications = sellerMessages.filter((item) => item.senderRole === "admin" && item.recipientUid === user.uid);
-  const buyerMessages = sellerMessages.filter((item) => item.senderRole !== "admin");
+  const sellerNotifications = sellerMessages.filter(
+    (item) => item.senderRole === "admin" && item.recipientUid === user.uid,
+  );
+  const buyerMessages = sellerMessages.filter(
+    (item) => item.senderRole !== "admin" && item.chatType !== "conversation",
+  );
+  const sellerChats = sellerMessages.filter(
+    (item) => item.chatType === "conversation",
+  );
   const sellerReviews = reviews.filter((item) => item.sellerUid === user.uid);
   const newOrders = sellerOrders.filter((item) => item.status === "new").length;
   const completedTotal = sellerOrders
@@ -999,10 +1471,16 @@ export function SellerPage() {
     setNotice("");
     setNoticeKind("info");
     try {
-      if (!form.imageUrl.trim()) throw new Error("Add a product image URL before publishing.");
+      if (!form.imageUrl.trim())
+        throw new Error("Add a product image URL before publishing.");
       let parsedImageUrl;
-      try { parsedImageUrl = new URL(form.imageUrl.trim()); } catch { throw new Error("Enter a valid direct image URL."); }
-      if (!["http:", "https:"].includes(parsedImageUrl.protocol)) throw new Error("Image URL must start with http:// or https://.");
+      try {
+        parsedImageUrl = new URL(form.imageUrl.trim());
+      } catch {
+        throw new Error("Enter a valid direct image URL.");
+      }
+      if (!["http:", "https:"].includes(parsedImageUrl.protocol))
+        throw new Error("Image URL must start with http:// or https://.");
       setNotice("Saving product listing…");
       const data = {
         ...form,
@@ -1026,7 +1504,9 @@ export function SellerPage() {
       setNotice("Your listing is live in the marketplace.");
       setNoticeKind("success");
     } catch (error) {
-      setNotice(error.message || "Could not save this listing. Check Firestore rules.");
+      setNotice(
+        error.message || "Could not save this listing. Check Firestore rules.",
+      );
       setNoticeKind("error");
     } finally {
       setBusy(false);
@@ -1043,9 +1523,21 @@ export function SellerPage() {
     });
     setEditing(item.id);
     setParams({ tab: "products" });
-    window.requestAnimationFrame(() => productFormRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }));
+    window.requestAnimationFrame(() =>
+      productFormRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      }),
+    );
   }
-  const tabs = ["overview", "products", "orders", "inbox", "notifications", "reviews"];
+  const tabs = [
+    "overview",
+    "products",
+    "orders",
+    "inbox",
+    "notifications",
+    "reviews",
+  ];
   const chooseTab = (value) =>
     setParams(value === "overview" ? {} : { tab: value });
   return (
@@ -1063,9 +1555,12 @@ export function SellerPage() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <Link className={outlineButton} to="/settings"><i className="fa-solid fa-gear"/> Settings</Link>
+          <Link className={outlineButton} to="/settings">
+            <i className="fa-solid fa-gear" /> Settings
+          </Link>
           <span className="border border-line px-4 py-2 text-xs text-stone-300">
-            <i className="fa-solid fa-circle text-[8px] text-gold" /> Seller account
+            <i className="fa-solid fa-circle text-[8px] text-gold" /> Seller
+            account
           </span>
         </div>
       </div>
@@ -1093,6 +1588,14 @@ export function SellerPage() {
           </div>
         ))}
       </div>
+      {[productsError, ordersError, messagesError, reviewsError].filter(Boolean)
+        .length > 0 && (
+        <Notice kind="error">
+          {[productsError, ordersError, messagesError, reviewsError]
+            .filter(Boolean)
+            .join(" ")}
+        </Notice>
+      )}
       <div className="mb-8 flex gap-5 overflow-x-auto border-b border-line">
         {tabs.map((name) => (
           <button
@@ -1107,7 +1610,9 @@ export function SellerPage() {
               </span>
             ) : null}
             {name === "notifications" && sellerNotifications.length > 0 ? (
-              <span className="ml-2 rounded-full bg-gold px-2 py-0.5 text-[10px] text-ink">{sellerNotifications.length}</span>
+              <span className="ml-2 rounded-full bg-gold px-2 py-0.5 text-[10px] text-ink">
+                {sellerNotifications.length}
+              </span>
             ) : null}
           </button>
         ))}
@@ -1193,9 +1698,16 @@ export function SellerPage() {
               {editing ? "Editing product" : "Add a piece"}
             </p>
             <h2 className="font-display text-2xl">
-              {editing ? `Edit ${form.title || "product"}` : "List something good."}
+              {editing
+                ? `Edit ${form.title || "product"}`
+                : "List something good."}
             </h2>
-            {editing && <p className="text-xs leading-5 text-stone-400">Update the name, category, price, stock, image, or product details below.</p>}
+            {editing && (
+              <p className="text-xs leading-5 text-stone-400">
+                Update the name, category, price, stock, image, or product
+                details below.
+              </p>
+            )}
             <label className="block text-xs text-stone-300">
               Product name
               <input
@@ -1260,8 +1772,15 @@ export function SellerPage() {
                   }
                 />
               </label>
-            </div><ProductImagePicker imageUrl={form.imageUrl} onChange={(imageUrl) => setForm({ ...form, imageUrl })} onRemove={() => setForm({ ...form, imageUrl: "" })} disabled={busy}/>
-            <label className="block text-xs text-stone-300">Details
+            </div>
+            <ProductImagePicker
+              imageUrl={form.imageUrl}
+              onChange={(imageUrl) => setForm({ ...form, imageUrl })}
+              onRemove={() => setForm({ ...form, imageUrl: "" })}
+              disabled={busy}
+            />
+            <label className="block text-xs text-stone-300">
+              Details
               <textarea
                 className={fieldClass}
                 required
@@ -1317,50 +1836,97 @@ export function SellerPage() {
             <div className="divide-y divide-line">
               {sellerProducts.map((item) => (
                 <div key={item.id} className="py-3">
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="size-16 shrink-0 bg-panel">
-                    {item.imageUrl ? (
-                      <img
-                        className="h-full w-full object-cover"
-                        src={item.imageUrl}
-                        alt=""
-                      />
-                    ) : (
-                      <div className="grid h-full place-items-center text-xl text-stone-600">
-                        <i className="fa-solid fa-shirt" />
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div className="size-16 shrink-0 bg-panel">
+                      {item.imageUrl ? (
+                        <img
+                          className="h-full w-full object-cover"
+                          src={item.imageUrl}
+                          alt=""
+                        />
+                      ) : (
+                        <div className="grid h-full place-items-center text-xl text-stone-600">
+                          <i className="fa-solid fa-shirt" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <strong className="block truncate font-display text-lg">
+                        {item.title}
+                      </strong>
+                      <span className="text-xs text-stone-400">
+                        Rs. {Number(item.price).toLocaleString()} Â·{" "}
+                        {item.stock} in stock
+                      </span>
+                      {item.active === false && (
+                        <span className="mt-1 block text-[10px] uppercase tracking-wider text-red-300">
+                          Hidden from shop
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      className="text-xs text-gold hover:text-cream"
+                      onClick={() => editProduct(item)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="text-xs text-red-300 hover:text-red-200"
+                      onClick={async () => {
+                        if (item.active === false) {
+                          await setProductVisibility(item.id, true);
+                          return;
+                        }
+                        setDeleteCandidate(item.id);
+                      }}
+                    >
+                      {item.active === false ? "Restore" : "Delete"}
+                    </button>
+                  </div>
+                  {deleteCandidate === item.id && (
+                    <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border border-line bg-panel p-4">
+                      <div>
+                        <p className="text-sm font-medium">
+                          Delete “{item.title}” from your shop?
+                        </p>
+                        <p className="mt-1 text-xs text-stone-400">
+                          It will be hidden from buyers. Existing order and
+                          review history stays saved.
+                        </p>
                       </div>
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <strong className="block truncate font-display text-lg">
-                      {item.title}
-                    </strong>
-                    <span className="text-xs text-stone-400">
-                      Rs. {Number(item.price).toLocaleString()} Â· {item.stock}{" "}
-                      in stock
-                    </span>
-                    {item.active === false && <span className="mt-1 block text-[10px] uppercase tracking-wider text-red-300">Hidden from shop</span>}
-                  </div>
-                  <button
-                    className="text-xs text-gold hover:text-cream"
-                    onClick={() => editProduct(item)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="text-xs text-red-300 hover:text-red-200"
-                    onClick={async () => {
-                      if (item.active === false) {
-                        await setProductVisibility(item.id, true);
-                        return;
-                      }
-                      setDeleteCandidate(item.id);
-                    }}
-                  >
-                    {item.active === false ? "Restore" : "Delete"}
-                  </button>
-                </div>
-                {deleteCandidate === item.id && <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border border-line bg-panel p-4"><div><p className="text-sm font-medium">Delete “{item.title}” from your shop?</p><p className="mt-1 text-xs text-stone-400">It will be hidden from buyers. Existing order and review history stays saved.</p></div><div className="flex gap-2"><button type="button" className="border border-line px-3 py-2 text-xs text-stone-400 hover:text-cream" disabled={deleteBusy} onClick={() => setDeleteCandidate("")}>Cancel</button><button type="button" className="border border-red-400/60 px-3 py-2 text-xs text-red-300 hover:bg-red-400/10" disabled={deleteBusy} onClick={async () => { setDeleteBusy(true); try { await removeProduct(item.id); setDeleteCandidate(""); } catch (error) { setNotice(error.message || "Could not delete this product."); } finally { setDeleteBusy(false); } }}>{deleteBusy ? "Deleting…" : "Delete product"}</button></div></div>}
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          className="border border-line px-3 py-2 text-xs text-stone-400 hover:text-cream"
+                          disabled={deleteBusy}
+                          onClick={() => setDeleteCandidate("")}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          className="border border-red-400/60 px-3 py-2 text-xs text-red-300 hover:bg-red-400/10"
+                          disabled={deleteBusy}
+                          onClick={async () => {
+                            setDeleteBusy(true);
+                            try {
+                              await removeProduct(item.id);
+                              setDeleteCandidate("");
+                            } catch (error) {
+                              setNotice(
+                                error.message ||
+                                  "Could not delete this product.",
+                              );
+                            } finally {
+                              setDeleteBusy(false);
+                            }
+                          }}
+                        >
+                          {deleteBusy ? "Deleting…" : "Delete product"}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -1402,6 +1968,7 @@ export function SellerPage() {
             Buyer questions
           </p>
           <h2 className="mb-6 font-display text-2xl">Your inbox</h2>
+          <ChatFeed messages={sellerChats} user={user} role="seller" />
           <div className="space-y-4">
             {buyerMessages.map((item) => (
               <article
@@ -1436,7 +2003,9 @@ export function SellerPage() {
           )}
         </section>
       )}
-      {tab === "notifications" && <AdminNotifications items={sellerNotifications} />}
+      {tab === "notifications" && (
+        <AdminNotifications items={sellerNotifications} />
+      )}
       {tab === "reviews" && (
         <section>
           <div className="mb-6 flex items-end justify-between">
@@ -1538,7 +2107,12 @@ function OrderRow({ order, sellerUid, onStatus, detailed = false }) {
 export function AccountPage() {
   const { user, profile, logout } = useAuth();
   const { data: orders, loading } = useLive("orders", "buyerUid", user?.uid);
-  const { data: adminMessages } = useLive("messages", "recipientUid", user?.uid);
+  const { data: conversations } = useLive("messages", "buyerUid", user?.uid);
+  const { data: adminMessages } = useLive(
+    "messages",
+    "recipientUid",
+    user?.uid,
+  );
   const { data: products } = useLive("products");
   const navigate = useNavigate();
   if (!user) return <Navigate to="/signin" replace />;
@@ -1559,7 +2133,9 @@ export function AccountPage() {
           <p className="mt-3 text-sm text-stone-400">{user.email}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Link className={outlineButton} to="/settings"><i className="fa-solid fa-gear"/> Settings</Link>
+          <Link className={outlineButton} to="/settings">
+            <i className="fa-solid fa-gear" /> Settings
+          </Link>
           <button className={outlineButton} onClick={logout}>
             Sign out <i className="fa-solid fa-arrow-right-from-bracket" />
           </button>
@@ -1631,7 +2207,21 @@ export function AccountPage() {
           )}
         </section>
       </div>
-      <AdminNotifications items={adminMessages.filter((item) => item.senderRole === "admin")} />
+      <AdminNotifications
+        items={adminMessages.filter((item) => item.senderRole === "admin")}
+      />
+      <section className="mt-10">
+        <p className="mb-2 text-xs uppercase tracking-[.18em] text-gold">
+          Seller conversations
+        </p>
+        <h2 className="mb-5 font-display text-2xl">Your chats</h2>
+        <ChatFeed messages={conversations} user={user} role="buyer" />
+        {!conversations.some((item) => item.chatType === "conversation") && (
+          <p className="text-sm text-stone-400">
+            Open a product and message its seller to start a chat.
+          </p>
+        )}
+      </section>
       <div className="mb-6 mt-14 flex items-end justify-between">
         <div>
           <p className="text-xs uppercase tracking-[.18em] text-gold">
@@ -1970,5 +2560,3 @@ export function NotFoundPage() {
     </PageFrame>
   );
 }
-
-
