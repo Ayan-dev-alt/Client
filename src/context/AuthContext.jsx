@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+  browserPopupRedirectResolver,
+  inMemoryPersistence,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -21,11 +25,21 @@ import {
   updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { auth, db } from "../firebase/firebase";
+import { auth, db, REMEMBER_ME_STORAGE_KEY } from "../firebase/firebase";
 import { isAdminIdentity } from "../data/roles";
 import { deleteOwnMarketplaceData } from "../data/admin";
 
 import { AuthContext } from "./auth";
+
+async function applyAuthPersistence(rememberMe) {
+  if (rememberMe)
+    window.localStorage.setItem(REMEMBER_ME_STORAGE_KEY, "true");
+  else window.localStorage.removeItem(REMEMBER_ME_STORAGE_KEY);
+  await setPersistence(
+    auth,
+    rememberMe ? browserLocalPersistence : inMemoryPersistence,
+  );
+}
 
 async function saveProfile(user, role = "buyer", name = "", phone = "") {
   const ref = doc(db, "users", user.uid);
@@ -160,10 +174,11 @@ export function AuthProvider({ children }) {
           (provider) => provider.providerId === "password",
         ),
       ),
-      async signup({ name, email, password, phone, role = "buyer" }) {
+      async signup({ name, email, password, phone, role = "buyer", rememberMe = false }) {
         const safeRole = role === "seller" ? "seller" : "buyer";
         sessionStorage.setItem("nbf-signup-role", safeRole);
         try {
+          await applyAuthPersistence(rememberMe);
           const result = await createUserWithEmailAndPassword(
             auth,
             email,
@@ -180,13 +195,19 @@ export function AuthProvider({ children }) {
           sessionStorage.removeItem("nbf-signup-role");
         }
       },
-      async signin(email, password) {
+      async signin(email, password, rememberMe = false) {
+        await applyAuthPersistence(rememberMe);
         await signInWithEmailAndPassword(auth, email, password);
       },
-      async google(role = "buyer", phone = "") {
+      async google(role = "buyer", phone = "", rememberMe = false) {
         sessionStorage.setItem("nbf-signup-role", role);
         try {
-          const result = await signInWithPopup(auth, new GoogleAuthProvider());
+          await applyAuthPersistence(rememberMe);
+          const result = await signInWithPopup(
+            auth,
+            new GoogleAuthProvider(),
+            browserPopupRedirectResolver,
+          );
           // Profile persistence is handled by the auth-state listener. Avoid
           // keeping the sign-in screen waiting on Firestore after OAuth succeeds.
           void saveProfile(result.user, role, "", phone.trim()).catch(

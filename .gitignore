@@ -38,5 +38,8 @@ serviceAccount*.json
 node_modules/
 dist/
 .vercel/
-.env*
-!.env.example
+
+# Local environment files; keep the example template tracked.
+.env
+.env.*
+.env.example

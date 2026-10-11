@@ -438,25 +438,63 @@ function ChatThread({ messages, user, role, onClose }) {
   );
 }
 
-function ProductImagePicker({ imageUrl, onChange, onRemove, disabled }) {
+function ProductImagePicker({ imageUrl, onChange, onRemove, onFileChange, disabled }) {
   const [failedImageUrl, setFailedImageUrl] = useState("");
-  const imageFailed = Boolean(imageUrl) && failedImageUrl === imageUrl;
+  const [file, setFile] = useState(null);
+  const [dragging, setDragging] = useState(false);
+  const [filePreview, setFilePreview] = useState("");
+  useEffect(() => {
+    if (!file) {
+      setFilePreview("");
+      return undefined;
+    }
+    const previewUrl = URL.createObjectURL(file);
+    setFilePreview(previewUrl);
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [file]);
+  const previewUrl = filePreview || imageUrl;
+  const imageFailed = Boolean(previewUrl) && failedImageUrl === previewUrl;
+  function chooseFile(nextFile) {
+    if (!nextFile) return;
+    if (!nextFile.type.startsWith("image/")) {
+      window.alert("Choose an image file (JPG, PNG, WebP, or GIF).");
+      return;
+    }
+    if (nextFile.size > 10 * 1024 * 1024) {
+      window.alert("Choose an image smaller than 10 MB.");
+      return;
+    }
+    setFailedImageUrl("");
+    setFile(nextFile);
+    onFileChange(nextFile);
+  }
+  function removeImage() {
+    setFile(null);
+    onFileChange(null);
+    onRemove();
+  }
   return (
     <div>
-      <label
-        className="block text-xs text-stone-300"
-        htmlFor="product-image-url"
-      >
-        Product image URL
+      <label className="block text-xs text-stone-300" htmlFor="product-image-file">
+        Product image
       </label>
-      <div className="mt-2 flex min-h-36 items-center gap-4 border border-dashed border-stone-700 bg-ink p-4">
-        {imageUrl && !imageFailed && (
+      <div
+        className={`mt-2 flex min-h-36 items-center gap-4 border border-dashed ${dragging ? "border-gold bg-gold/5" : "border-stone-700"} bg-ink p-4`}
+        onDragOver={(event) => { event.preventDefault(); if (!disabled) setDragging(true); }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={(event) => {
+          event.preventDefault();
+          setDragging(false);
+          if (!disabled) chooseFile(event.dataTransfer.files?.[0]);
+        }}
+      >
+        {previewUrl && !imageFailed && (
           <div className="relative size-24 shrink-0">
             <img
               className="h-full w-full object-cover"
-              src={imageUrl}
+              src={previewUrl}
               alt="Product preview"
-              onError={() => setFailedImageUrl(imageUrl)}
+              onError={() => setFailedImageUrl(previewUrl)}
             />
             <button
               type="button"
@@ -464,18 +502,39 @@ function ProductImagePicker({ imageUrl, onChange, onRemove, disabled }) {
               className="absolute -right-2 -top-2 grid size-7 place-items-center rounded-full border border-line bg-panel text-sm text-cream shadow-md hover:text-red-300"
               aria-label="Remove product image"
               title="Remove image"
-              onClick={onRemove}
+              onClick={removeImage}
             >
               <i className="fa-solid fa-xmark" />
             </button>
           </div>
         )}
-        {imageUrl && imageFailed && (
+        {previewUrl && imageFailed && (
           <div className="grid size-24 shrink-0 place-items-center bg-panel text-xs text-red-300">
             Image link failed
           </div>
         )}
         <div className="min-w-0 flex-1">
+          <input
+            id="product-image-file"
+            className="sr-only"
+            type="file"
+            accept="image/*"
+            disabled={disabled}
+            onChange={(event) => {
+              chooseFile(event.target.files?.[0]);
+              event.target.value = "";
+            }}
+          />
+          <label
+            htmlFor="product-image-file"
+            className="inline-flex cursor-pointer items-center gap-2 border border-line px-3 py-2 text-xs text-cream hover:border-gold"
+          >
+            <i className="fa-solid fa-cloud-arrow-up" /> Choose image
+          </label>
+          <p className="mt-2 text-xs leading-5 text-stone-500">
+            {file ? `${file.name} · ready to upload` : "Drag and drop an image here, or choose a file. Up to 10 MB."}
+          </p>
+          <p className="mb-2 text-[10px] uppercase tracking-wider text-stone-500">or paste an image URL</p>
           <input
             id="product-image-url"
             className={fieldClass}
@@ -484,12 +543,11 @@ function ProductImagePicker({ imageUrl, onChange, onRemove, disabled }) {
             autoComplete="url"
             placeholder="https://example.com/product.jpg"
             value={imageUrl}
-            onChange={(event) => onChange(event.target.value)}
+            onChange={(event) => { setFile(null); onFileChange(null); onChange(event.target.value); }}
             disabled={disabled}
           />
           <p className="mt-2 text-xs leading-5 text-stone-500">
-            Paste a public, direct image link (JPG, PNG or WebP). A link to a
-            webpage may not display.
+            Preview first; new images upload to Cloudinary when you save the listing.
           </p>
         </div>
       </div>
@@ -1166,6 +1224,7 @@ export function AuthPage({ mode = "signin" }) {
   });
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   if (user && !loading)
     return (
       <Navigate
@@ -1188,8 +1247,8 @@ export function AuthPage({ mode = "signin" }) {
       if (isSignup && form.phone.replace(/\D/g, "").length < 7)
         throw new Error("Enter a valid phone number with at least 7 digits.");
       if (isSignup)
-        await signup({ ...form, role: sellerIntent ? "seller" : "buyer" });
-      else await signin(form.email, form.password);
+        await signup({ ...form, role: sellerIntent ? "seller" : "buyer", rememberMe });
+      else await signin(form.email, form.password, rememberMe);
       navigate(safeRedirect || fallbackRoute);
     } catch (cause) {
       setError(cause.message || "Could not sign in.");
@@ -1208,6 +1267,7 @@ export function AuthPage({ mode = "signin" }) {
       const signedInUser = await google(
         sellerIntent ? "seller" : "buyer",
         form.phone,
+        rememberMe,
       );
       navigate(
         isAdminIdentity(signedInUser)
@@ -1336,6 +1396,15 @@ export function AuthPage({ mode = "signin" }) {
             }
           />
         </label>
+        <label className="flex w-fit cursor-pointer items-center gap-2 text-sm text-stone-300">
+          <input
+            className="size-4 accent-[var(--color-gold)]"
+            type="checkbox"
+            checked={rememberMe}
+            onChange={(event) => setRememberMe(event.target.checked)}
+          />
+          Remember me
+        </label>
         <Notice kind="error">{error}</Notice>
         <button className={`${primaryButton} w-full`} disabled={busy}>
           {busy ? "Please waitâ€¦" : isSignup ? "Create account" : "Sign in"}
@@ -1390,6 +1459,8 @@ export function SellerPage() {
   const [notice, setNotice] = useState("");
   const [noticeKind, setNoticeKind] = useState("info");
   const [busy, setBusy] = useState(false);
+  const [productImageFile, setProductImageFile] = useState(null);
+  const [imagePickerKey, setImagePickerKey] = useState(0);
   const [editing, setEditing] = useState("");
   const productFormRef = useRef(null);
   const [deleteCandidate, setDeleteCandidate] = useState("");
@@ -1471,11 +1542,31 @@ export function SellerPage() {
     setNotice("");
     setNoticeKind("info");
     try {
-      if (!form.imageUrl.trim())
+      let imageUrl = form.imageUrl.trim();
+      if (productImageFile) {
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME?.trim();
+        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET?.trim();
+        if (!cloudName || !uploadPreset)
+          throw new Error("Cloudinary is not configured. Add its cloud name and unsigned upload preset to the app environment.");
+        setNotice("Uploading image to Cloudinary…");
+        const uploadData = new FormData();
+        uploadData.append("file", productImageFile);
+        uploadData.append("upload_preset", uploadPreset);
+        uploadData.append("folder", `seller-products/${user.uid}`);
+        const uploadResponse = await fetch(
+          `https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudName)}/image/upload`,
+          { method: "POST", body: uploadData },
+        );
+        const uploadResult = await uploadResponse.json();
+        if (!uploadResponse.ok || !uploadResult.secure_url)
+          throw new Error(uploadResult.error?.message || "Cloudinary could not upload this image.");
+        imageUrl = uploadResult.secure_url;
+      }
+      if (!imageUrl)
         throw new Error("Add a product image URL before publishing.");
       let parsedImageUrl;
       try {
-        parsedImageUrl = new URL(form.imageUrl.trim());
+        parsedImageUrl = new URL(imageUrl);
       } catch {
         throw new Error("Enter a valid direct image URL.");
       }
@@ -1500,6 +1591,8 @@ export function SellerPage() {
         imageUrl: "",
         description: "",
       });
+      setProductImageFile(null);
+      setImagePickerKey((key) => key + 1);
       setEditing("");
       setNotice("Your listing is live in the marketplace.");
       setNoticeKind("success");
@@ -1521,6 +1614,8 @@ export function SellerPage() {
       imageUrl: item.imageUrl || "",
       description: item.description || "",
     });
+    setProductImageFile(null);
+    setImagePickerKey((key) => key + 1);
     setEditing(item.id);
     setParams({ tab: "products" });
     window.requestAnimationFrame(() =>
@@ -1774,9 +1869,11 @@ export function SellerPage() {
               </label>
             </div>
             <ProductImagePicker
+              key={imagePickerKey}
               imageUrl={form.imageUrl}
               onChange={(imageUrl) => setForm({ ...form, imageUrl })}
               onRemove={() => setForm({ ...form, imageUrl: "" })}
+              onFileChange={setProductImageFile}
               disabled={busy}
             />
             <label className="block text-xs text-stone-300">
@@ -1812,6 +1909,8 @@ export function SellerPage() {
                     imageUrl: "",
                     description: "",
                   });
+                  setProductImageFile(null);
+                  setImagePickerKey((key) => key + 1);
                 }}
               >
                 Cancel edit
