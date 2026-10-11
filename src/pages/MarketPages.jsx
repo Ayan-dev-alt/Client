@@ -27,6 +27,7 @@ import {
   EmptyState,
   Loading,
   Notice,
+  PasswordInput,
   ProductCard,
   Stars,
 } from "../components/Storefront";
@@ -1251,7 +1252,14 @@ export function AuthPage({ mode = "signin" }) {
       else await signin(form.email, form.password, rememberMe);
       navigate(safeRedirect || fallbackRoute);
     } catch (cause) {
-      setError(cause.message || "Could not sign in.");
+      const googleAccountHint =
+        !isSignup &&
+        ["auth/invalid-credential", "auth/user-not-found", "auth/wrong-password"].includes(cause.code);
+      setError(
+        googleAccountHint
+          ? "We couldn't sign you in with email and password. This account may have been created with Google. Try signing in with Google instead."
+          : cause.message || "Could not sign in.",
+      );
     } finally {
       setBusy(false);
     }
@@ -1384,11 +1392,10 @@ export function AuthPage({ mode = "signin" }) {
         </label>
         <label className="block text-xs text-stone-300">
           Password
-          <input
+          <PasswordInput
             className={fieldClass}
             required
             minLength={6}
-            type="password"
             autoComplete={isSignup ? "new-password" : "current-password"}
             value={form.password}
             onChange={(event) =>
