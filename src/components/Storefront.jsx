@@ -8,6 +8,28 @@ import { watchCollection } from "../data/marketplace";
 const navClass = ({ isActive }) =>
   `nav-underline py-2 transition-colors ${isActive ? "text-gold" : "text-stone-300 hover:text-gold"}`;
 
+export function PasswordInput({ className = "", ...props }) {
+  const [visible, setVisible] = useState(false);
+  return (
+    <div className="relative">
+      <input
+        {...props}
+        type={visible ? "text" : "password"}
+        className={`${className} pr-12`}
+      />
+      <button
+        type="button"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 transition hover:text-gold"
+        aria-label={visible ? "Hide password" : "Show password"}
+        aria-pressed={visible}
+        onClick={() => setVisible((current) => !current)}
+      >
+        <i className={`fa-solid ${visible ? "fa-eye-slash" : "fa-eye"}`} aria-hidden="true" />
+      </button>
+    </div>
+  );
+}
+
 export function Header() {
   const { user, profile, logout } = useAuth();
   const { items } = useCart();
