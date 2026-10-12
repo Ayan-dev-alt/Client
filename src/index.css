@@ -11,7 +11,19 @@
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scrollbar-color: var(--color-gold) var(--color-ink);
+    scrollbar-width: thin;
+  }
+  html::-webkit-scrollbar { width: 10px; height: 10px; }
+  html::-webkit-scrollbar-track { background: var(--color-ink); }
+  html::-webkit-scrollbar-thumb {
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+    background: var(--color-gold);
+  }
+  html::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--color-gold) 78%, white); }
   body { @apply m-0 min-w-[360px] bg-ink font-sans text-cream antialiased; }
   button, input, textarea, select { font: inherit; }
   button:disabled { @apply cursor-not-allowed opacity-60; }

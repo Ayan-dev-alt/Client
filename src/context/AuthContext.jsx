@@ -100,6 +100,8 @@ export function AuthProvider({ children }) {
         await saveProfile(
           nextUser,
           sessionStorage.getItem("nbf-signup-role") || "buyer",
+          "",
+          sessionStorage.getItem("nbf-signup-phone") || "",
         );
         const snapshot = await getDoc(doc(db, "users", nextUser.uid));
         if (requestId !== currentRequest) return;
@@ -201,6 +203,7 @@ export function AuthProvider({ children }) {
       },
       async google(role = "buyer", phone = "", rememberMe = false) {
         sessionStorage.setItem("nbf-signup-role", role);
+        sessionStorage.setItem("nbf-signup-phone", phone.trim());
         try {
           await applyAuthPersistence(rememberMe);
           const result = await signInWithPopup(
@@ -208,16 +211,11 @@ export function AuthProvider({ children }) {
             new GoogleAuthProvider(),
             browserPopupRedirectResolver,
           );
-          // Profile persistence is handled by the auth-state listener. Avoid
-          // keeping the sign-in screen waiting on Firestore after OAuth succeeds.
-          void saveProfile(result.user, role, "", phone.trim()).catch(
-            (error) => {
-              console.warn("Could not save the signed-in profile", error);
-            },
-          );
+          await saveProfile(result.user, role, "", phone.trim());
           return result.user;
         } finally {
           sessionStorage.removeItem("nbf-signup-role");
+          sessionStorage.removeItem("nbf-signup-phone");
         }
       },
       async becomeSeller() {

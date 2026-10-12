@@ -846,113 +846,228 @@ export function AdminPage() {
                   : people.buyers.length}
                 )
               </h2>
-              <div className="overflow-x-auto border border-line">
-                <table className="w-full min-w-190 text-left text-sm">
-                  <thead className="bg-panel text-xs uppercase tracking-wider text-stone-400">
-                    <tr>
-                      <th className="p-4">Name</th>
-                      <th className="p-4">Email</th>
-                      <th className="p-4">Phone</th>
-                      <th className="p-4">Joined / activity</th>
-                      <th className="p-4">Status</th>
-                      <th className="p-4">Moderation</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-line">
-                    {(tab === "sellers" ? people.sellers : people.buyers).map(
-                      (person) => {
-                        const order = (person.accountIds || [person.id])
-                          .map((uid) => orderByBuyer.get(uid))
-                          .find(Boolean);
-                        const restricted =
-                          person.accountStatus === "restricted";
-                        const phone =
-                          person.phone || order?.phone || "Not provided";
-                        const online = onlineAt(person, presenceNow);
-                        return (
-                          <tr key={person.id}>
-                            <td className="p-4 font-medium">
-                              {person.name || "â€”"}
-                            </td>
-                            <td className="p-4 text-stone-300">
-                              {person.email || "â€”"}
-                            </td>
-                            <td className="p-4 text-stone-300">{phone}</td>
-                            <td className="p-4 text-stone-400">
-                              {dateOf(person.createdAt)}
-                              {order && (
-                                <span className="block text-xs">
-                                  Last order: {dateOf(order.createdAt)}
-                                </span>
-                              )}
-                            </td>
-                            <td className="p-4">
-                              <span
-                                className={
-                                  restricted
-                                    ? "text-red-300"
-                                    : online
-                                      ? "text-green-300"
-                                      : "text-stone-400"
-                                }
-                              >
-                                {restricted
-                                  ? "Suspended"
-                                  : online
-                                    ? "Online"
-                                    : "Offline"}
-                              </span>
-                              {restricted && (
-                                <small className="block text-stone-500">
-                                  until {dateOf(person.restrictedUntil)}
-                                </small>
-                              )}
-                            </td>
-                            <td className="p-4">
-                              <div className="flex flex-wrap gap-2">
-                                {restricted ? (
-                                  <button
-                                    className={button}
-                                    disabled={busy === `user-${person.id}`}
-                                    onClick={() => restrict(person, 0)}
-                                  >
-                                    Restore
-                                  </button>
-                                ) : (
-                                  <button
-                                    className={button}
-                                    disabled={busy === `user-${person.id}`}
-                                    onClick={() => restrict(person, 30)}
-                                  >
-                                    Suspend
-                                  </button>
+              <div className="border border-line">
+                <div className="hidden overflow-x-auto md:block">
+                  <table className="w-full min-w-190 text-left text-sm">
+                    <thead className="bg-panel text-xs uppercase tracking-wider text-stone-400">
+                      <tr>
+                        <th className="p-4">Name</th>
+                        <th className="p-4">Email</th>
+                        <th className="p-4">Phone</th>
+                        <th className="p-4">Joined / activity</th>
+                        <th className="p-4">Status</th>
+                        <th className="p-4">Moderation</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-line">
+                      {(tab === "sellers" ? people.sellers : people.buyers).map(
+                        (person) => {
+                          const order = (person.accountIds || [person.id])
+                            .map((uid) => orderByBuyer.get(uid))
+                            .find(Boolean);
+                          const restricted =
+                            person.accountStatus === "restricted";
+                          const phone =
+                            person.phone || order?.phone || "Not provided";
+                          const online = onlineAt(person, presenceNow);
+                          return (
+                            <tr key={person.id}>
+                              <td className="p-4 font-medium">
+                                {person.name || "â€”"}
+                              </td>
+                              <td className="p-4 text-stone-300">
+                                {person.email || "â€”"}
+                              </td>
+                              <td className="p-4 text-stone-300">{phone}</td>
+                              <td className="p-4 text-stone-400">
+                                {dateOf(person.createdAt)}
+                                {order && (
+                                  <span className="block text-xs">
+                                    Last order: {dateOf(order.createdAt)}
+                                  </span>
                                 )}
-                                <button
-                                  className={button}
-                                  onClick={() => {
-                                    setMessageTarget(person);
-                                    setMessageText("");
-                                  }}
+                              </td>
+                              <td className="p-4">
+                                <span
+                                  className={
+                                    restricted
+                                      ? "text-red-300"
+                                      : online
+                                        ? "text-green-300"
+                                        : "text-stone-400"
+                                  }
                                 >
-                                  Message
-                                </button>
-                                <button
-                                  className="border border-red-500/50 px-3 py-2 text-xs text-red-300 transition hover:bg-red-500 hover:text-white"
-                                  onClick={() => {
-                                    setDeletePhrase("");
-                                    setDeleteTarget(person);
-                                  }}
-                                >
-                                  Delete permanently
-                                </button>
+                                  {restricted
+                                    ? "Suspended"
+                                    : online
+                                      ? "Online"
+                                      : "Offline"}
+                                </span>
+                                {restricted && (
+                                  <small className="block text-stone-500">
+                                    until {dateOf(person.restrictedUntil)}
+                                  </small>
+                                )}
+                              </td>
+                              <td className="p-2 sm:p-4">
+                                <div className="flex max-w-52 flex-wrap gap-1.5 sm:max-w-none sm:gap-2">
+                                  {restricted ? (
+                                    <button
+                                      className={`${button} whitespace-nowrap px-2 py-1.5 text-[11px] sm:px-3 sm:py-2 sm:text-xs`}
+                                      title="Restore account"
+                                      disabled={busy === `user-${person.id}`}
+                                      onClick={() => restrict(person, 0)}
+                                    >
+                                      <i className="fa-solid fa-rotate-left mr-1" />
+                                      Restore
+                                    </button>
+                                  ) : (
+                                    <button
+                                      className={`${button} whitespace-nowrap px-2 py-1.5 text-[11px] sm:px-3 sm:py-2 sm:text-xs`}
+                                      title="Suspend account"
+                                      disabled={busy === `user-${person.id}`}
+                                      onClick={() => restrict(person, 30)}
+                                    >
+                                      <i className="fa-solid fa-ban mr-1" />
+                                      Suspend
+                                    </button>
+                                  )}
+                                  <button
+                                    className={`${button} whitespace-nowrap px-2 py-1.5 text-[11px] sm:px-3 sm:py-2 sm:text-xs`}
+                                    title="Message user"
+                                    onClick={() => {
+                                      setMessageTarget(person);
+                                      setMessageText("");
+                                    }}
+                                  >
+                                    <i className="fa-regular fa-envelope mr-1" />
+                                    Message
+                                  </button>
+                                  <button
+                                    className="whitespace-nowrap border border-red-500/50 px-2 py-2 text-[11px] text-red-300 transition hover:bg-red-500 hover:text-white sm:px-3 sm:py-2 sm:text-xs"
+                                    title="Delete account permanently"
+                                    onClick={() => {
+                                      setDeletePhrase("");
+                                      setDeleteTarget(person);
+                                    }}
+                                  >
+                                    <i className="fa-solid fa-trash-can mr-1" />
+                                    Delete {" "}
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        },
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="space-y-3 p-3 md:hidden">
+                  {(tab === "sellers" ? people.sellers : people.buyers).map(
+                    (person) => {
+                      const order = (person.accountIds || [person.id])
+                        .map((uid) => orderByBuyer.get(uid))
+                        .find(Boolean);
+                      const restricted = person.accountStatus === "restricted";
+                      const phone =
+                        person.phone || order?.phone || "Not provided";
+                      const online = onlineAt(person, presenceNow);
+                      return (
+                        <article
+                          key={person.id}
+                          className="space-y-3 border border-line bg-panel p-3"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0">
+                              <h3 className="truncate font-medium">
+                                {person.name || "—"}
+                              </h3>
+                              <p className="break-all text-xs text-stone-400">
+                                {person.email || "—"}
+                              </p>
+                            </div>
+                            <span
+                              className={`shrink-0 text-xs ${restricted ? "text-red-300" : online ? "text-green-300" : "text-stone-400"}`}
+                            >
+                              {restricted
+                                ? "Suspended"
+                                : online
+                                  ? "Online"
+                                  : "Offline"}
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-2 gap-x-3 gap-y-2 text-xs">
+                            <div>
+                              <span className="block text-stone-500">
+                                Phone
+                              </span>
+                              <span className="break-all text-stone-300">
+                                {phone}
+                              </span>
+                            </div>
+                            <div>
+                              <span className="block text-stone-500">
+                                Joined
+                              </span>
+                              <span className="text-stone-300">
+                                {dateOf(person.createdAt)}
+                              </span>
+                            </div>
+                            {order && (
+                              <div className="col-span-2 text-stone-400">
+                                Last order: {dateOf(order.createdAt)}
                               </div>
-                            </td>
-                          </tr>
-                        );
-                      },
-                    )}
-                  </tbody>
-                </table>
+                            )}
+                            {restricted && (
+                              <div className="col-span-2 text-stone-500">
+                                Until {dateOf(person.restrictedUntil)}
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex flex-wrap gap-2 border-t border-line pt-3">
+                            <button
+                              className={`${button} px-2 py-1.5 text-xs`}
+                              disabled={busy === `user-${person.id}`}
+                              onClick={() =>
+                                restrict(person, restricted ? 0 : 30)
+                              }
+                            >
+                              <i
+                                className={`fa-solid ${restricted ? "fa-rotate-left" : "fa-ban"} mr-1`}
+                              />
+                              {restricted ? "Restore" : "Suspend"}
+                            </button>
+                            <button
+                              className={`${button} px-2 py-1.5 text-xs`}
+                              onClick={() => {
+                                setMessageTarget(person);
+                                setMessageText("");
+                              }}
+                            >
+                              <i className="fa-regular fa-envelope mr-1" />
+                              Message
+                            </button>
+                            <button
+                              className="border border-red-500/50 px-2 py-1.5 text-xs text-red-300 transition hover:bg-red-500 hover:text-white"
+                              title="Delete account permanently"
+                              onClick={() => {
+                                setDeletePhrase("");
+                                setDeleteTarget(person);
+                              }}
+                            >
+                              <i className="fa-solid fa-trash-can mr-1" />
+                              <span className="sm:hidden">Delete</span>
+                              <span className="hidden sm:inline">
+                                Delete permanently
+                              </span>
+                            </button>
+                          </div>
+                        </article>
+                      );
+                    },
+                  )}
+                </div>
                 {!(tab === "sellers" ? people.sellers : people.buyers)
                   .length && <EmptyState title={`No ${tab} registered yet.`} />}
               </div>
