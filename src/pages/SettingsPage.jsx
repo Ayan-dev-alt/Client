@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { useTheme } from "../context/theme";
+import { userFriendlyError } from "../data/userError";
 
 const field = "mt-2 w-full border border-line bg-ink px-3 py-3 text-sm text-cream outline-none placeholder:text-stone-500 focus:border-gold";
 const outline = "inline-flex min-h-11 items-center justify-center gap-2 border border-gold/60 px-4 py-2 text-sm text-gold transition hover:bg-gold hover:text-ink";
@@ -29,7 +30,7 @@ export function SettingsPage() {
       await updateAccount(form);
       setNotice("Your account details have been updated.");
     } catch (error) {
-      setNotice(error.code === "permission-denied" ? "Firestore denied this update. Publish the included firestore.rules." : error.message || "Could not update your details.");
+      setNotice(userFriendlyError(error, "We could not save your details. Check your connection and try again."));
     } finally {
       setBusy(false);
     }
@@ -43,13 +44,11 @@ export function SettingsPage() {
     try {
       await deleteAccount({ password: deletePassword });
     } catch (error) {
-      setDeleteError(error.code === "permission-denied"
-        ? "Firebase denied the cleanup. Publish the latest firestore.rules, then sign in again and retry."
-        : error.code === "auth/requires-recent-login"
+      setDeleteError(error.code === "auth/requires-recent-login"
           ? "Please sign out and sign in again, then retry account deletion."
           : error.code === "auth/wrong-password" || error.code === "auth/invalid-credential"
             ? "The password you entered is incorrect."
-            : error.message || "Could not delete this account.");
+            : userFriendlyError(error, "We could not delete your account. Check your connection and try again."));
     } finally {
       setDeleting(false);
     }

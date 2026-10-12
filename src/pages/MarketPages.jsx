@@ -10,6 +10,7 @@ import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
 import { useWishlist } from "../context/wishlist";
 import { isAdminIdentity } from "../data/roles";
+import { userFriendlyError } from "../data/userError";
 import {
   addProduct,
   addReview,
@@ -48,7 +49,7 @@ function useLive(name, field, value, operator) {
         onError: (cause) =>
           setError(
             cause.code === "permission-denied"
-              ? "Firestore denied access. Publish the included firestore.rules in your Firebase project."
+              ? "You do not have permission to view this information. Sign in to the right account or contact support."
               : "Could not connect to Firestore. Check your Firebase project and internet connection.",
           ),
       },
@@ -78,7 +79,7 @@ function AdminNotifications({ items }) {
           .filter((item) => item.read !== true)
           .forEach((item) => {
             markMessageRead(item.id).catch((cause) =>
-              setError(cause.message || "Could not mark notification as read."),
+              setError(userFriendlyError(cause, "We could not update this notification. Try again.")),
             );
           });
         observer.disconnect();
@@ -96,8 +97,8 @@ function AdminNotifications({ items }) {
     } catch (cause) {
       setError(
         cause.code === "permission-denied"
-          ? "Firestore denied this action. Publish the latest firestore.rules."
-          : cause.message || "Could not delete the notification.",
+          ? "You do not have permission to delete this notification. Sign in to the right account or contact support."
+          : userFriendlyError(cause, "We could not delete this notification. Try again."),
       );
     } finally {
       setDeleting("");
@@ -223,7 +224,7 @@ function PageTitle({ eyebrow, title, children }) {
 function useProductWish() {
   const wishlist = useWishlist();
   return (product) =>
-    wishlist.toggle(product).catch((error) => window.alert(error.message));
+    wishlist.toggle(product).catch((error) => window.alert(userFriendlyError(error, "We could not update your wishlist. Try again.")));
 }
 function Catalog({ products }) {
   const toggle = useProductWish();
@@ -343,7 +344,7 @@ function ChatThread({ messages, user, role, onClose }) {
       setDraft("");
       setError("");
     } catch (cause) {
-      setError(cause.message || "Could not send message.");
+      setError(userFriendlyError(cause, "We could not send your message. Check your connection and try again."));
     }
   }
   return (
@@ -905,7 +906,7 @@ export function ProductPage() {
       setMessage("");
       setNotice("Your message was sent to the seller.");
     } catch (error) {
-      setNotice(error.message || "Could not send your message.");
+      setNotice(userFriendlyError(error, "We could not send your message. Check your connection and try again."));
     }
   }
   async function submitReview(event) {
@@ -926,7 +927,7 @@ export function ProductPage() {
       setReview("");
       setNotice("Thanks, your review is live.");
     } catch (error) {
-      setNotice(error.message || "Could not post your review.");
+      setNotice(userFriendlyError(error, "We could not post your review. Check your connection and try again."));
     }
   }
   async function saveWish() {
@@ -937,7 +938,7 @@ export function ProductPage() {
         wasSaved ? "Removed from wishlist." : "Saved to your wishlist.",
       );
     } catch (error) {
-      setNotice(error.message);
+      setNotice(userFriendlyError(error, "We could not update this item. Please try again."));
     }
   }
   return (
@@ -1258,7 +1259,7 @@ export function AuthPage({ mode = "signin" }) {
       setError(
         googleAccountHint
           ? "We couldn't sign you in with email and password. This account may have been created with Google. Try signing in with Google instead."
-          : cause.message || "Could not sign in.",
+          : userFriendlyError(cause, "We could not sign you in. Check your details and try again."),
       );
     } finally {
       setBusy(false);
@@ -1283,7 +1284,7 @@ export function AuthPage({ mode = "signin" }) {
           : safeRedirect || fallbackRoute,
       );
     } catch (cause) {
-      setError(cause.message || "Google sign-in could not start.");
+      setError(userFriendlyError(cause, "Google sign-in could not start. Check your connection and try again."));
     } finally {
       setBusy(false);
     }
@@ -1500,7 +1501,7 @@ export function SellerPage() {
               try {
                 await becomeSeller();
               } catch (error) {
-                setSellerActivation(error.message);
+                setSellerActivation(userFriendlyError(error, "We could not open your seller account. Check your connection and try again."));
               } finally {
                 setBusy(false);
               }
@@ -1605,7 +1606,7 @@ export function SellerPage() {
       setNoticeKind("success");
     } catch (error) {
       setNotice(
-        error.message || "Could not save this listing. Check Firestore rules.",
+        userFriendlyError(error, "We could not save this listing. Check the product details and your connection, then try again."),
       );
       setNoticeKind("error");
     } finally {
@@ -2020,8 +2021,7 @@ export function SellerPage() {
                               setDeleteCandidate("");
                             } catch (error) {
                               setNotice(
-                                error.message ||
-                                  "Could not delete this product.",
+                                userFriendlyError(error, "We could not delete this product. Check your connection and try again."),
                               );
                             } finally {
                               setDeleteBusy(false);
@@ -2377,7 +2377,7 @@ export function WishlistPage() {
                 product={item}
                 wished
                 onToggleWish={(product) =>
-                  toggle(product).catch((error) => window.alert(error.message))
+                  toggle(product).catch((error) => window.alert(userFriendlyError(error, "We could not update your wishlist. Try again.")))
                 }
               />
             </div>
@@ -2557,8 +2557,7 @@ export function CheckoutPage() {
       navigate("/account?order=placed");
     } catch (error) {
       setNotice(
-        error.message ||
-          "We could not place your order. Check your Firestore rules.",
+        userFriendlyError(error, "We could not place your order. Check your delivery details and connection, then try again."),
       );
     } finally {
       setBusy(false);
