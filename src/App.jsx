@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./context/auth";
 import { useState } from "react";
+import { userFriendlyError } from "./data/userError";
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -34,7 +35,7 @@ function RequiredPhonePage() {
     try {
       await updateAccount({ name: profile.name || "Fashion customer", phone });
     } catch (cause) {
-      setError(cause.message || "Could not save your phone number.");
+      setError(userFriendlyError(cause, "We could not save your phone number. Check your connection and try again."));
     } finally {
       setBusy(false);
     }

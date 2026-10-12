@@ -13,6 +13,7 @@ import { EmptyState, Loading, Notice, Stars } from "../components/Storefront";
 import { ADMIN_EMAILS } from "../data/roles";
 import { isAdminIdentity } from "../data/roles";
 import { permanentlyDeleteUser } from "../data/admin";
+import { userFriendlyError } from "../data/userError";
 
 const button =
   "border border-gold/50 px-3 py-2 text-xs text-gold transition hover:bg-gold hover:text-ink";
@@ -44,7 +45,7 @@ function useAdminCollection(name, enabled) {
           setRows([]);
           setError(
             cause.code === "permission-denied"
-              ? "Admin page is open, but Firestore denied dashboard data. Publish the latest firestore.rules."
+              ? "Your account cannot access this dashboard data. Check that you are signed in with an administrator account."
               : `Could not load ${name}. Check your Firebase connection.`,
           );
         },
@@ -360,8 +361,8 @@ export function AdminPage() {
     } catch (error) {
       setNotice(
         error.code === "permission-denied"
-          ? "Firestore denied this admin action. Publish the included firestore.rules."
-          : error.message || "Action failed. Try again.",
+          ? "This administrator action was not allowed. Check your access and try again."
+          : userFriendlyError(error, "We could not complete this action. Check your connection and try again."),
       );
     } finally {
       setBusy("");
@@ -418,7 +419,7 @@ export function AdminPage() {
       setMessageTarget(null);
       setMessageText("");
     } catch (error) {
-      setNotice(error.message || "Could not send the message.");
+      setNotice(userFriendlyError(error, "We could not send the message. Check your connection and try again."));
     } finally {
       setBusy("");
     }
@@ -439,7 +440,7 @@ export function AdminPage() {
       setNotice(
         error.code === "functions/not-found"
           ? "Account deletion service is not deployed. Deploy Firebase Functions, then retry."
-          : error.message || "Could not permanently delete this account.",
+          : userFriendlyError(error, "We could not delete this account. Check your connection and try again."),
       );
     } finally {
       setBusy("");
@@ -494,7 +495,7 @@ export function AdminPage() {
           : cause.code === "auth/wrong-password" ||
               cause.code === "auth/invalid-credential"
             ? "The current password is incorrect."
-            : cause.message || "Could not save the password.",
+            : userFriendlyError(cause, "We could not save the password. Check your details and try again."),
       );
     } finally {
       setPasswordBusy(false);
